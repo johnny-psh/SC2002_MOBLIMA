@@ -14,7 +14,7 @@ public class MOBLIMA {
 		System.out.println("                           /____/                     /_/                                 ");
 		
 		int userOption = 0;
-		while(true) {
+		while(userOption != 8) {
 			System.out.println("1. Search/List movie");
 			System.out.println("2. View movie details");
 			System.out.println("3. Check seat availability and selection of seat/s.");
@@ -22,6 +22,7 @@ public class MOBLIMA {
 			System.out.println("5. View booking history");
 			System.out.println("6. List the Top 5 ranking by ticket sales OR by overall reviewers’ ratings");
 			System.out.println("7. Admin Login");
+			System.out.println("8. Exit");
 			System.out.print("Option > ");
 			userOption = scanner.nextInt();
 			
@@ -40,7 +41,12 @@ public class MOBLIMA {
 					break;
 				case 7:
 					break;
+				case 8:
+					System.out.println("Goodbye!");	
+					break;
 				default:
+					System.out.println("Invalid Option!");
+					System.out.println("Please re-enter!");
 					break;
 			
 			}
