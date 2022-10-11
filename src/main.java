@@ -3,6 +3,8 @@ import java.util.Scanner;
 
 public class main {
 	
+	static Scanner scanner = new Scanner(System.in);
+	
 	public static void main(String[] args) {
 		System.out.println("   ______      __  __                   _______                  __                       ");
 		System.out.println("  / ____/___ _/ /_/ /_  ____ ___  __   / ____(_)___  ___  ____  / /__  _  _____  _____    ");
@@ -11,7 +13,6 @@ public class main {
 		System.out.println("\\____/\\__,_/\\__/_/ /_/\\__,_/\\__, /   \\____/_/_/ /_/\\___/ .___/_/\\___/_/|_|\\___/____/      ");
 		System.out.println("                           /____/                     /_/                                 ");
 		
-		Scanner scanner = new Scanner(System.in);
 		int userOption = 0;
 		while(true) {
 			System.out.println("1. Search/List movie");
