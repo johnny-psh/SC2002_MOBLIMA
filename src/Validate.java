@@ -3,6 +3,7 @@ import java.io.*;
 public class Validate {
 
     public boolean valid = false;
+    public String name;
 
     static String path = "/Users/periadhityan/Documents/GitHub/SC2002_Assignment/src/database/LoginDetails.csv";
     
@@ -15,15 +16,17 @@ public class Validate {
             while((line = br.readLine()) != null)
             {
                 String values[] = line.split(",");
-                if(a.userName.compareTo(values[0].replaceAll("\\s", ""))==0)
+                if(a.userName.compareTo(values[1].replaceAll("\\s", ""))==0)
                 {
-                    if(a.passWord.compareTo(values[1].replaceAll("\\s", ""))==0)
+                    if(a.passWord.compareTo(values[2].replaceAll("\\s", ""))==0)
                     {
                         valid = true;
+                        name = values[0];
+
                     }
                 }
                 
-            } 
+            } br.close();
         } catch (FileNotFoundException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

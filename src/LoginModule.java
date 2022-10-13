@@ -12,6 +12,15 @@ public class LoginModule {
         String password = sc.nextLine();
         Administrator a = new Administrator(username, password);
         Validate v = new Validate();
-        System.out.println(v.validateLogin(a));
+        v.validateLogin(a);
+
+        if(v.valid)
+        {
+            System.out.println("Welcome " + v.name);
+        }
+        else
+        {
+            System.out.println("Invalid Credentials!");
+        }
     }
 }
