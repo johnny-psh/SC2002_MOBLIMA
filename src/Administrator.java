@@ -1,5 +1,4 @@
 public class Administrator {
-//Test
     public String userName;
     public String passWord;
 
