@@ -23,7 +23,7 @@ public class Moviegoer {
 	}
 
     public void printRating() {
-		System.out.println(Name + " joins :");
+		System.out.println(Name + " have this rating :");
 		for (Rating g : glist)
 			System.out.println(this.Name + g.getRating() + "" + g.getdescription());
 	}
