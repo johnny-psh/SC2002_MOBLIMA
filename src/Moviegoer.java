@@ -1,9 +1,11 @@
+import java.util.*;
 public class Moviegoer {
     /*
     //If there is login
     private String mUser; //username
     private String mPass; //password 
     */
+    private ArrayList<Rating> glist = new ArrayList<Rating>();
 
     //Moviegoer info
     private String Name,email;
@@ -15,6 +17,16 @@ public class Moviegoer {
         this.email = mail;
         this.age = age;
     }
+
+    public void join(Rating g) {
+		glist.add(g);  // partcipant note game's ref
+	}
+
+    public void printRating() {
+		System.out.println(Name + " joins :");
+		for (Rating g : glist)
+			System.out.println(this.Name + g.getRating() + "" + g.getdescription());
+	}
 
     public String getName()
     {
