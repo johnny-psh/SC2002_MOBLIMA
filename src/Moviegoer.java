@@ -9,10 +9,11 @@ public class Moviegoer {
     private String Name,email;
     private int mobileNo,age;
 
-    public Moviegoer(String name,int mobile,String mail) {
+    public Moviegoer(String name,int mobile,String mail,int age) {
         this.Name = name;
         this.mobileNo = mobile;
         this.email = mail;
+        this.age = age;
     }
 
     public String getName()
