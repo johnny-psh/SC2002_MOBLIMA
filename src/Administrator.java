@@ -2,6 +2,7 @@ public class Administrator {
     public String userName;
     public String passWord;
     public Boolean isValid;
+    public String name;
 
     public Administrator(String userName, String passWord)
     {
@@ -19,9 +20,15 @@ public class Administrator {
         return this.passWord;
     }
 
-    public void isValid(Boolean isValid)
+    public void isValid(Boolean isValid, String name)
     {
         this.isValid = isValid;
+        this.name = name;
+    }
+
+    public boolean getValid()
+    {
+        return this.isValid;
     }
 
 

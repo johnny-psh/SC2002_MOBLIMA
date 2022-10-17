@@ -4,7 +4,7 @@ public class LoginModule {
     
     static Scanner sc = new Scanner(System.in);
     
-    public static void main (String[] args)
+    public static void Login ()
     {
         System.out.print("Username: ");
         String username = sc.nextLine();
@@ -16,8 +16,9 @@ public class LoginModule {
 
         if(v.valid)
         {
-            a.isValid(true);
-            System.out.println("Welcome " + v.name);
+            a.isValid(true, v.name);
+            AdminModule.MenuPage(a);
+            
         }
         else
         {
