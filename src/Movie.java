@@ -31,8 +31,9 @@ public class Movie {
     };
 
     public enum TypeOfMovie {
-        2D("2D"), 
-        3D("3D"), 
+        
+        twoD("2D"), 
+        threeD("3D"), 
         BLOCKBUSTER("Blockbuster");
 
         private String type;
@@ -80,14 +81,13 @@ public class Movie {
     // Constructor - Used by <cinema staff> to create a new movie object
     public Movie(String title){
         this.title = title;
-        this.castList = new ArrayList<String>;
-        this.overallReviewerRating = null;
-        this.movieReviewList = new ArrayList<Review>;
+        this.castList = new ArrayList<String>();
+        this.movieReviewList = new ArrayList<Review>();
     }
 
     // Note: get classes are called by movieGoer class , 
     public String getTitle(){
-        return this.title
+        return this.title;
     }
 
     public void setTitle(String title){
@@ -139,26 +139,26 @@ public class Movie {
         this.movieRating = movieRating;
     } 
 
-    public String[] getCast(){
-        return this.cast;
+    public ArrayList<String> getCast(){
+        return this.castList;
     }
 
     public void addCast(String castName){
-        this.cast.add(castName);
+        this.castList.add(castName);
     }
 
     public void printCast(){
-        if(this.cast.size() > 0)
-            System.out.println(Arrays.toString(this.cast));
-        else
-            System.out.println("NIL");
+
+        for(String str : castList)
+        {
+            System.out.println(str);
+        }
     }
 
     // OVERALL Reviewer Rating
     public int getOverallReviewerRating(){
-        if(this.overallReviewerRating != null)
-            return this.overallReviewerRating;
-        return null;
+        
+        return this.overallReviewerRating;
     }
 
     // Private Helper method to calculate overall reviewer rating
@@ -178,7 +178,7 @@ public class Movie {
     }
 
     // Print Past Reviews
-    public printPastReviews(){
+    public void printPastReviews(){
         for(int i=0; i < this.movieReviewList.size(); i++){
             System.out.println("Rating: " + this.movieReviewList.get(i).getRating());
             System.out.println("Review: " + this.movieReviewList.get(i).getDescription());
