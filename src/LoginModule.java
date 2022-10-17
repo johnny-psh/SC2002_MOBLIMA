@@ -16,6 +16,7 @@ public class LoginModule {
 
         if(v.valid)
         {
+            a.isValid(true);
             System.out.println("Welcome " + v.name);
         }
         else
