@@ -13,7 +13,7 @@ public class Review {
 
     public int getRating()
     {
-        return this.overallRating;
+        return this.rating;
     }
     
     public String getDescription()
