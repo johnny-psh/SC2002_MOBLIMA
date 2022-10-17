@@ -24,7 +24,6 @@ public class Movie {
             this.status = status;
         }
      
-        @overwrite
         public String toString(){
             return this.status;
         }
@@ -42,7 +41,6 @@ public class Movie {
             this.type = type;
         }
 
-        @overwrite
         public String toString(){
             return this.type;
         }
@@ -58,11 +56,10 @@ public class Movie {
 
         private String rating;
 
-        ContentRating(String rating) {
+        MovieRating(String rating) {
         this.rating = rating;
         }
 
-        @overwrite
         public String toString() {
              return this.rating;
         }

@@ -5,7 +5,7 @@ public class Moviegoer {
     private String mUser; //username
     private String mPass; //password 
     */
-    private ArrayList<Rating> glist = new ArrayList<Rating>();
+    private ArrayList<Review> glist = new ArrayList<Review>();
 
     //Moviegoer info
     private String Name,email;
@@ -18,14 +18,14 @@ public class Moviegoer {
         this.age = age;
     }
 
-    public void join(Rating g) {
+    public void join(Review g) {
 		glist.add(g);  // partcipant note game's ref
 	}
 
     public void printRating() {
 		System.out.println(Name + " have this rating :");
-		for (Rating g : glist)
-			System.out.println(this.Name + g.getRating() + "" + g.getdescription());
+		for (Review g : glist)
+			System.out.println(this.Name + g.getRating() + "" + g.getDescription());
 	}
 
     public String getName()
