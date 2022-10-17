@@ -74,14 +74,15 @@ public class Movie {
     private MovieRating movieRating; // Rating of movie - (PG, M18 etc.)
     private ArrayList<String> castList;
 
-    // STILL UNSURE - should rating & reviews be in a new class??
     private int overallReviewerRating; // Viewed by moviegoer
-    private ArrayList<String> pastReviews; // Viewed by moviegoer
-    private ArrayList<int> pastRatings; // Viewed by moviegoer
+    private ArrayList<Review> movieReviewList;
 
     // Constructor - Used by <cinema staff> to create a new movie object
     public Movie(String title){
         this.title = title;
+        this.castList = new ArrayList<String>;
+        this.overallReviewerRating = null;
+        this.movieReviewList = new ArrayList<Review>;
     }
 
     // Note: get classes are called by movieGoer class , 
@@ -150,12 +151,38 @@ public class Movie {
         if(this.cast.size() > 0)
             System.out.println(Arrays.toString(this.cast));
         else
-            System.out.println(this.title + " has no cast list.");
+            System.out.println("NIL");
     }
 
-    // Reviewer Rating
+    // OVERALL Reviewer Rating
+    public int getOverallReviewerRating(){
+        if(this.overallReviewerRating != null)
+            return this.overallReviewerRating;
+        return null;
+    }
 
-    // Past Reviews
+    // Private Helper method to calculate overall reviewer rating
+    private void updateOverallReviewerRating(int newReviewerRating){
+        int numOfRatings = movieReviewList.size();
+        int totalRatings = (overallReviewerRating * (numOfRatings - 1))  + newReviewerRating;
+        
+        this.overallReviewerRating = totalRatings / numOfRatings;
+    }
 
-    // Past Ratings
+    // REVIEWS - CALLED BY MOVIE GOER USER CLASS
+    // Add review
+    public void addReview(int rating, String review){
+        Review newReview = new Review(review, rating);
+        movieReviewList.add(newReview);
+        updateOverallReviewerRating(rating);
+    }
+
+    // Print Past Reviews
+    public printPastReviews(){
+        for(int i=0; i < this.movieReviewList.size(); i++){
+            System.out.println("Rating: " + this.movieReviewList.get(i).getRating());
+            System.out.println("Review: " + this.movieReviewList.get(i).getDescription());
+        }
+    }
+
 }
