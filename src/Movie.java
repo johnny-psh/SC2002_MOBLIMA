@@ -56,7 +56,7 @@ public class Movie {
 
         private String rating;
 
-        ContentRating(String rating) {
+        MovieRating(String rating) {
         this.rating = rating;
         }
 

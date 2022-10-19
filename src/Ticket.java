@@ -4,8 +4,8 @@ public class Ticket{
     private Seat seat;
     private int ticketID;
     
-    public Ticket(int ticketID){
-        movie = new Movie();
+    public Ticket(int ticketID, String movieName){
+        movie = new Movie(movieName);
         seat = new Seat();
         this.ticketID = ticketID;
     }
