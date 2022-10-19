@@ -1,7 +1,13 @@
 // Login plus display  menu in our main function
 import java.util.Scanner;
+import java.io.*;
 
 public class MOBLIMA {
+
+	// Open CSV
+
+	// Initialize Cineplexe object, Movie Object
+	
 	
 	static Scanner scanner = new Scanner(System.in);
 	
