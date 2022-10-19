@@ -1,5 +1,9 @@
 import java.util.*;
 import java.util.ArrayList;
+import java.io.*;
+
+//Test Read Txt File
+
 
 public class Movie {
 
@@ -180,6 +184,26 @@ public class Movie {
             System.out.println("Rating: " + this.movieReviewList.get(i).getRating());
             System.out.println("Review: " + this.movieReviewList.get(i).getDescription());
         }
+    }
+
+    public void showTest() throws FileNotFoundException {
+        Scanner s = new Scanner(new File("C:/Users/User/Desktop/SC2002_Assignment/src/database/testData.txt"));
+List<String> names = new ArrayList<String>();
+
+// Skip column headings.
+
+// Read each line, ensuring correct format.
+while (s.hasNext())
+{
+    s.nextInt();         // read and skip 'id'
+    names.add(s.next()); // read and store 'name'
+    s.nextInt();         // read and skip 'age'
+}
+
+for (String name: names)
+{
+    System.out.println(name);
+}
     }
 
 }

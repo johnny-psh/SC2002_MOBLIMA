@@ -16,5 +16,6 @@ public class TestUser {
 
         test1.printRating();
         test2.printRating();
+       
     }
 }

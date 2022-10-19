@@ -47,16 +47,23 @@ public class Moviegoer {
 
     public void setEmail(String email)
     {
-        String regex = "^[A-Za-z0-9+_.-]+@(.+)$";
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(email);
-        if(matcher.matches())
+        if(email != "")
         {
-            this.email = email;
+            String regex = "^[A-Za-z0-9+_.-]+@(.+)$";
+            Pattern pattern = Pattern.compile(regex);
+            Matcher matcher = pattern.matcher(email);
+            if(matcher.matches())
+            {
+                this.email = email;
+            }
+            else
+            {
+                System.out.println("Invalid email or invalid email format");
+            }
         }
         else
         {
-            System.out.println("Invalid email or invalid email format");
+            System.out.println("Empty Input");
         }
     }
 
@@ -67,7 +74,8 @@ public class Moviegoer {
 
     public void setPhone(int pno)
     {
-
+        if(pno==0)
+        {
         String regex = "(8|9)[0-9]{0,7}";
         Pattern pattern = Pattern.compile(regex);
         String newNo = Integer.toString(pno);
@@ -79,6 +87,11 @@ public class Moviegoer {
         else
         {
             System.out.println("Invalid SG Phone Number");
+        }
+        }
+        else
+        {
+            System.out.println("Empty Input");
         }
     }
 

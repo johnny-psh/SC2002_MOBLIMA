@@ -23,7 +23,6 @@ public class Validate {
                     {
                         valid = true;
                         name = values[0];
-
                     }
                 }
                 
