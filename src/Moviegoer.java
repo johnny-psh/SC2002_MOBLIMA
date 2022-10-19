@@ -1,4 +1,6 @@
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 public class Moviegoer {
     /*
     //If there is login
@@ -32,18 +34,62 @@ public class Moviegoer {
     {
         return this.Name;
     }
+
+    public void setName(String name)
+    {
+        this.Name = name;
+    }
+
     public String getEmail()
     {
         return this.email;
     }
+
+    public void setEmail(String email)
+    {
+        String regex = "^[A-Za-z0-9+_.-]+@(.+)$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(email);
+        if(matcher.matches())
+        {
+            this.email = email;
+        }
+        else
+        {
+            System.out.println("Invalid email or invalid email format");
+        }
+    }
+
     public int getPhone()
     {
         return this.mobileNo;
     }
 
+    public void setPhone(int pno)
+    {
+
+        String regex = "(8|9)[0-9]{0,7}";
+        Pattern pattern = Pattern.compile(regex);
+        String newNo = Integer.toString(pno);
+        Matcher matcher = pattern.matcher(newNo);
+        if(matcher.matches())
+        {
+            this.mobileNo = pno;
+        }
+        else
+        {
+            System.out.println("Invalid SG Phone Number");
+        }
+    }
+
     public int getAge()
     {
         return this.age;
+    }
+
+    public void setAge(int age)
+    {
+        this.age = age;
     }
     
     
