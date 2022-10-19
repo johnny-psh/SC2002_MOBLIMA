@@ -4,9 +4,9 @@ public class Ticket{
     private Seat seat;
     private int ticketID;
     
-    public Ticket(int ticketID, String movieName){
+    public Ticket(int ticketID, String movieName, int seatID){
         movie = new Movie(movieName);
-        seat = new Seat();
+        seat = new Seat(seatID);
         this.ticketID = ticketID;
     }
 
@@ -15,11 +15,11 @@ public class Ticket{
     }
 
     public Seat getSeat(){
-        return getSeat;
+        return seat;
     }
 
     public int getTicketID(){
-        return getTicketID;
+        return ticketID;
     }
 
     public void setMovie(Movie movie){
