@@ -46,7 +46,14 @@ public class MOBLIMA {
 				case 6:
 					break;
 				case 7:
-					LoginModule.Login();
+					try {
+						LoginModule.Login();
+						
+					} catch (Exception e) {
+						// TODO: handle exception
+						e.printStackTrace();
+					}
+					
 					System.out.println("   ______      __  __                   _______                  __                       ");
 					System.out.println("  / ____/___ _/ /_/ /_  ____ ___  __   / ____(_)___  ___  ____  / /__  _  _____  _____    ");
 					System.out.println(" / /   / __ `/ __/ __ \\/ __ `/ / / /  / /   / / __ \\/ _ \\/ __ \\/ / _ \\| |/_/ _ \\/ ___/   ");

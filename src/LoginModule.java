@@ -1,10 +1,11 @@
+import java.io.IOException;
 import java.util.*;
 
 public class LoginModule {
     
     static Scanner sc = new Scanner(System.in);
     
-    public static void Login ()
+    public static void Login () throws IOException
     {
         System.out.print("Username: ");
         String username = sc.nextLine();

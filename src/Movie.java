@@ -4,7 +4,6 @@ import java.io.*;
 
 //Test Read Txt File
 
-
 public class Movie {
 
     /*

@@ -1,11 +1,16 @@
 import java.util.*;
+import java.io.*;
 
 public class AdminModule {
 
     static Scanner sc = new Scanner(System.in);
+    static String path = "./database/Movies.csv";
 
-    public static void MenuPage(Administrator a)
+    public static void MenuPage(Administrator a) throws IOException
     {
+        FileWriter fw = new FileWriter(path, true);
+        BufferedWriter bw = new BufferedWriter(fw);
+        PrintWriter pw = new PrintWriter(bw);
         while(a.getValid())
         {
             int choice;
@@ -14,7 +19,7 @@ public class AdminModule {
             System.out.println("Select an option: ");
             System.out.println("1. Movie Listings");
             System.out.println("2. Showtimes");
-            System.out.println("3. System Setting");
+            System.out.println("3. System Settings");
             System.out.println("4. Logout");
             System.out.print("Option > ");
 
@@ -32,17 +37,13 @@ public class AdminModule {
                 int listing = sc.nextInt();
                 if(listing == 1)
                 {
-                    String title, synopsis, director;
-                    System.out.print("Enter Movie Title: ");
-                    title = sc.nextLine();
-                    System.out.print("Enter Movie Director: ");
-                    director = sc.nextLine();
-                    System.out.print("Enter Movie Synopsis: ");
-                    synopsis = sc.nextLine();
-                    Movie m = new Movie(title);
-                    m.setDirector(director);
-                    m.setSypnosis(synopsis);
-                       
+
+                    Movie m = MovieListings.createMovie();
+
+                    pw.println(m.getTitle() + "," + m.getSypnosis() + "," + m.getDirector() + "," + m.getCast() + "," + 
+                               m.getShowingStatus() + "," + m.getType() + "," + m.getMovieRating() + "," 
+                               + m.getOverallReviewerRating());
+            
                 }
                 else if(listing == 2)
                 {
@@ -88,7 +89,8 @@ public class AdminModule {
                 a.isValid(false, a.name);
             }
         }
-
+        pw.close();
+        pw.flush();
     }
     
 }
