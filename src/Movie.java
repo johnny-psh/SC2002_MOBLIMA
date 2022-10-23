@@ -39,8 +39,8 @@ public class Movie {
 
     public enum TypeOfMovie {
         
-        twoD("2D"), 
-        threeD("3D"), 
+        TWO_D("2D"), 
+        THREE_D("3D"), 
         BLOCKBUSTER("Blockbuster");
 
         private String type;
