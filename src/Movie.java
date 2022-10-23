@@ -1,10 +1,16 @@
 import java.util.ArrayList;
 import java.io.*;
+import java.util.*;
 
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 //Test Read Txt File
 
 public class Movie {
-
+    static XSSFRow row;
     /*
         This Movie Class is for:
         1) Cinema Staff to Create(new Movie object) / Update(set) / Remove(set Showing status to ENDOFSHOWING) movies
@@ -183,49 +189,63 @@ public class Movie {
             System.out.println("Review: " + this.movieReviewList.get(i).getDescription());
         }
     }
-
     
 //Temporary Txt File Reader 
     public static void main(String[] args) throws IOException {        
-       
+   
 
+        FileInputStream fis = new FileInputStream(new File("C:/Users/User/Desktop/SC2002_Assignment/src/database/TestMoviesReader.xlsx"));
+        XSSFWorkbook workbook = new XSSFWorkbook(fis);
+        XSSFSheet spreadsheet = workbook.getSheetAt(0);
+        Iterator < Row >  rowIterator = spreadsheet.iterator();
+        String a[]=new String[30];
+        int count=0;
+        int tRow=0;
+        int tCol=0;
+        //Boolean flag=true; 
+        String[][] TitleTest = new String[4][4];
 
- BufferedReader br = null;
-    String[] characters = new String[1024];//just an example - you have to initialize it to be big enough to hold all the lines!
+        while (rowIterator.hasNext()) {
+           row = (XSSFRow) rowIterator.next();
+           Iterator < Cell >  cellIterator = row.cellIterator();
 
-    try {
-
-        String sCurrentLine;
-        br = new BufferedReader(new FileReader("C:/Users/User/Desktop/SC2002_Assignment/src/database/testData.txt"));
-
-        int i=0;
-        while ((sCurrentLine = br.readLine()) != null) {
-            String[] arr = sCurrentLine.split(" ");
-            //for the first line it'll print
-            System.out.println("arr[0] = " + arr[0]); // h
-            System.out.println("arr[1] = " + arr[1]); // Vito
-            System.out.println("arr[2] = " + arr[2]); // 123
-            if(arr.length == 4){
-                System.out.println("arr[3] = " + arr[3]);
-            }
-
-            //Now if you want to enter them into separate arrays
-            characters[i] = arr[0];
-            // and you can do the same with
-            // names[1] = arr[1]
-            //etc
-            i++;
+           while ( cellIterator.hasNext()) {
+              Cell cell = cellIterator.next();
+              
+              switch (cell.getCellType()) {
+                 case NUMERIC:
+                 String convert = String.valueOf(cell.getNumericCellValue());
+                 if(convert!= null && !convert.equals(""))
+                 {
+                    a[count] = String.valueOf(cell.getNumericCellValue());
+                    TitleTest[tRow][tCol] = String.valueOf(cell.getNumericCellValue());
+                    tCol++;
+                 }
+                    
+                    System.out.print(cell.getNumericCellValue() + " \t\t ");
+                    break;
+                 
+                 case STRING:
+                 if(cell.getStringCellValue() != null && !cell.getStringCellValue().equals(""))
+                 {
+                    a[count] = cell.getStringCellValue();
+                    TitleTest[tRow][tCol] = cell.getStringCellValue();
+                    tCol++;
+                 }
+                    System.out.print(
+                    cell.getStringCellValue() + " \t\t ");
+                    break;
+              }
+              count++;
+              
+           }
+           tRow++;
+           System.out.println();
         }
-
-    } catch (IOException e) {
-        e.printStackTrace();
-    } finally {
-        try {
-            if (br != null)br.close();
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-    }
- 
+        fis.close();
+        for(int i=0; i<a.length; i++) {
+            System.out.println(a[i]);
+         }
+         
     }
 }
