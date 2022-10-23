@@ -1,31 +1,11 @@
 public class Cinema{
 
-    // ENUMS
-    public enum CinemaClass {
-        
-        REGULAR("Regular"), 
-        DOLBY_ATMOS("Dolby Atmos"), 
-        PLATINUM_MOVIE_SUITES("Platinum Movie Suites");
-
-        private String cinemaClass;
-
-        CinemaClass(String cinemaClass){
-            this.cinemaClass = cinemaClass;
-        }
-
-        public String toString(){
-            return this.cinemaClass;
-        }
-    }
-
-    private CinemaClass cinemaClass;
     private Seat[][] seats;
+    private Movie movie;
 
-    public Cinema(CinemaClass cinemaClass){
+    public Cinema(){
         
-        this.cinemaClass = cinemaClass;
 
-        // To be changed
         this.seats = new Seat[5][10];
         int counter = 0;
 
@@ -36,14 +16,6 @@ public class Cinema{
                 counter++;
             }
         }
-    }
-
-    public CinemaClass getCinemaClass() {
-        return this.cinemaClass;
-    }
-
-    public void setCinemaClass(CinemaClass cinemaClass) {
-        this.cinemaClass = cinemaClass;
     }
     
 }
