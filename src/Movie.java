@@ -19,65 +19,12 @@ public class Movie {
      */
 
 
-    // ENUMS - should these be in their own class?
-    public enum ShowingStatus {
-        COMING_SOON("Coming Soon"),
-        PREVIEW("Preview"),
-        NOW_SHOWING("Now Showing"), 
-        END_OF_SHOWING("End of Showing");
-
-        private String status;
-
-        ShowingStatus(String status) {
-            this.status = status;
-        }
-     
-        public String toString(){
-            return this.status;
-        }
-    };
-
-    public enum TypeOfMovie {
-        
-        TWO_D("2D"), 
-        THREE_D("3D"), 
-        BLOCKBUSTER("Blockbuster");
-
-        private String type;
-
-        TypeOfMovie(String type){
-            this.type = type;
-        }
-
-        public String toString(){
-            return this.type;
-        }
-    }
-
-    public enum MovieRating { 
-        G("G"),
-        PG("PG"),
-        PG13("PG13"),
-        NC16("NC16"),
-        M18("M18"),
-        R21("R21");
-
-        private String rating;
-
-        MovieRating(String rating) {
-        this.rating = rating;
-        }
-
-        public String toString() {
-             return this.rating;
-        }
-    }
-
+   
     // Properties
     private String title, sypnosis, director;
-    private ShowingStatus showingStatus;
-    private TypeOfMovie type; // Type of movie (3D, Blockbuster etc.) - This is also called by ticket class 
-    private MovieRating movieRating; // Rating of movie - (PG, M18 etc.)
+    private Enums.ShowingStatus showingStatus;
+    private Enums.TypeOfMovie type; // Type of movie (3D, Blockbuster etc.) - This is also called by ticket class 
+    private Enums.MovieRating movieRating; // Rating of movie - (PG, M18 etc.)
     private ArrayList<String> castList;
 
     private int overallReviewerRating; // Viewed by moviegoer
@@ -115,19 +62,19 @@ public class Movie {
         this.sypnosis = sypnosis;
     }
 
-    public ShowingStatus getShowingStatus(){
+    public Enums.ShowingStatus getShowingStatus(){
         return this.showingStatus;
     }
 
-    public void setShowingStatus(ShowingStatus showingStatus){
+    public void setShowingStatus(Enums.ShowingStatus showingStatus){
         this.showingStatus = showingStatus;
     }
 
-    public TypeOfMovie getType(){
+    public Enums.TypeOfMovie getType(){
         return this.type;
     }
 
-    public void setType(TypeOfMovie type){
+    public void setType(Enums.TypeOfMovie type){
         this.type = type;
     }
 
@@ -136,11 +83,11 @@ public class Movie {
         System.out.println(this.type);
     }
 
-    public MovieRating getMovieRating(){
+    public Enums.MovieRating getMovieRating(){
         return this.movieRating;
     }
 
-    public void setMovieRating(MovieRating movieRating) {
+    public void setMovieRating(Enums.MovieRating movieRating) {
         this.movieRating = movieRating;
     } 
 

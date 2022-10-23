@@ -48,16 +48,16 @@ public class MovieListings {
         switch(option)
         {
             case 1:
-            m.setShowingStatus(Movie.ShowingStatus.COMING_SOON);
+            m.setShowingStatus(Enums.ShowingStatus.COMING_SOON);
             break;
             case 2:
-            m.setShowingStatus(Movie.ShowingStatus.PREVIEW);
+            m.setShowingStatus(Enums.ShowingStatus.PREVIEW);
             break;
             case 3:
-            m.setShowingStatus(Movie.ShowingStatus.NOW_SHOWING);
+            m.setShowingStatus(Enums.ShowingStatus.NOW_SHOWING);
             break;
             case 4:
-            m.setShowingStatus(Movie.ShowingStatus.END_OF_SHOWING);
+            m.setShowingStatus(Enums.ShowingStatus.END_OF_SHOWING);
             break;
         }
 
@@ -72,14 +72,14 @@ public class MovieListings {
         switch(option)
         {
             case 1:
-            m.setType(Movie.TypeOfMovie.twoD);
-            break;
+                m.setType(Enums.TypeOfMovie.TWO_D);
+                break;
             case 2:
-            m.setType(Movie.TypeOfMovie.threeD);
-            break;
+                m.setType(Enums.TypeOfMovie.THREE_D);
+                break;
             case 3:
-            m.setType(Movie.TypeOfMovie.BLOCKBUSTER);
-            break;
+                m.setType(Enums.TypeOfMovie.BLOCKBUSTER);
+                break;
         }
 
         System.out.println("Enter Rating of Movie:");
@@ -96,23 +96,23 @@ public class MovieListings {
         switch(option)
         {
             case 1:
-            m.setMovieRating(Movie.MovieRating.G);
-            break;
+                m.setMovieRating(Enums.MovieRating.G);
+                break;
             case 2:
-            m.setMovieRating(Movie.MovieRating.PG);
-            break;
+                m.setMovieRating(Enums.MovieRating.PG);
+                break;
             case 3:
-            m.setMovieRating(Movie.MovieRating.PG13);
-            break;
+                m.setMovieRating(Enums.MovieRating.PG13);
+                break;
             case 4:
-            m.setMovieRating(Movie.MovieRating.NC16);
-            break;
+                m.setMovieRating(Enums.MovieRating.NC16);
+                break;
             case 5:
-            m.setMovieRating(Movie.MovieRating.M18);
-            break;
+                m.setMovieRating(Enums.MovieRating.M18);
+                break;
             case 6:
-            m.setMovieRating(Movie.MovieRating.R21);
-            break;
+                m.setMovieRating(Enums.MovieRating.R21);
+                break;
         }
 
         return m;
