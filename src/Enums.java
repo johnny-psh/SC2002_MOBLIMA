@@ -23,7 +23,8 @@ public class Enums {
         
         TWO_D("2D"), 
         THREE_D("3D"), 
-        BLOCKBUSTER("Blockbuster");
+        TWO_D_BLOCKBUSTER("2D Blockbuster"),
+        THREE_D_BLOCKBUSTER("3D Blockbuster");
 
         private String type;
 

@@ -64,7 +64,8 @@ public class MovieListings {
         System.out.println("Enter Type of Movie:");
         System.out.println("1. 2D");
         System.out.println("2. 3D");
-        System.out.println("3. Blockbuster");
+        System.out.println("3. 2D Blockbuster");
+        System.out.println("3. 3D Blockbuster");
         System.out.print("Option> ");
 
         option = sc.nextInt();
@@ -78,7 +79,10 @@ public class MovieListings {
                 m.setType(Enums.TypeOfMovie.THREE_D);
                 break;
             case 3:
-                m.setType(Enums.TypeOfMovie.BLOCKBUSTER);
+                m.setType(Enums.TypeOfMovie.TWO_D_BLOCKBUSTER);
+                break;
+            case 4:
+                m.setType(Enums.TypeOfMovie.THREE_D_BLOCKBUSTER);
                 break;
         }
 
