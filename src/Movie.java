@@ -1,10 +1,9 @@
 import java.util.ArrayList;
 import java.io.*;
+import java.util.*;
 
-//Test Read Txt File
 
 public class Movie {
-
     /*
         This Movie Class is for:
         1) Cinema Staff to Create(new Movie object) / Update(set) / Remove(set Showing status to ENDOFSHOWING) movies
@@ -13,66 +12,13 @@ public class Movie {
      */
 
 
-    // ENUMS - should these be in their own class?
-    public enum ShowingStatus {
-        COMING_SOON("Coming Soon"),
-        PREVIEW("Preview"),
-        NOW_SHOWING("Now Showing"), 
-        END_OF_SHOWING("End of Showing");
-
-        private String status;
-
-        ShowingStatus(String status) {
-            this.status = status;
-        }
-     
-        public String toString(){
-            return this.status;
-        }
-    };
-
-    public enum TypeOfMovie {
-        
-        twoD("2D"), 
-        threeD("3D"), 
-        BLOCKBUSTER("Blockbuster");
-
-        private String type;
-
-        TypeOfMovie(String type){
-            this.type = type;
-        }
-
-        public String toString(){
-            return this.type;
-        }
-    }
-
-    public enum MovieRating { 
-        G("G"),
-        PG("PG"),
-        PG13("PG13"),
-        NC16("NC16"),
-        M18("M18"),
-        R21("R21");
-
-        private String rating;
-
-        MovieRating(String rating) {
-        this.rating = rating;
-        }
-
-        public String toString() {
-             return this.rating;
-        }
-    }
-
+   
     // Properties
     private String movieID;
     private String title, sypnosis, director;
-    private ShowingStatus showingStatus;
-    private TypeOfMovie type; // Type of movie (3D, Blockbuster etc.) - This is also called by ticket class 
-    private MovieRating movieRating; // Rating of movie - (PG, M18 etc.)
+    private Enums.ShowingStatus showingStatus;
+    private Enums.TypeOfMovie type; // Type of movie (3D, Blockbuster etc.) - This is also called by ticket class 
+    private Enums.MovieRating movieRating; // Rating of movie - (PG, M18 etc.)
     private ArrayList<String> castList;
 
     private int overallReviewerRating; // Viewed by moviegoer
@@ -122,19 +68,19 @@ public class Movie {
         this.sypnosis = sypnosis;
     }
 
-    public ShowingStatus getShowingStatus(){
+    public Enums.ShowingStatus getShowingStatus(){
         return this.showingStatus;
     }
 
-    public void setShowingStatus(ShowingStatus showingStatus){
+    public void setShowingStatus(Enums.ShowingStatus showingStatus){
         this.showingStatus = showingStatus;
     }
 
-    public TypeOfMovie getType(){
+    public Enums.TypeOfMovie getType(){
         return this.type;
     }
 
-    public void setType(TypeOfMovie type){
+    public void setType(Enums.TypeOfMovie type){
         this.type = type;
     }
 
@@ -143,11 +89,11 @@ public class Movie {
         System.out.println(this.type);
     }
 
-    public MovieRating getMovieRating(){
+    public Enums.MovieRating getMovieRating(){
         return this.movieRating;
     }
 
-    public void setMovieRating(MovieRating movieRating) {
+    public void setMovieRating(Enums.MovieRating movieRating) {
         this.movieRating = movieRating;
     } 
 
@@ -196,49 +142,6 @@ public class Movie {
             System.out.println("Review: " + this.movieReviewList.get(i).getDescription());
         }
     }
-
     
-//Temporary Txt File Reader 
-    public static void main(String[] args) throws IOException {        
-       
-
-
- BufferedReader br = null;
-    String[] characters = new String[1024];//just an example - you have to initialize it to be big enough to hold all the lines!
-
-    try {
-
-        String sCurrentLine;
-        br = new BufferedReader(new FileReader("C:/Users/User/Desktop/SC2002_Assignment/src/database/testData.txt"));
-
-        int i=0;
-        while ((sCurrentLine = br.readLine()) != null) {
-            String[] arr = sCurrentLine.split(" ");
-            //for the first line it'll print
-            System.out.println("arr[0] = " + arr[0]); // h
-            System.out.println("arr[1] = " + arr[1]); // Vito
-            System.out.println("arr[2] = " + arr[2]); // 123
-            if(arr.length == 4){
-                System.out.println("arr[3] = " + arr[3]);
-            }
-
-            //Now if you want to enter them into separate arrays
-            characters[i] = arr[0];
-            // and you can do the same with
-            // names[1] = arr[1]
-            //etc
-            i++;
-        }
-
-    } catch (IOException e) {
-        e.printStackTrace();
-    } finally {
-        try {
-            if (br != null)br.close();
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-    }
- 
-    }
+    
 }

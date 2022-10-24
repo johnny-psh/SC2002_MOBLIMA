@@ -1,39 +1,123 @@
 public class Ticket{
 
-    private Movie movie;
     private Seat seat;
-    private int ticketID;
-    
-    public Ticket(int ticketID, String movieName, int seatID){
-        movie = new Movie(movieName);
-        seat = new Seat(seatID);
-        this.ticketID = ticketID;
-    }
+    private Enums.TypeOfMovie movieType; // Charged $1 extra for blockbuster
+    private Enums.CinemaType cinemaType; 
+    private Enums.TicketType ticketType;
 
-    public Movie getMovie(){
-        return movie;
+    private double ticketPrice;
+    
+    public Ticket(Seat seat, Enums.TypeOfMovie movieType, Enums.CinemaType cinemaType, Enums.TicketType ticketType){
+        this.seat = seat;
+        this.movieType = movieType;
+        this.cinemaType = cinemaType;
+        this.ticketType = ticketType;
+        this.ticketPrice = calcTicketPrice();
     }
 
     public Seat getSeat(){
-        return seat;
+        return this.seat;
     }
 
-    public int getTicketID(){
-        return ticketID;
+    public Enums.TypeOfMovie getMovieType(){
+        return this.movieType;
     }
 
-    public void setMovie(Movie movie){
-        this.movie = movie;
+    public Enums.CinemaType getCinemaType(){
+        return this.cinemaType;
     }
 
-    public void setSeat(Seat seat){
-        this.seat = seat;
+    public Enums.TicketType getTicketType(){
+        return this.ticketType;
     }
 
-    public void setTicketID(int ticketID){
-        this.ticketID = ticketID;
+    public double getTicketPrice(){
+        return this.ticketPrice;
     }
 
+    /* Helper class for calculating ticket price based on:
+        1) Movie type (2D, 3D, Blockbuster)
+        2) Cinema type (Regular, Dolby Atmos, Platinum Movie Suites)
+        3) Ticket type - depends on:
+            a) Age/Type of movie-goer (Student, Adult, Senior)
+            b) Day of week (Mon-Sun or Public Hol)
+            c) Time (Before 6pm / After 6pm)
+    */
+    private double calcTicketPrice(){
 
-    
+        double price = 0.0;
+
+        // If movie type is "BLOCKBUSTER", extra $1 is charged regardless of cinemaType
+        if(this.movieType == Enums.TypeOfMovie.TWO_D_BLOCKBUSTER || this.movieType == Enums.TypeOfMovie.THREE_D_BLOCKBUSTER)
+            price += 1.00;
+
+        if(this.cinemaType == Enums.CinemaType.REGULAR){           
+            // Regular 2D
+            if(this.movieType == Enums.TypeOfMovie.TWO_D || this.movieType == Enums.TypeOfMovie.TWO_D_BLOCKBUSTER){
+                switch(this.ticketType){
+                    case SENIOR:
+                        return (price += 4.00);
+                    case STUDENT:
+                        return (price += 7.00);
+                    case MON_TO_WED:
+                        return (price += 8.50);
+                    case THU:
+                    case FRI_BEFORE_SIX:
+                        return (price += 9.50);
+                    case FRI_FROM_SIX:
+                    case WEEKEND_AND_PUBLICHOL:
+                    default:
+                        return (price += 11.00);
+                }
+            }
+            // Regular 3D
+            else{
+                switch(this.ticketType){
+                    case SENIOR:
+                    case STUDENT:
+                        return (price += 9.00);
+                    case MON_TO_WED:
+                    case THU:
+                        return (price += 11.0);
+                    case FRI_BEFORE_SIX:
+                    case FRI_FROM_SIX:
+                    case WEEKEND_AND_PUBLICHOL:
+                    default:
+                        return (price += 15.00);
+                }
+            }           
+        }
+
+        else if(this.cinemaType == Enums.CinemaType.DOLBY_ATMOS){   
+            // Dolby 2D       
+            if(this.movieType == Enums.TypeOfMovie.TWO_D || this.movieType == Enums.TypeOfMovie.TWO_D_BLOCKBUSTER){
+                return (price += 14.00);
+            }
+            // Dolby 3D
+            else if(this.movieType == Enums.TypeOfMovie.THREE_D  || this.movieType == Enums.TypeOfMovie.THREE_D_BLOCKBUSTER){
+                return (price += 16.00);          
+            }
+        }
+
+        // PLATINUM MOVIE SUITES - 2D/3D
+        else if(this.cinemaType == Enums.CinemaType.PLATINUM_MOVIE_SUITES){
+            switch(this.ticketType){
+                case SENIOR:
+                case STUDENT:
+                case MON_TO_WED:
+                case THU:
+                    return (price += 28.00);
+                case FRI_BEFORE_SIX:
+                case FRI_FROM_SIX:
+                case WEEKEND_AND_PUBLICHOL:
+                default:
+                    return (price += 38.00);
+            }
+        }
+        
+        
+        return 0;        
+        
+    }
+
 }
