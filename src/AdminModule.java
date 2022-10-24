@@ -8,6 +8,7 @@ public class AdminModule {
 
     public static void MenuPage(Administrator a) throws IOException
     {
+        BufferedReader br = new BufferedReader(new FileReader(path));
         FileWriter fw = new FileWriter(path, true);
         BufferedWriter bw = new BufferedWriter(fw);
         PrintWriter pw = new PrintWriter(bw);
@@ -40,14 +41,22 @@ public class AdminModule {
 
                     Movie m = MovieListings.createMovie();
 
-                    pw.println(m.getTitle() + "," + m.getSypnosis() + "," + m.getDirector() + "," + m.getCast() + "," + 
+                    pw.println(m.getMovieID() + "," + m.getTitle() + "," + m.getSypnosis() + "," + m.getDirector() + "," + m.getCast() + "," + 
                                m.getShowingStatus() + "," + m.getType() + "," + m.getMovieRating() + "," 
                                + m.getOverallReviewerRating());
-            
+                    pw.flush();            
                 }
                 else if(listing == 2)
                 {
-                    
+                    System.out.println("Which Movie would you like to update?");
+                    System.out.println("Movie ID\t" + "Movie Title");
+                    String line = "";
+                    while((line = br.readLine())!=null)
+                    {
+                        String values[] = line.split(",");
+                        System.out.println(values[0] + "\t\t" + values[1]);
+                    }
+
                 }
                 else if(listing == 3)
                 {
@@ -57,40 +66,18 @@ public class AdminModule {
                 {
                     break;
                 }
+                break;
 
                 case 2:
-                System.out.println("SHOWTIMES");
-                System.out.println("1. Create New Cinema Showtime");
-                System.out.println("2. Update Current Cinema Showtime");
-                System.out.println("3. Remove Cinema Showtime");
-                System.out.println("4. Exit");
-                System.out.print("Option > ");
-                int showtime = sc.nextInt();
-                if(showtime == 1)
-                {
-                    
-                }
-                else if(showtime == 2)
-                {
-                    
-                }
-                else if(showtime == 3)
-                {
-
-                }
-                else if(showtime == 4)
-                {
-                    break;
-                }
-
+                break;
                 case 3:
-
+                break;
                 case 4:
                 a.isValid(false, a.name);
             }
         }
         pw.close();
-        pw.flush();
+        br.close();
     }
     
 }
