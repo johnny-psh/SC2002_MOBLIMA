@@ -14,6 +14,7 @@ public class Movie {
 
    
     // Properties
+    private String movieID;
     private String title, sypnosis, director;
     private Enums.ShowingStatus showingStatus;
     private Enums.TypeOfMovie type; // Type of movie (3D, Blockbuster etc.) - This is also called by ticket class 
@@ -24,10 +25,22 @@ public class Movie {
     private ArrayList<Review> movieReviewList;
 
     // Constructor - Used by <cinema staff> to create a new movie object
-    public Movie(String title){
+    public Movie(String movieID, String title){
+
+        this.movieID = movieID;
         this.title = title;
         this.castList = new ArrayList<String>();
         this.movieReviewList = new ArrayList<Review>();
+    }
+
+    public String getMovieID()
+    {
+        return this.movieID;
+    }
+
+    public void setMovieID(String movieID)
+    {
+        this.movieID = movieID;
     }
 
     // Note: get classes are called by movieGoer class , 
