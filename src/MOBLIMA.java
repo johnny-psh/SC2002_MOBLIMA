@@ -120,7 +120,7 @@ public class MOBLIMA {
 					break;
 				case 2:
 				String[][] movielist = getMovies();
-				for(int row =0;row<movielist.length;row++)
+				for(int row =0;row<movielist[0].length;row++)
 				{
 					for(int col  = 0;col <movielist.length;col ++)
 					{
