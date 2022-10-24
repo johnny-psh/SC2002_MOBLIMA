@@ -2,15 +2,8 @@ import java.util.ArrayList;
 import java.io.*;
 import java.util.*;
 
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.xssf.usermodel.XSSFRow;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-//Test Read Txt File
 
 public class Movie {
-    static XSSFRow row;
     /*
         This Movie Class is for:
         1) Cinema Staff to Create(new Movie object) / Update(set) / Remove(set Showing status to ENDOFSHOWING) movies
@@ -137,6 +130,5 @@ public class Movie {
         }
     }
     
-//Temporary Txt File Reader 
     
 }

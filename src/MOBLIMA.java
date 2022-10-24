@@ -21,17 +21,12 @@ public class MOBLIMA {
 	static Scanner scanner = new Scanner(System.in);
 	
 	public static String[][] getMovies() throws IOException {        
-   
-
         FileInputStream fis = new FileInputStream(new File("C:/Users/User/Desktop/SC2002_Assignment/src/database/TestMoviesReader.xlsx"));
         XSSFWorkbook workbook = new XSSFWorkbook(fis);
         XSSFSheet spreadsheet = workbook.getSheetAt(0);
         Iterator < Row >  rowIterator = spreadsheet.iterator();
-        //String a[]=new String[30];
-        int count=0;
         int tRow=0;
         int tCol=0;
-        //Boolean flag=true; 
         String[][] TitleTest = new String[4][4];
 
         while (rowIterator.hasNext()) {
@@ -46,7 +41,6 @@ public class MOBLIMA {
                  String convert = String.valueOf(cell.getNumericCellValue());
                  if(convert!= null && !convert.equals(""))
                  {
-                    //a[count] = String.valueOf(cell.getNumericCellValue());
                     TitleTest[tRow][tCol] = String.valueOf(cell.getNumericCellValue());
                     tCol++;
                  }
@@ -57,7 +51,6 @@ public class MOBLIMA {
                  case STRING:
                  if(cell.getStringCellValue() != null && !cell.getStringCellValue().equals(""))
                  {
-                    //a[count] = cell.getStringCellValue();
                     TitleTest[tRow][tCol] = cell.getStringCellValue();
                     tCol++;
                  }
@@ -65,17 +58,12 @@ public class MOBLIMA {
                     cell.getStringCellValue() + " \t\t ");
                     break;
               }
-              count++;
-              
            }
            tRow++;
            tCol=0;
            System.out.println();
         }
-        fis.close();
-        /* for(int i=0; i<a.length; i++) {
-            System.out.println(a[i]);
-         }*/    
+        fis.close();  
 		 return TitleTest;
     }
 
@@ -108,7 +96,6 @@ public class MOBLIMA {
 					break;
 				case 2:
 				String[][] movielist = getMovies();
-				//System.out.println(Arrays.deepToString(movielist));
 				for(int row =0;row<movielist.length;row++)
 				{
 					for(int col  = 0;col <movielist.length;col ++)
