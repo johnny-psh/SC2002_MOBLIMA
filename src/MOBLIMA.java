@@ -90,6 +90,28 @@ public class MOBLIMA {
         }
         return cleanArr;
     }
+	public static void printArr(String[][] movielist)
+	{
+		for(int row =0;row<movielist[0].length;row++)
+				{
+					for(int col  = 0;col <movielist.length;col ++)
+					{
+						if(movielist[col][row]!=null)
+						{
+							if(row==0)
+							{
+								System.out.print(movielist[col][row]+"\t");
+							}
+							else
+							{
+								System.out.print(movielist[col][row]+"\t \t");
+							}
+						}
+					}
+					System.out.print("\n");
+				}
+		System.out.print("\n");
+	}
 
 	
 
@@ -119,25 +141,8 @@ public class MOBLIMA {
 				case 1:
 					break;
 				case 2:
-				String[][] movielist = getMovies();
-				for(int row =0;row<movielist[0].length;row++)
-				{
-					for(int col  = 0;col <movielist.length;col ++)
-					{
-						if(movielist[col][row]!=null)
-						{
-							if(row==0)
-							{
-								System.out.print(movielist[col][row]+"\t");
-							}
-							else
-							{
-								System.out.print(movielist[col][row]+"\t \t");
-							}
-						}
-					}
-					System.out.print("\n");
-				}
+				String[][] getList = getMovies();
+				printArr(getList);
 					break;
 				case 3:
 					break;
