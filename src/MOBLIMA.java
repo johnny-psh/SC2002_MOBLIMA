@@ -1,16 +1,88 @@
 // Login plus display  menu in our main function
 import java.util.Scanner;
 
+import java.util.ArrayList;
+import java.io.*;
+import java.util.*;
+
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
 public class MOBLIMA {
 
 	// Open CSV
 
 	// Initialize Cineplexe object, Movie Object
-	
+	static XSSFRow row;
 	
 	static Scanner scanner = new Scanner(System.in);
 	
-	public static void main (String[] args) {
+	public static String[][] getMovies() throws IOException {        
+   
+
+        FileInputStream fis = new FileInputStream(new File("C:/Users/User/Desktop/SC2002_Assignment/src/database/TestMoviesReader.xlsx"));
+        XSSFWorkbook workbook = new XSSFWorkbook(fis);
+        XSSFSheet spreadsheet = workbook.getSheetAt(0);
+        Iterator < Row >  rowIterator = spreadsheet.iterator();
+        //String a[]=new String[30];
+        int count=0;
+        int tRow=0;
+        int tCol=0;
+        //Boolean flag=true; 
+        String[][] TitleTest = new String[4][4];
+
+        while (rowIterator.hasNext()) {
+           row = (XSSFRow) rowIterator.next();
+           Iterator < Cell >  cellIterator = row.cellIterator();
+
+           while ( cellIterator.hasNext()) {
+              Cell cell = cellIterator.next();
+              
+              switch (cell.getCellType()) {
+                 case NUMERIC:
+                 String convert = String.valueOf(cell.getNumericCellValue());
+                 if(convert!= null && !convert.equals(""))
+                 {
+                    //a[count] = String.valueOf(cell.getNumericCellValue());
+                    TitleTest[tRow][tCol] = String.valueOf(cell.getNumericCellValue());
+                    tCol++;
+                 }
+                    
+                    System.out.print(cell.getNumericCellValue() + " \t\t ");
+                    break;
+                 
+                 case STRING:
+                 if(cell.getStringCellValue() != null && !cell.getStringCellValue().equals(""))
+                 {
+                    //a[count] = cell.getStringCellValue();
+                    TitleTest[tRow][tCol] = cell.getStringCellValue();
+                    tCol++;
+                 }
+                    System.out.print(
+                    cell.getStringCellValue() + " \t\t ");
+                    break;
+              }
+              count++;
+              
+           }
+           tRow++;
+           tCol=0;
+           System.out.println();
+        }
+        fis.close();
+        /* for(int i=0; i<a.length; i++) {
+            System.out.println(a[i]);
+         }*/    
+		 return TitleTest;
+    }
+
+
+
+	
+	public static void main (String[] args) throws IOException {
 		System.out.println("   ______      __  __                   _______                  __                       ");
 		System.out.println("  / ____/___ _/ /_/ /_  ____ ___  __   / ____(_)___  ___  ____  / /__  _  _____  _____    ");
 		System.out.println(" / /   / __ `/ __/ __ \\/ __ `/ / / /  / /   / / __ \\/ _ \\/ __ \\/ / _ \\| |/_/ _ \\/ ___/   ");
@@ -35,6 +107,16 @@ public class MOBLIMA {
 				case 1:
 					break;
 				case 2:
+				String[][] movielist = getMovies();
+				//System.out.println(Arrays.deepToString(movielist));
+				for(int row =0;row<movielist.length;row++)
+				{
+					for(int col  = 0;col <movielist.length;col ++)
+					{
+						System.out.print(movielist[col][row]+"\t");
+					}
+					System.out.print("\n");
+				}
 					break;
 				case 3:
 					break;
