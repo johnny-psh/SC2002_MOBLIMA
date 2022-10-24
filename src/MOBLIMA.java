@@ -44,8 +44,6 @@ public class MOBLIMA {
                     TitleTest[tRow][tCol] = String.valueOf(cell.getNumericCellValue());
                     tCol++;
                  }
-                    
-                    System.out.print(cell.getNumericCellValue() + " \t\t ");
                     break;
                  
                  case STRING:
@@ -54,8 +52,6 @@ public class MOBLIMA {
                     TitleTest[tRow][tCol] = cell.getStringCellValue();
                     tCol++;
                  }
-                    System.out.print(
-                    cell.getStringCellValue() + " \t\t ");
                     break;
               }
            }
@@ -100,7 +96,17 @@ public class MOBLIMA {
 				{
 					for(int col  = 0;col <movielist.length;col ++)
 					{
-						System.out.print(movielist[col][row]+"\t");
+						if(movielist[col][row]!=null)
+						{
+							if(row==0)
+							{
+								System.out.print(movielist[col][row]+"\t");
+							}
+							else
+							{
+								System.out.print(movielist[col][row]+"\t \t");
+							}
+						}
 					}
 					System.out.print("\n");
 				}
