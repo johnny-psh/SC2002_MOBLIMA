@@ -22,7 +22,7 @@ public class AdminModule {
    // ./src/database/TestMoviesReader.xlsx
 
 
-   public static void insertNewColumnBeforeWithData(Workbook workbook, int colIndex) {
+   public static void insertNewColumnBeforeWithData(Workbook workbook, int colIndex,String [] arr) {
     // Getting the first sheet from workbook
     Sheet sheet = workbook.getSheetAt(0);
     //int startColumn = colIndex;
@@ -33,21 +33,15 @@ public class AdminModule {
 
     //Get Last row
     int newCol = endColumn++; 
-    // Add the data to new column
+
+    // Add the data to new column , just to know what data needed here to progress
     for (int i = 0; i <= sheet.getLastRowNum(); i++) {
         Row row = sheet.getRow(i);
-        if (i == 0) {
-            row.createCell(newCol).setCellValue("ID");
-        } else {
-            row.createCell(newCol).setCellValue(generateId());
-        }
+            row.createCell(newCol).setCellValue(arr[i]);
+        
     }
 
 }
-private static int generateId() {
-    return (int) (Math.random() * 100000);
-}
-
 
     public static void MenuPage(Administrator a) throws IOException
     {
@@ -81,7 +75,7 @@ private static int generateId() {
                 int listing = sc.nextInt();
                 if(listing == 1)
                 {
-                    
+                    //Delete if deprecated function
                     // Movie m = MovieListings.createMovie();
 
                     // pw.println(m.getMovieID() + "," + m.getTitle() + "," + m.getSypnosis() + "," + m.getDirector() + "," + m.getCast() + "," + 
@@ -89,26 +83,31 @@ private static int generateId() {
                     //            + m.getOverallReviewerRating());
                     // pw.flush();         
                     
+
+                    //Add into excel function below
                     File xlsxFile = new File("./src/database/TestMoviesReader.xlsx");
 
-		try {
-			// Creating input stream
-			FileInputStream inputStream = new FileInputStream(xlsxFile);
-			// Creating workbook from input stream
-			Workbook workbook = WorkbookFactory.create(inputStream);
-			insertNewColumnBeforeWithData(workbook, 1);
+                    try {
+                        // Creating input stream
+                        FileInputStream inputStream = new FileInputStream(xlsxFile);
 
-			// Write the updated workbook to the file
-			FileOutputStream fos = new FileOutputStream(xlsxFile);
-			workbook.write(fos);
-			// close the output stream
-			fos.close();
-			System.out.println("Success: added new column with data to an existing excel file.");
-		} catch (EncryptedDocumentException | IOException e) {
+                        String[] dummydata = {"1", "t2", "3"}; 
 
-			System.err.println("Failed: adding new column to an existing excel file.");
-			e.printStackTrace();
-		}
+                        // Creating workbook from input stream
+                        Workbook workbook = WorkbookFactory.create(inputStream);
+                        insertNewColumnBeforeWithData(workbook, 1,dummydata);
+                        
+                        // Write the updated workbook to the file
+                        FileOutputStream fos = new FileOutputStream(xlsxFile);
+                        workbook.write(fos);
+                        // close the output stream
+                        fos.close();
+                        System.out.println("Success: added new column with data to an existing excel file.");
+                    } catch (EncryptedDocumentException | IOException e) {
+
+                        System.err.println("Failed: adding new column to an existing excel file.");
+                        e.printStackTrace();
+                    }
                 }
                 else if(listing == 2)
                 {
