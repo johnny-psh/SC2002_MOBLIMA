@@ -11,6 +11,7 @@ import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+
 public class MOBLIMA {
 
 	// Open CSV
@@ -60,7 +61,8 @@ public class MOBLIMA {
            tCol=0;
            System.out.println();
         }
-        fis.close();  
+        fis.close(); 
+		workbook.close(); 
 		String[][] cleanedData = removeNull(TitleTest);
 
 		 return cleanedData;
