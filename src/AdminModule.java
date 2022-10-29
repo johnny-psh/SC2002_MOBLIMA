@@ -26,22 +26,32 @@ public class AdminModule {
     // Getting the first sheet from workbook
     Sheet sheet = workbook.getSheetAt(0);
     //int startColumn = colIndex;
-    int endColumn = sheet.getRow(0).getLastCellNum();
+    //int endColumn = sheet.getRow(0).getLastCellNum();
 
     // to insert only one column
     //int newColCount = 1;
 
     //Get Last row
-    int newCol = endColumn++; 
+    int newCol = 1; 
 
     // Add the data to new column , just to know what data needed here to progress
-    for (int i = 0; i <= sheet.getLastRowNum(); i++) {
+        for (int i = 0; i <= sheet.getLastRowNum(); i++) {
         Row row = sheet.getRow(i);
             row.createCell(newCol).setCellValue(arr[i]);
         
+        }
     }
 
-}
+    public static void updateValue(Workbook workbook, int colIndex,String [] arr)
+    {
+        Sheet sheet = workbook.getSheetAt(0);
+        int endColumn = 2;
+        for (int i = 0; i <= sheet.getLastRowNum(); i++) {
+            Row row = sheet.getRow(i);
+                row.createCell(endColumn).setCellValue(arr[i]);
+            
+            }
+    }
 
     public static void MenuPage(Administrator a) throws IOException
     {
@@ -49,6 +59,8 @@ public class AdminModule {
         FileWriter fw = new FileWriter(path, true);
         BufferedWriter bw = new BufferedWriter(fw);
         PrintWriter pw = new PrintWriter(bw);
+
+        File xlsxFile = new File("./src/database/TestMoviesReader.xlsx");
         while(a.getValid())
         {
             int choice;
@@ -85,18 +97,19 @@ public class AdminModule {
                     
 
                     //Add into excel function below
-                    File xlsxFile = new File("./src/database/TestMoviesReader.xlsx");
+                    //File xlsxFile = new File("./src/database/TestMoviesReader.xlsx");
 
                     try {
                         // Creating input stream
                         FileInputStream inputStream = new FileInputStream(xlsxFile);
+                        //Add your input scanner thing for whatever value supposed be here
 
-                        String[] dummydata = {"1", "t2", "3"}; 
+                        //Placeholder insert function data
+                        String[] dummydata = {"InsertFunction", "T1", "T3"}; 
 
                         // Creating workbook from input stream
                         Workbook workbook = WorkbookFactory.create(inputStream);
                         insertNewColumnBeforeWithData(workbook, 1,dummydata);
-                        
                         // Write the updated workbook to the file
                         FileOutputStream fos = new FileOutputStream(xlsxFile);
                         workbook.write(fos);
@@ -113,11 +126,26 @@ public class AdminModule {
                 {
                     System.out.println("Which Movie would you like to update?");
                     System.out.println("Movie ID\t" + "Movie Title");
-                    String line = "";
-                    while((line = br.readLine())!=null)
-                    {
-                        String values[] = line.split(",");
-                        System.out.println(values[0] + "\t\t" + values[1]);
+                    
+
+                    try {
+                        FileInputStream inputStream = new FileInputStream(xlsxFile);
+                      
+                        //Placeholder update function data
+                        String[] dummydata = {"Update", "t2", "3"}; 
+
+
+                        Workbook workbook = WorkbookFactory.create(inputStream);
+                        updateValue(workbook, 1,dummydata);
+
+                        FileOutputStream fos = new FileOutputStream(xlsxFile);
+                        workbook.write(fos);
+                        fos.close();
+                        System.out.println("Success: updated new column with data to an existing excel file.");
+                    } catch (EncryptedDocumentException | IOException e) {
+
+                        System.err.println("Failed: adding new column to an existing excel file.");
+                        e.printStackTrace();
                     }
 
                 }
