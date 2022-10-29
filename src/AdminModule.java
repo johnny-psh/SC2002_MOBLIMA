@@ -12,6 +12,7 @@ import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
+import org.apache.poi.ss.usermodel.CellValue;
 
 
 public class AdminModule {
@@ -51,6 +52,78 @@ public class AdminModule {
                 row.createCell(endColumn).setCellValue(arr[i]);
             
             }
+    }
+
+    public static void deleteMovie(Workbook workbook, int colIndex)
+    {
+        //Future note : colIndex cannot be 0 if there is header in xlxs file
+        // Like testMovie xlxs, apply to above few
+        Sheet sheet = workbook.getSheetAt(0);
+        int tempColDelete =2;
+        int maxColumn = 0;
+        for ( int r=0; r < sheet.getLastRowNum()+1; r++ ){
+            Row row = sheet.getRow( r );
+
+            // if no row exists here; then nothing to do; next!
+            if ( row == null )
+                continue;
+
+            // if the row doesn't have this many columns then we are good; next!
+            int lastColumn = row.getLastCellNum();
+            if ( lastColumn > maxColumn )
+                maxColumn = lastColumn;
+
+            //Temporary placeholder
+            if ( lastColumn < tempColDelete )
+                continue;
+            //Temporary placeholder
+            for ( int x=tempColDelete+1; x < lastColumn + 1; x++ ){
+                Cell oldCell    = row.getCell(x-1);
+                if ( oldCell != null )
+                    row.removeCell( oldCell );
+
+                Cell nextCell   = row.getCell( x );
+                if ( nextCell != null ){
+                    Cell newCell    = row.createCell( x-1, nextCell.getCellType() );
+                    cloneCell(newCell, nextCell);
+                }
+            }
+        }
+
+
+        // Adjust the column widths
+        for ( int c=0; c < maxColumn; c++ ){
+            sheet.setColumnWidth( c, sheet.getColumnWidth(c+1) );
+        }
+    }
+
+    private static void cloneCell( Cell cNew, Cell cOld ){
+        cNew.setCellComment( cOld.getCellComment() );
+        cNew.setCellStyle( cOld.getCellStyle() );
+
+        switch ( cNew.getCellType() ){
+            case BOOLEAN:{
+                cNew.setCellValue( cOld.getBooleanCellValue() );
+                break;
+            }
+            case NUMERIC:{
+                cNew.setCellValue( cOld.getNumericCellValue() );
+                break;
+            }
+            case STRING:{
+                cNew.setCellValue( cOld.getStringCellValue() );
+                break;
+            }
+            case ERROR:{
+                cNew.setCellValue( cOld.getErrorCellValue() );
+                break;
+            }
+            case FORMULA:{
+                cNew.setCellFormula( cOld.getCellFormula() );
+                break;
+            }
+        }
+
     }
 
     public static void MenuPage(Administrator a) throws IOException
@@ -151,6 +224,23 @@ public class AdminModule {
                 }
                 else if(listing == 3)
                 {
+                    //3. Remove Movie 
+
+                    try {
+                        FileInputStream inputStream = new FileInputStream(xlsxFile);
+
+                        Workbook workbook = WorkbookFactory.create(inputStream);
+                        deleteMovie(workbook, 1);
+
+                        FileOutputStream fos = new FileOutputStream(xlsxFile);
+                        workbook.write(fos);
+                        fos.close();
+                        System.out.println("Success: updated new column with data to an existing excel file.");
+                    } catch (EncryptedDocumentException | IOException e) {
+
+                        System.err.println("Failed: adding new column to an existing excel file.");
+                        e.printStackTrace();
+                    }
 
                 }
                 else if(listing == 4)
