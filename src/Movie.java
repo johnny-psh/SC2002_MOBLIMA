@@ -20,8 +20,7 @@ public class Movie {
     private Enums.TypeOfMovie type; // Type of movie (3D, Blockbuster etc.) - This is also called by ticket class 
     private Enums.MovieRating movieRating; // Rating of movie - (PG, M18 etc.)
     private ArrayList<String> castList;
-
-    private int overallReviewerRating; // Viewed by moviegoer
+    private int overallReviewerRating, ticketSales;
     private ArrayList<Review> movieReviewList;
 
     // Constructor - Used by <cinema staff> to create a new movie object
@@ -31,6 +30,7 @@ public class Movie {
         this.title = title;
         this.castList = new ArrayList<String>();
         this.movieReviewList = new ArrayList<Review>();
+        this.ticketSales = 0;
     }
 
     public String getMovieID()
@@ -114,8 +114,7 @@ public class Movie {
     }
 
     // OVERALL Reviewer Rating
-    public int getOverallReviewerRating(){
-        
+    public int getOverallReviewerRating(){ 
         return this.overallReviewerRating;
     }
 
@@ -123,7 +122,6 @@ public class Movie {
     private void updateOverallReviewerRating(int newReviewerRating){
         int numOfRatings = movieReviewList.size();
         int totalRatings = (overallReviewerRating * (numOfRatings - 1))  + newReviewerRating;
-        
         this.overallReviewerRating = totalRatings / numOfRatings;
     }
 
@@ -143,5 +141,11 @@ public class Movie {
         }
     }
     
-    
+    // Ticket Sales
+    public int getTicketSales(){
+        return this.ticketSales;
+    }
+    public void addTicketSales(int numOfTickets){
+        this.ticketSales += numOfTickets;
+    }
 }
