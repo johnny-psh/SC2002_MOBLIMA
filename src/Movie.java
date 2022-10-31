@@ -7,22 +7,18 @@ public class Movie {
         2) Movie-goer user class to access(get) movie properties
         3) Ticket class to access(get) movie properties
      */
-
-
    
     // Properties
-    private String movieID;
-    private String title, sypnosis, director;
+    private String movieID, title, sypnosis, director;
     private Enums.ShowingStatus showingStatus;
     private Enums.TypeOfMovie type; // Type of movie (3D, Blockbuster etc.) - This is also called by ticket class 
     private Enums.MovieRating movieRating; // Rating of movie - (PG, M18 etc.)
     private ArrayList<String> castList;
-    private int overallReviewerRating, ticketSales;
     private ArrayList<Review> movieReviewList;
+    private int overallReviewerRating, ticketSales;
 
     // Constructor - Used by <cinema staff> to create a new movie object
     public Movie(String movieID, String title){
-
         this.movieID = movieID;
         this.title = title;
         this.castList = new ArrayList<String>();
@@ -94,7 +90,7 @@ public class Movie {
         this.movieRating = movieRating;
     } 
 
-    public ArrayList<String> getCast(){
+    public ArrayList<String> getCastList(){
         return this.castList;
     }
 
@@ -102,12 +98,9 @@ public class Movie {
         this.castList.add(castName);
     }
 
-    public void printCast(){
-
-        for(String str : castList)
-        {
-            System.out.println(str);
-        }
+    public void printCastList(){
+        for(String cast : castList)
+            System.out.println(cast);
     }
 
     // OVERALL Reviewer Rating
