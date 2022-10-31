@@ -1,23 +1,31 @@
 public class Seat{
 
-    private int seatID;
+    private char row;
+    private int col;
+    private String seatID;
     private boolean isOccupied;
 
-    public Seat(int seatID){
-        this.seatID = seatID;
-        isOccupied = false;
+    public Seat(char row, int col){
+        this.row = row;
+        this.col = col;
+        this.seatID = "" + this.row + this.col;
+        this.isOccupied = false;
     }
 
-    public int getSeatID(){
-        return seatID;
+    public char getRow(){
+        return this.row;
+    }
+
+    public int getCol(){
+        return this.col;
+    }
+
+    public String getSeatID(){
+        return this.seatID;
     }
 
     public boolean getIsOccupied() {
-        return isOccupied;
-    }
-
-    public void setSeatID(int seatID){
-        this.seatID = seatID;
+        return this.isOccupied;
     }
 
     public void setIsOccupied(boolean isOccupied){
