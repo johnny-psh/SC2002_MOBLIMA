@@ -1,6 +1,6 @@
 public class Cinema{
 
-    private String cinemaID;
+    private String cinemaID; // 3 digit code
     private Enums.CinemaType cinemaType;
     private Seat[][] seats;
     private int numOfRows;
