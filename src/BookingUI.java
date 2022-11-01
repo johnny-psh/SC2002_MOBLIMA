@@ -108,7 +108,7 @@ public class BookingUI {
         // Make Payment
 
         // Transaction
-        this.transaction = new Transaction(this.numOfTickets, this.selectedCinema.getCinemaID());
+        this.transaction = new Transaction(this.selectedCinema.getCinemaID());
         System.out.println("You have successfully purchased " + this.numOfTickets + " ticket(s)");
         System.out.println("Transaction ID: " + this.transaction.getTransactionID());
     }

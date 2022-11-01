@@ -1,17 +1,22 @@
-import java.util.Date;
+import java.text.SimpleDateFormat;  
+import java.util.Date;  
 
 public class Transaction {
     private String transactionID; // TID - XXXYYYYMMDDhhmm
     private String cinemaID;
     private Date date;
-    private int numOfTickets;
 
-    public Transaction(int numOfTickets, String cinemaID){
-        this.date = 
-        this.transactionID = "" + cinemaID + this.date.toString();
+    public Transaction(String cinemaID){
+        SimpleDateFormat dateTimeFormatter = new SimpleDateFormat("yyyyMMddHHmm");  
+        this.date = new Date();  
+        this.transactionID = "" + cinemaID + dateTimeFormatter.format(this.date);
     }
 
     public String getTransactionID(){
         return this.transactionID;
     }
+    
+    public String getCinemaID(){
+        return this.cinemaID;
+    } 
 }
