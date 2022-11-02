@@ -27,18 +27,18 @@ public class AdminModule {
     // Getting the first sheet from workbook
     Sheet sheet = workbook.getSheetAt(0);
     //int startColumn = colIndex;
-    //int endColumn = sheet.getRow(0).getLastCellNum();
+
 
     // to insert only one column
     //int newColCount = 1;
 
     //Get Last row
-    int newCol = 1; 
+    int endColumn = sheet.getRow(0).getLastCellNum();
 
     // Add the data to new column , just to know what data needed here to progress
         for (int i = 0; i <= sheet.getLastRowNum(); i++) {
         Row row = sheet.getRow(i);
-            row.createCell(newCol).setCellValue(arr[i]);
+            row.createCell(endColumn).setCellValue(arr[i]);
         
         }
     }
@@ -46,6 +46,8 @@ public class AdminModule {
     public static void updateValue(Workbook workbook, int colIndex,String [] arr)
     {
         Sheet sheet = workbook.getSheetAt(0);
+
+        //column to update
         int endColumn = 2;
         for (int i = 0; i <= sheet.getLastRowNum(); i++) {
             Row row = sheet.getRow(i);
@@ -59,6 +61,8 @@ public class AdminModule {
         //Future note : colIndex cannot be 0 if there is header in xlxs file
         // Like testMovie xlxs, apply to above few
         Sheet sheet = workbook.getSheetAt(0);
+        
+        //tempColDelete temp col = change to colIndex
         int tempColDelete =2;
         int maxColumn = 0;
         for ( int r=0; r < sheet.getLastRowNum()+1; r++ ){
@@ -73,10 +77,10 @@ public class AdminModule {
             if ( lastColumn > maxColumn )
                 maxColumn = lastColumn;
 
-            //Temporary placeholder
+            //Temporary placeholder =tempColDelete
             if ( lastColumn < tempColDelete )
                 continue;
-            //Temporary placeholder
+            //Temporary placeholder =tempColDelete
             for ( int x=tempColDelete+1; x < lastColumn + 1; x++ ){
                 Cell oldCell    = row.getCell(x-1);
                 if ( oldCell != null )
