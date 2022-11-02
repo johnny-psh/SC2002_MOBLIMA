@@ -144,43 +144,7 @@ public class MovieListings {
 
     public static void main(String[] args) throws IOException
     {
-        BufferedReader br = new BufferedReader(new FileReader(path));
-        FileWriter fw = new FileWriter(path, true);
-        BufferedWriter bw = new BufferedWriter(fw);
-        PrintWriter pw = new PrintWriter(bw);
-
-        System.out.println("Which Movie would you like to update?");
-        System.out.println();
-        System.out.println("Movie ID\t" + "Movie Title");
-        String line = "";
-        while((line = br.readLine())!=null)
-        {
-            String values[] = line.split(",");
-            System.out.println(values[0] + "\t\t" + values[1]);
-        }
-        System.out.print("Option> ");
-        String ID = sc.nextLine();
-        boolean found = false;
-
-        while((line = br.readLine())!=null)
-        {
-            
-            String values[] = line.split(",");
-            System.out.println(values[0]);
-            if(ID.compareTo(values[0])==0)
-            {
-                System.out.println("Movie found");
-                found = true;
-            }
-        }
-
-        if(!found)
-        {
-            System.out.println("Invalid Movie ID");
-        }
-
-        br.close();
-        pw.close();
+        
  
     }
         
