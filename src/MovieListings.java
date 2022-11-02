@@ -1,6 +1,20 @@
 import java.io.*;
 import java.util.*;
 
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+import org.apache.poi.EncryptedDocumentException;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
+import org.apache.poi.ss.usermodel.CellValue;
+
+
 public class MovieListings {
     
     static Scanner sc = new Scanner(System.in);
@@ -144,8 +158,15 @@ public class MovieListings {
 
     public static void main(String[] args) throws IOException
     {
-        
- 
+        Movie m = MovieListings.createMovie();
+        File xlsxFile = new File("./src/database/TestMoviesReader.xlsx");
+        XSSFWorkbook workbook = new XSSFWorkbook();
+        XSSFSheet sheet = workbook.createSheet("Movies");
+        String type = m.getType().toString();
+        System.out.println(type);
+
+        int col = 7;
+
     }
         
     
