@@ -350,16 +350,28 @@ public class AdminModule {
                 {
 
                     try {
+                        System.out.println("=============== Edit Ticket Price ===============");
+                        System.out.print("Enter Ticket Price for 2D > ");
+                        int twoDTicket = sc.nextInt();
+                        System.out.print("Enter Ticket Price for 3D > ");
+                        int threeDTicket = sc.nextInt();
+                        System.out.println("Enter Ticket Price for 2D Blockbuster > ");
+                        int twoDTicketBlock = sc.nextInt();
+                        System.out.println("Enter Ticket Price for 3D Blockbuster > ");
+                        int threeDTicketBlock = sc.nextInt();
+                        
+
                         // Creating input stream
                         FileInputStream inputStream = new FileInputStream(systemSettings);
                         //Add your input scanner thing for whatever value supposed be here
                         
                         //Placeholder insert function data
-                        String[] dummydata = {"InsertFunction", "T1", "T3"}; 
+                        //String[] dummydata = {"InsertFunction", "T1", "T3"}; 
 
                         // Creating workbook from input stream
                         Workbook workbook = WorkbookFactory.create(inputStream);
-                        insertNewColumnBeforeWithData(workbook, 1,dummydata);
+                        
+                        //insertNewColumnBeforeWithData(workbook, 1,dummydata);
                         // Write the updated workbook to the file
                         FileOutputStream fos = new FileOutputStream(systemSettings);
                         workbook.write(fos);
@@ -374,8 +386,10 @@ public class AdminModule {
                 }
                 else if(systemSettingsOption == 2)
                 {
-                    System.out.println("Which Movie would you like to update?");
-                    System.out.println("Movie ID\t" + "Movie Title");
+                    //System.out.println("Which Movie would you like to update?");
+                    //System.out.println("Movie ID\t" + "Movie Title");
+                    java.util.Date date =new java.util.Date();  
+                    System.out.println(date);
                     
 
                     try {
@@ -386,7 +400,7 @@ public class AdminModule {
 
 
                         Workbook workbook = WorkbookFactory.create(inputStream);
-                        updateValue(workbook, 1,dummydata);
+                        //updateValue(workbook, 1,dummydata);
 
                         FileOutputStream fos = new FileOutputStream(systemSettings);
                         workbook.write(fos);
