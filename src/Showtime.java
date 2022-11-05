@@ -1,4 +1,5 @@
 import java.util.Date;  
+import java.text.SimpleDateFormat;  
 
 public class Showtime {
     private Movie movie;
@@ -14,16 +15,28 @@ public class Showtime {
         this.time = time;
     }
 
+    public Movie getMovie(){
+        return this.movie;
+    }
+
     public String getMovieName(){
         return this.movie.getTitle();
     }
 
-    public String getCineplexName(){
-        return this.cineplex.getCineplexeName();
+    public Cineplex getCineplex(){
+        return this.cineplex;
+    }
+
+    public Cinema getCinema(){
+        return this.cinema;
     }
 
     public String getCinemaName(){
         return this.cinema.getCinemaName();
+    }
+
+    public Enums.CinemaType getCinemaType(){
+        return this.cinema.getCinemaType();
     }
 
     public Date getDate(){
@@ -40,6 +53,19 @@ public class Showtime {
 
     public void setTime(Date time){
         this.time = time;
+    }
+
+    public String getFormattedDate(){
+        SimpleDateFormat dateTimeFormatter = new SimpleDateFormat("dd/MM/yyyy");
+        return (dateTimeFormatter.format(this.date));  
+    }
+
+
+    public void printShowtime(){
+        // Example - 15:00 - Hall5 - CinemaType - Avengers
+        SimpleDateFormat dateTimeFormatter = new SimpleDateFormat("HH:mm");
+        System.out.print(" " + dateTimeFormatter.format(this.time)); 
+        System.out.print(" - " + this.getCinemaName() + " - " + this.getCinemaType().toString() + " - " + this.getMovieName()); 
     }
 
 }

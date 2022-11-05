@@ -21,24 +21,24 @@ public class ShowtimeList {
         return this.showtimeList.get(index);
     };
 
-    public ArrayList<Showtime> getShowtimeListByDate(Date date){
-        ArrayList<Showtime> showtimeListByDate = new ArrayList<Showtime>();
+    public ArrayList<Showtime> getShowtimeListByCineplex(Cineplex cineplex){
+        ArrayList<Showtime> showtimeListByCineplex = new ArrayList<Showtime>();
         for(int i=0; i < this.showtimeList.size(); i++){
             Showtime curShowtime = this.showtimeList.get(i);
+            if(curShowtime.getCineplex() == cineplex)
+                showtimeListByCineplex.add(curShowtime);
+        }
+        return showtimeListByCineplex;
+    };
+
+    public static ArrayList<Showtime> getShowtimeListByDate(ArrayList<Showtime> showtimeListByCineplex, Date date){
+        ArrayList<Showtime> showtimeListByDate = new ArrayList<Showtime>();
+        for(int i=0; i < showtimeListByCineplex.size(); i++){
+            Showtime curShowtime = showtimeListByCineplex.get(i);
             if(curShowtime.getDate() == date)
                 showtimeListByDate.add(curShowtime);
         }
         return showtimeListByDate;
-    };
-
-    public ArrayList<Showtime> getShowtimeListByCineplex(String cineplexName){
-        ArrayList<Showtime> showtimeListByMovie = new ArrayList<Showtime>();
-        for(int i=0; i < this.showtimeList.size(); i++){
-            Showtime curShowtime = this.showtimeList.get(i);
-            if(curShowtime.getCineplexName() == cineplexName)
-                showtimeListByMovie.add(curShowtime);
-        }
-        return showtimeListByMovie;
     };
 
 }
