@@ -147,6 +147,48 @@ public class AdminModule {
 
     }
 
+    public static void readshowTimeCSV(Workbook workbook){
+ 
+            //Get first/desired sheet from the workbook
+            //XSSFSheet sheet = workbook.getSheetAt(0);
+            Sheet sheet = workbook.getSheetAt(0);
+ 
+            //Iterate through each rows one by one
+            Iterator<Row> rowIterator = sheet.iterator();
+
+            
+            int r = 0;
+            
+            while (rowIterator.hasNext()) 
+            {
+                Row row = rowIterator.next();
+                //For each row, iterate through all the columns
+                Iterator<Cell> cellIterator = row.cellIterator();
+                System.out.print(r+". ");
+                while (cellIterator.hasNext()) {
+                    Cell cell = cellIterator.next();
+                    
+                    switch (cell.getCellType()) 
+                    {
+                        case NUMERIC:
+                            System.out.print(cell.getNumericCellValue() + " ");
+                            break;
+                        case STRING:
+
+                            System.out.print(cell.getStringCellValue() + " ");
+                            break;
+                    }
+                    
+                    
+                }
+                System.out.println("");
+                r++;
+            }
+           
+        
+        
+    }
+
     public static void MenuPage(Administrator a) throws IOException
     {
         BufferedReader br = new BufferedReader(new FileReader(path));
@@ -156,6 +198,8 @@ public class AdminModule {
 
         File xlsxFile = new File("./src/database/TestMoviesReader.xlsx");
         File systemSettings = new File("./src/database/SystemSettings.xlsx");
+        File showtime = new File("./src/database/Showtime.xlsx");
+
         while(a.getValid())
         {
             int choice;
@@ -280,6 +324,32 @@ public class AdminModule {
                 System.out.println("4. Exit");
                 System.out.print("Option > ");
                 int showtimes = sc.nextInt();
+
+                // Store all the information into an 2D array
+                List<List<String>> cienemaShowtimesMovies = new ArrayList<List<String>>();  
+
+                try {
+                    // Creating input stream
+                    FileInputStream inputStream = new FileInputStream(showtime);
+                    //Add your input scanner thing for whatever value supposed be here
+
+                    // Creating workbook from input stream
+                    Workbook workbook = WorkbookFactory.create(inputStream);
+                    readshowTimeCSV(workbook);
+
+                    // Write the updated workbook to the file
+
+                    // FileOutputStream fos = new FileOutputStream(xlsxFile);
+                    // workbook.write(fos);
+                    // close the output stream
+                    // fos.close();
+                    // System.out.println("Success: added new column with data to an existing excel file.");
+                } catch (EncryptedDocumentException | IOException e) {
+
+                    System.err.println("Failed: adding new column to an existing excel file.");
+                    e.printStackTrace();
+                }
+
                 if(showtimes == 1)
                 {
 
