@@ -27,7 +27,7 @@ public class BookingUI {
         // 6. Select seats
         selectSeats(numOfTickets, selectedShowtime);
         // 7. Transaction
-        completeTransaction(numOfTickets, selectedShowtime.getCinema());
+        completeTransaction(numOfTickets, selectedShowtime);
     }
 
     private static Cineplex selectCineplex(){
@@ -134,6 +134,7 @@ public class BookingUI {
                 System.out.print("Column: ");
                 col = scanner.nextInt();
                 if(!cinema.getSeatOccupied(row, col)){
+                    cinema.setSeatOccupied(row, col);
                     Enums.TypeOfMovieGoer movieGoerType = selectTypeOfMovieGoer();
                     Seat seat = cinema.getSeat(row,col);
                     Ticket ticket = new Ticket(seat,  showtime, movieGoerType);
@@ -151,7 +152,7 @@ public class BookingUI {
     	System.out.print("Do you want to confirm payment? Yes (1) / No (2): ");
     	int userOption = scanner.nextInt();
     	if(userOption == 1){
-    		saveSeatToDB();
+    		saveSeatToDB(cinema);
             saveBookingToDB();
 		}
     	else{
@@ -161,7 +162,7 @@ public class BookingUI {
     }
 
     // Function to save reserved seats to database from CinemaController.java
-    private static void saveSeatToDB(){
+    private static void saveSeatToDB(Cinema cinema){
         return;
     }
 
@@ -198,13 +199,13 @@ public class BookingUI {
         return null;
     }
 
-    private static void completeTransaction(int numOfTickets, Cinema cinema){
+    private static void completeTransaction(int numOfTickets, Showtime showtime){
         // TODO: Capture movie-goer's name, mobile number, email address
         
         // Transaction
-        Transaction transaction = new Transaction(cinema.getCinemaID());
+        Transaction transaction = new Transaction(showtime, "Testusername");
         System.out.println("\nYou have successfully purchased " + numOfTickets + " ticket(s)");
-        System.out.println("Transaction ID: " + transaction.getTransactionID());
-        System.out.println("\nReturning to main menu...\n");
+        System.out.println(transaction.toString());
+        System.out.println("Returning to main menu...\n");
     }
 }

@@ -1,6 +1,5 @@
 import java.util.Date;  
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.text.Format;  
 
 public class Showtime {
@@ -79,7 +78,7 @@ public class Showtime {
     public void setHoliday(){
         this.dayOfWeek = Enums.DayOfWeek.PUBLIC_HOL;
     }
-    
+
     public boolean isTimeBeforeSize(){
         return this.timeBeforeSix;
     }
@@ -89,11 +88,15 @@ public class Showtime {
         return (dateTimeFormatter.format(this.date));  
     }
 
-    public void printShowtime(){
+    public String getFormattedTime(){
         SimpleDateFormat dateTimeFormatter = new SimpleDateFormat("HH:mm");
+        return (dateTimeFormatter.format(this.time));
+    }
+
+    public void printShowtime(){
         System.out.println(
         this.getFormattedDate() 
-        + " - " + dateTimeFormatter.format(this.time) 
+        + " - " +  this.getFormattedTime()
         + " - " + this.getCinema().getCinemaID() 
         + " - " + this.getCinema().getCinemaType().toString() 
         + " - " + this.getMovie().getTitle()); 
