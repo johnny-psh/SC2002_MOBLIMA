@@ -129,6 +129,20 @@ public class AdminModule {
         System.out.println(endColumn);
         return endColumn;
     }
+    public static String getID(Workbook workbook)
+    {
+        Sheet sheet = workbook.getSheetAt(0);
+        int endColumn = sheet.getRow(0).getLastCellNum();
+        //System.out.println(endColumn);
+        endColumn--;
+
+        Cell i = workbook.getSheetAt(0).getRow(0).getCell(endColumn); 
+        int cellString = Integer.parseInt(i.getStringCellValue());
+        cellString++;
+        String conv = String.valueOf(cellString);
+        //System.out.println("ID = " +cellString);
+        return conv;
+    }
         
 
     private static void cloneCell( Cell cNew, Cell cOld ){
@@ -246,6 +260,7 @@ public class AdminModule {
 
                     
                     //Simple Data insertion
+                    
                     System.out.println("Enter Movie Title: ");
                     String movieName  = sc.next();
 
@@ -291,7 +306,11 @@ public class AdminModule {
                         Workbook workbook = WorkbookFactory.create(inputStream);
                         //int col = getLastColumn(workbook);
                         //String sCol = Integer.toString(col);
-                        String[] inputData = {movieName,sypnosis, status[no], AR[ARno],type,Dname};
+
+                        String LastID = getID(workbook);
+
+
+                        String[] inputData = {LastID,movieName,sypnosis, status[no], AR[ARno],type,Dname};
                         insertNewColumnBeforeWithData(workbook,inputData);
                         // Write the updated workbook to the file
                         FileOutputStream fos = new FileOutputStream(xlsxFile);
