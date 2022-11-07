@@ -167,7 +167,7 @@ public class AdminModule {
                 System.out.print(r+". ");
                 while (cellIterator.hasNext()) {
                     Cell cell = cellIterator.next();
-                    //System.out.print(cell.getCellType());
+                    
                     switch (cell.getCellType()) 
                     {
                         case NUMERIC:
@@ -359,13 +359,13 @@ public class AdminModule {
                     String tempMovie, tempCineplex, tempCinema, tempDate, tempTime = "";
                     System.out.print("Enter Movie ID >");
                     tempMovie = sc.next();
-                    System.out.print("Enter Cineplex (Downtown, Causeway, Tampines) >");
+                    System.out.print("Enter Cineplex (Downtown, Causeway, Tampines) > ");
                     tempCineplex = sc.next();
-                    System.out.print("Enter Cinema (D01, D02, etc)>");
+                    System.out.print("Enter Cinema (D01, D02, etc)> ");
                     tempCinema = sc.next();
-                    System.out.print("Enter Date >");
+                    System.out.print("Enter Date > ");
                     tempDate = sc.next();
-                    System.out.print("Enter Time >");
+                    System.out.print("Enter Time > ");
                     tempTime = sc.next();
 
                     try {
@@ -374,14 +374,35 @@ public class AdminModule {
                         //Add your input scanner thing for whatever value supposed be here
 
                         //Placeholder insert function data
-                        String[] dummydata = {"InsertFunction", "T1", "T3"}; 
+                        String[] newRow = {"InsertFunction", "T1", "T3"}; 
 
                         // Creating workbook from input stream
                         Workbook workbook = WorkbookFactory.create(inputStream);
 
-                        insertNewColumnBeforeWithData(workbook, 1,dummydata);
+                        Sheet sheet = workbook.getSheetAt(0);
+
+                        int lastRow = sheet.getLastRowNum(); 
+                        Row row = sheet.createRow(lastRow+1);
+
+                        Cell cell = row.createCell(0);
+                        cell.setCellValue(tempMovie);
+
+                        cell = row.createCell(1);
+                        cell.setCellValue(tempCineplex);
+
+                        cell = row.createCell(2);
+                        cell.setCellValue(tempCinema);
+
+                        cell = row.createCell(3);
+                        cell.setCellValue(tempDate);
+
+                        cell = row.createCell(4);
+                        cell.setCellValue(tempTime);
+
+
+                        
                         // Write the updated workbook to the file
-                        FileOutputStream fos = new FileOutputStream(xlsxFile);
+                        FileOutputStream fos = new FileOutputStream(showtime);
                         workbook.write(fos);
                         // close the output stream
                         fos.close();
