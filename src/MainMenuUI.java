@@ -9,7 +9,7 @@ public class MainMenuUI {
 	public static void displayMenu() throws IOException {
 		
 		int userOption = 0;
-		while(userOption != 8) {
+		while(userOption != 7) {
 			System.out.println("1. Search/List movie");
 			System.out.println("2. View movie details");
 			System.out.println("3. Book and purchase ticket");

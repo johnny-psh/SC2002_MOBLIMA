@@ -9,7 +9,7 @@ public class MOBLIMA {
 		System.out.println("/ /___/ /_/ / /_/ / / / /_/ / /_/ /  / /___/ / / / /  __/ /_/ / /  __/>  </  __(__  )     ");
 		System.out.println("\\____/\\__,_/\\__/_/ /_/\\__,_/\\__, /   \\____/_/_/ /_/\\___/ .___/_/\\___/_/|_|\\___/____/      ");
 		System.out.println("                           /____/                     /_/                                 ");
-		
+		System.out.println("");
 		MainMenuUI.displayMenu();
 	}
 
