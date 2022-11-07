@@ -19,24 +19,12 @@ public class Showtime {
         return this.movie;
     }
 
-    public String getMovieName(){
-        return this.movie.getTitle();
-    }
-
     public Cineplex getCineplex(){
         return this.cineplex;
     }
 
     public Cinema getCinema(){
         return this.cinema;
-    }
-
-    public String getCinemaName(){
-        return this.cinema.getCinemaName();
-    }
-
-    public Enums.CinemaType getCinemaType(){
-        return this.cinema.getCinemaType();
     }
 
     public Date getDate(){
@@ -62,10 +50,13 @@ public class Showtime {
 
 
     public void printShowtime(){
-        // Example - 15:00 - Hall5 - CinemaType - Avengers
         SimpleDateFormat dateTimeFormatter = new SimpleDateFormat("HH:mm");
-        System.out.print(" " + dateTimeFormatter.format(this.time)); 
-        System.out.print(" - " + this.getCinemaName() + " - " + this.getCinemaType().toString() + " - " + this.getMovieName()); 
+        System.out.println(
+        " " + this.getFormattedDate() 
+        + " - " + dateTimeFormatter.format(this.time) 
+        + " - " + this.getCinema().getCinemaID() 
+        + " - " + this.getCinema().getCinemaType().toString() 
+        + " - " + this.getMovie().getTitle()); 
     }
 
 }
