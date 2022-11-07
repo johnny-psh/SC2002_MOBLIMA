@@ -4,9 +4,9 @@ public class Cineplex{
     private ArrayList<Cinema> cinemaList;
     private String cineplexName;
 
-    public Cineplex(String cineplexName){
+    public Cineplex(String cineplexName, ArrayList<Cinema> cinemaList){
         this.cineplexName = cineplexName;
-        this.cinemaList = new ArrayList<Cinema>();
+        this.cinemaList = cinemaList;
     }
 
     public String getCineplexeName(){

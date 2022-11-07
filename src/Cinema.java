@@ -1,17 +1,19 @@
 public class Cinema{
 
     private String cinemaID; // 3 digit code
+    private String cinemaName;
     private Enums.CinemaType cinemaType;
     private Seat[][] seats;
     private int numOfRows;
     private int numOfCols;
 
-    public Cinema(String cinemaID, Enums.CinemaType cinemaType, int numOfRows, int numOfCols){
+    public Cinema(String cinemaID, String cinemaName, Enums.CinemaType cinemaType){
         this.cinemaID = cinemaID;
+        this.cinemaName = cinemaName;
         this.cinemaType = cinemaType;
-        this.numOfRows = numOfRows;
-        this.numOfCols = numOfCols;
-        seats = new Seat[this.numOfRows][this.numOfCols];
+        this.numOfRows = 10;
+        this.numOfCols = 10;
+        this.seats = new Seat[this.numOfRows][this.numOfCols];
         for(int i = 1; i <= this.numOfRows; i++){
             for(int j = 1; j <= this.numOfCols; j++){
                 this.seats[i-1][j-1] = new Seat((char)(i+64), j);
@@ -40,12 +42,16 @@ public class Cinema{
                 if(j == mid)
                     System.out.print("    "); // Isle
             }
-            System.out.println("\t" + (char) (i+64)); //Row alphabet
+            System.out.println(" \t" + (char) (i+64)); //Row alphabet
         }
     }
 
     public String getCinemaID(){
         return this.cinemaID;
+    }
+
+    public String getCinemaName(){
+        return this.cinemaName;
     }
 
     public Enums.CinemaType getCinemaType(){
@@ -79,15 +85,15 @@ public class Cinema{
 
     // For testing purposes - Delete afterwards
     // This is how booking seat will be implemented in booking class
-    // public static void main (String[] args){
-    //     Cinema cin = new Cinema("HallA", Enums.CinemaType.REGULAR, 10, 10);
+    public static void main (String[] args){
+        Cinema cin = new Cinema("A12", "Hall5",Enums.CinemaType.REGULAR);
         
-    //     if(!cin.getSeatOccupied('A', 1)) // Check if seat already assigned first
-    //         cin.setSeatOccupied('A', 1); 
+        if(!cin.getSeatOccupied('A', 1)) // Check if seat already assigned first
+            cin.setSeatOccupied('A', 1); 
 
-    //     if(!cin.getSeatOccupied('B', 10)) 
-    //         cin.setSeatOccupied('B', 10);
+        if(!cin.getSeatOccupied('B', 10)) 
+            cin.setSeatOccupied('B', 10);
 
-    //     cin.printCinemaLayout();
-    // }
+        cin.printCinemaLayout();
+    }
 }

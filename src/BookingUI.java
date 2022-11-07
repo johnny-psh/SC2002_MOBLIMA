@@ -56,7 +56,7 @@ public class BookingUI {
             System.out.println("Select Cineplex: ");
             System.out.println("1. Downtown Cineplex");
             System.out.println("2. Causeway Cineplex");
-            System.out.println("3. West Mall Cineplex");
+            System.out.println("3. Tampines Cineplex");
             System.out.println("4. Back");
 			System.out.print("Option > ");
 			userOption = scanner.nextInt();
