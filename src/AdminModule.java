@@ -167,15 +167,17 @@ public class AdminModule {
                 System.out.print(r+". ");
                 while (cellIterator.hasNext()) {
                     Cell cell = cellIterator.next();
-                    
+                    //System.out.print(cell.getCellType());
                     switch (cell.getCellType()) 
                     {
                         case NUMERIC:
-                            System.out.print(cell.getNumericCellValue() + " ");
+                            System.out.print((int)cell.getNumericCellValue() + " ");
+                            
                             break;
                         case STRING:
 
                             System.out.print(cell.getStringCellValue() + " ");
+                            
                             break;
                     }
                     
@@ -353,28 +355,42 @@ public class AdminModule {
                 if(showtimes == 1)
                 {
 
-                    // try {
-                    //     // Creating input stream
-                    //     FileInputStream inputStream = new FileInputStream(xlsxFile);
-                    //     //Add your input scanner thing for whatever value supposed be here
+                    System.out.println("==========Create new showtime==========");
+                    String tempMovie, tempCineplex, tempCinema, tempDate, tempTime = "";
+                    System.out.print("Enter Movie ID >");
+                    tempMovie = sc.next();
+                    System.out.print("Enter Cineplex (Downtown, Causeway, Tampines) >");
+                    tempCineplex = sc.next();
+                    System.out.print("Enter Cinema (D01, D02, etc)>");
+                    tempCinema = sc.next();
+                    System.out.print("Enter Date >");
+                    tempDate = sc.next();
+                    System.out.print("Enter Time >");
+                    tempTime = sc.next();
 
-                    //     //Placeholder insert function data
-                    //     String[] dummydata = {"InsertFunction", "T1", "T3"}; 
+                    try {
+                        // Creating input stream
+                        FileInputStream inputStream = new FileInputStream(showtime);
+                        //Add your input scanner thing for whatever value supposed be here
 
-                    //     // Creating workbook from input stream
-                    //     Workbook workbook = WorkbookFactory.create(inputStream);
-                    //     insertNewColumnBeforeWithData(workbook, 1,dummydata);
-                    //     // Write the updated workbook to the file
-                    //     FileOutputStream fos = new FileOutputStream(xlsxFile);
-                    //     workbook.write(fos);
-                    //     // close the output stream
-                    //     fos.close();
-                    //     System.out.println("Success: added new column with data to an existing excel file.");
-                    // } catch (EncryptedDocumentException | IOException e) {
+                        //Placeholder insert function data
+                        String[] dummydata = {"InsertFunction", "T1", "T3"}; 
 
-                    //     System.err.println("Failed: adding new column to an existing excel file.");
-                    //     e.printStackTrace();
-                    // }
+                        // Creating workbook from input stream
+                        Workbook workbook = WorkbookFactory.create(inputStream);
+
+                        insertNewColumnBeforeWithData(workbook, 1,dummydata);
+                        // Write the updated workbook to the file
+                        FileOutputStream fos = new FileOutputStream(xlsxFile);
+                        workbook.write(fos);
+                        // close the output stream
+                        fos.close();
+                        System.out.println("Success: added new column with data to an existing excel file.");
+                    } catch (EncryptedDocumentException | IOException e) {
+
+                        System.err.println("Failed: adding new column to an existing excel file.");
+                        e.printStackTrace();
+                    }
                 }
                 else if(showtimes == 2)
                 {
