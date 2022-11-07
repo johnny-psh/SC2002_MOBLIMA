@@ -55,9 +55,27 @@ public class ShowtimeController {
                 cineplexName = cellIterator.next().getStringCellValue();
                 cinemaID = cellIterator.next().getStringCellValue();
                 cell = cellIterator.next();
-                dateString = (int)cell.getNumericCellValue() + "";
+                switch (cell.getCellType()) 
+                {
+                    case NUMERIC:
+                        dateString = ((int)cell.getNumericCellValue() + "");            
+                        break;
+                    case STRING:
+                    default:
+                        dateString = (cell.getStringCellValue());
+                        break;
+                }
                 cell = cellIterator.next();
-                timeString = (int)cell.getNumericCellValue() + "";
+                switch (cell.getCellType()) 
+                {
+                    case NUMERIC:
+                        timeString = ((int)cell.getNumericCellValue() + "");            
+                        break;
+                    case STRING:
+                    default:
+                        timeString = (cell.getStringCellValue());
+                        break;
+                }
                 //Convert string type to their respective types needed for creating Showtime object
                 date = dateFormatter.parse(dateString);  
                 time = timeFormatter.parse(timeString); 
