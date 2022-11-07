@@ -83,17 +83,4 @@ public class Cinema{
         return this.getSeat(row, col).getIsOccupied();
     }
 
-    // For testing purposes - Delete afterwards
-    // This is how booking seat will be implemented in booking class
-    public static void main (String[] args){
-        Cinema cin = new Cinema("A12", "Hall5",Enums.CinemaType.REGULAR);
-        
-        if(!cin.getSeatOccupied('A', 1)) // Check if seat already assigned first
-            cin.setSeatOccupied('A', 1); 
-
-        if(!cin.getSeatOccupied('B', 10)) 
-            cin.setSeatOccupied('B', 10);
-
-        cin.printCinemaLayout();
-    }
 }
