@@ -84,17 +84,4 @@ public class CineplexesController {
         }
         return cineplexList;
     }
-
-    public static void main(String[] args){
-        ArrayList<Cineplex> cineplexes = CineplexesController.read();
-        System.out.println(cineplexes.size());
-        for(int i = 0; i < cineplexes.size(); i++) {
-        	System.out.println((i+1) + ". " + cineplexes.get(i).getCineplexeName());            
-            for(int j=0; j < cineplexes.get(i).getCinemaList().size(); j++){
-        	System.out.println(cineplexes.get(i).getCineplexeName() + " - " + cineplexes.get(i).getCinemaList().get(j).getCinemaName());
-                
-            }
-		}
-    }
-
 }
