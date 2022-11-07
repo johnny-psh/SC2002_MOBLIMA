@@ -1,17 +1,26 @@
 public class Ticket{
 
     private Seat seat;
+    private Showtime showtime;
+    private Enums.TypeOfMovieGoer movieGoerType;
+
     private Enums.TypeOfMovie movieType; // Charged $1 extra for blockbuster
     private Enums.CinemaType cinemaType; 
     private Enums.TicketType ticketType;
+    private Enums.DayOfWeek dayOfWeek;
+    private boolean timeBeforeSix;
 
     private double ticketPrice;
     
-    public Ticket(Seat seat, Enums.TypeOfMovie movieType, Enums.CinemaType cinemaType, Enums.TicketType ticketType){
+    public Ticket(Seat seat, Showtime showtime, Enums.TypeOfMovieGoer movieGoerType){
         this.seat = seat;
-        this.movieType = movieType;
-        this.cinemaType = cinemaType;
-        this.ticketType = ticketType;
+        this.showtime = showtime;
+        this.movieGoerType = movieGoerType;
+        this.movieType = this.showtime.getMovie().getType();
+        this.cinemaType = this.showtime.getCinema().getCinemaType();
+        this.dayOfWeek = showtime.getDayOfWeek();
+        this.timeBeforeSix = this.showtime.isTimeBeforeSize();
+        this.ticketType = this.calcTicketType();
         this.ticketPrice = calcTicketPrice();
     }
 
@@ -118,6 +127,38 @@ public class Ticket{
         
         return 0;        
         
+    }
+
+    private Enums.TicketType calcTicketType(){
+
+        boolean isWeekendOrPublicHol = this.dayOfWeek != Enums.DayOfWeek.SAT && this.dayOfWeek != Enums.DayOfWeek.SUN && this.dayOfWeek != Enums.DayOfWeek.PUBLIC_HOL;
+        
+        // Students & Seniors on weekdays before 6pm
+        if(timeBeforeSix && !isWeekendOrPublicHol){
+            if(this.movieGoerType == Enums.TypeOfMovieGoer.SENIOR)
+                return Enums.TicketType.SENIOR;
+            else if(this.movieGoerType == Enums.TypeOfMovieGoer.STUDENT)
+                return Enums.TicketType.STUDENT;
+        }
+
+        // Non senior/student price Mon-Fri
+        switch(this.dayOfWeek){
+            case MON:
+            case TUES:
+            case WED:
+                return Enums.TicketType.MON_TO_WED;
+            case THURS:
+                return Enums.TicketType.THU;
+            case FRI:
+                return timeBeforeSix ? Enums.TicketType.FRI_BEFORE_SIX : Enums.TicketType.FRI_FROM_SIX;
+            
+            // Weekends & Public Hol
+            case SAT:
+            case SUN:
+            case PUBLIC_HOL:
+            default:
+                return Enums.TicketType.WEEKEND_AND_PUBLICHOL;       
+        }
     }
 
 }
