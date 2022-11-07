@@ -1,5 +1,9 @@
 import java.util.*;
 import java.io.*;
+import java.text.SimpleDateFormat;  
+import java.util.Date;  
+import java.text.ParseException;
+
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -40,7 +44,7 @@ public class AdminModule {
    }
 
 
-   public static void insertNewColumnBeforeWithData(Workbook workbook, int colIndex,String [] arr) {
+   public static void insertNewColumnBeforeWithData(Workbook workbook,String [] arr) {
     // Getting the first sheet from workbook
     Sheet sheet = workbook.getSheetAt(0);
     //int startColumn = colIndex;
@@ -227,18 +231,47 @@ public class AdminModule {
                 System.out.print("Option > ");
                 int listing = sc.nextInt();
                 if(listing == 1)
-                {
-                    //Delete if deprecated function
-                    // Movie m = MovieListings.createMovie();
-
-                    // pw.println(m.getMovieID() + "," + m.getTitle() + "," + m.getSypnosis() + "," + m.getDirector() + "," + m.getCast() + "," + 
-                    //            m.getShowingStatus() + "," + m.getType() + "," + m.getMovieRating() + "," 
-                    //            + m.getOverallReviewerRating());
-                    // pw.flush();         
-                    
-
+                {      
                     //Add into excel function below
                     //File xlsxFile = new File("./src/database/TestMoviesReader.xlsx");
+
+                    String movieName,cinema;
+                    
+
+                    System.out.println("Enter Movie Name: ");
+                    movieName  = sc.next();
+
+                    System.out.println("Choose a Cineplex:  1)Downtown 2)Causeway 3)Tampines ");
+                    String[] cine = {"Downtown","Causeway","Tampines"};
+                    int no=0;
+
+                    while (!(no>=1 && no<=(cine.length))) {
+                        no = sc.nextInt();  
+                        System.out.println("Please select in its range of 1-"+cine.length);
+                    }
+                    no--;
+
+                    System.out.println("Choose a Cinema:  1)D01 2)D02 3)D03 4)C01 5)C02 6)C03 7)D01 8)D02 9)D03");
+                    String[] Cinema = {"D01","D02","D03","C01","C02","C03","D01","D02","D03"};
+                    int cinNo=0;
+
+                    while (!(cinNo>=1 && cinNo<=(Cinema.length))) {
+                        cinNo = sc.nextInt();  
+                        System.out.println("Please select in its range of 1-"+Cinema.length);
+                    }
+                    cinNo--;
+                    
+                    
+                    
+                    System.out.println("Enter a date in this format dd/mm/yyyy: ");
+                    String date = sc.next();
+
+                    System.out.println("Enter time: ");
+                    String time = sc.next();
+                    
+                    
+
+
 
                     try {
                         // Creating input stream
@@ -246,11 +279,11 @@ public class AdminModule {
                         //Add your input scanner thing for whatever value supposed be here
 
                         //Placeholder insert function data
-                        String[] dummydata = {"InsertFunction", "T1", "T3"}; 
+                        String[] inputData = {movieName, cine[no], Cinema[cinNo],date,time}; 
 
                         // Creating workbook from input stream
                         Workbook workbook = WorkbookFactory.create(inputStream);
-                        insertNewColumnBeforeWithData(workbook, 1,dummydata);
+                        insertNewColumnBeforeWithData(workbook,inputData);
                         // Write the updated workbook to the file
                         FileOutputStream fos = new FileOutputStream(xlsxFile);
                         workbook.write(fos);
@@ -273,7 +306,7 @@ public class AdminModule {
                         FileInputStream inputStream = new FileInputStream(xlsxFile);
                       
                         //Placeholder update function data
-                        String[] dummydata = {"Update", "t2", "3"}; 
+                        String[] dummydata = {"Update", "t2", "3","test","test"}; 
 
 
                         Workbook workbook = WorkbookFactory.create(inputStream);

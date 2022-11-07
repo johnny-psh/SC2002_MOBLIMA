@@ -13,15 +13,16 @@ public class ViewMovieDetailUI {
 
 	// Initialize Cineplexe object, Movie Object
 	static XSSFRow row;
+    
 	public static String[][] getMovies() throws IOException {        
-        FileInputStream fis = new FileInputStream(new File("./src/database/TestMoviesReader.xlsx"));
+        FileInputStream fis = new FileInputStream(new File("./src/database/Movies.xlsx"));
         XSSFWorkbook workbook = new XSSFWorkbook(fis);
         XSSFSheet spreadsheet = workbook.getSheetAt(0);
         Iterator < Row >  rowIterator = spreadsheet.iterator();
         int tRow=0;
         int tCol=0;
 		//if add row/col , just change here [row][col]
-        String[][] TitleTest = new String[10][10];
+        String[][] TitleTest = new String[100][100];
 
         while (rowIterator.hasNext()) {
            row = (XSSFRow) rowIterator.next();
@@ -95,7 +96,7 @@ public class ViewMovieDetailUI {
 						{
 							if(row==0)
 							{
-								System.out.print(movielist[col][row]+"\t");
+								System.out.print(movielist[col][row]+"\t \t");
 							}
 							else
 							{
