@@ -66,7 +66,7 @@ public class Cinema{
         return this.numOfCols;
     }
 
-    private Seat getSeat(char row, int col){
+    public Seat getSeat(char row, int col){
         int rowNum = row - 'A';
         int colNum = col-1;
         if(rowNum < this.numOfRows && colNum < this.numOfCols)

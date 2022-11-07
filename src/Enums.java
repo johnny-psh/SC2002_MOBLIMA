@@ -95,7 +95,6 @@ public class Enums {
     }
 
     public enum TypeOfMovieGoer {
-        CHILD("Child"),
         STUDENT("Student"),
         ADULT("Adult"),
         SENIOR("Senior Citizen");
