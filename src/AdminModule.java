@@ -22,6 +22,23 @@ public class AdminModule {
     
    // ./src/database/TestMoviesReader.xlsx
 
+   public static void updateColumnWithData(Workbook workbook, int colIndex,String [] arr) {
+    Sheet sheet = workbook.getSheetAt(0);
+
+    int smaller = sheet.getLastRowNum();
+
+    if (arr.length <= sheet.getLastRowNum()){
+        smaller = arr.length;
+    }
+
+    for(int i = 0; i < smaller; i++){
+        Row row = sheet.getRow(i);
+        if(sheet.getLastRowNum() < arr.length)
+        row.createCell(colIndex).setCellValue(arr[i]);
+    }
+
+   }
+
 
    public static void insertNewColumnBeforeWithData(Workbook workbook, int colIndex,String [] arr) {
     // Getting the first sheet from workbook
@@ -359,60 +376,80 @@ public class AdminModule {
                         int twoDTicket = sc.nextInt();
                         System.out.print("Enter Ticket Price for 3D > ");
                         int threeDTicket = sc.nextInt();
-                        System.out.println("Enter Ticket Price for 2D Blockbuster > ");
+                        System.out.print("Enter Ticket Price for 2D Blockbuster > ");
                         int twoDTicketBlock = sc.nextInt();
-                        System.out.println("Enter Ticket Price for 3D Blockbuster > ");
+                        System.out.print("Enter Ticket Price for 3D Blockbuster > ");
                         int threeDTicketBlock = sc.nextInt();
                         
 
                         // Creating input stream
                         FileInputStream inputStream = new FileInputStream(systemSettings);
                         //Add your input scanner thing for whatever value supposed be here
+
+                        // New data
+                        String[] updatedTicketPrice = {"price",Integer.toString(twoDTicket), Integer.toString(threeDTicket), Integer.toString(twoDTicketBlock), Integer.toString(threeDTicketBlock)};
                         
                         //Placeholder insert function data
                         //String[] dummydata = {"InsertFunction", "T1", "T3"}; 
 
                         // Creating workbook from input stream
                         Workbook workbook = WorkbookFactory.create(inputStream);
+
+
                         
-                        //insertNewColumnBeforeWithData(workbook, 1,dummydata);
+                        updateColumnWithData(workbook, 0,updatedTicketPrice);
                         // Write the updated workbook to the file
                         FileOutputStream fos = new FileOutputStream(systemSettings);
                         workbook.write(fos);
                         // close the output stream
                         fos.close();
-                        System.out.println("Success: added new column with data to an existing excel file.");
+                        System.out.println("Updated the movie price successfully!");
                     } catch (EncryptedDocumentException | IOException e) {
 
-                        System.err.println("Failed: adding new column to an existing excel file.");
+                        System.err.println("Failed to update movie price!");
                         e.printStackTrace();
                     }
                 }
                 else if(systemSettingsOption == 2)
                 {
-                    //System.out.println("Which Movie would you like to update?");
+                    System.out.println("=============== Edit Holiday Date ===============");
                     //System.out.println("Movie ID\t" + "Movie Title");
-                    java.util.Date date =new java.util.Date();  
-                    System.out.println(date);
+
+                    
+                    List<String> holidayDate = new ArrayList<String>();
+                    holidayDate.add("holidays");
+                    int inputDate = 0;
+                    System.out.println("Enter 0 to stop adding the date");
+                    while(true){
+                        System.out.print("Enter the holiday date in ddMMyyyy (E.g. 25122022) > ");
+                        inputDate = sc.nextInt();
+                        if(inputDate == 0){
+                            break;
+                        }
+                        holidayDate.add(Integer.toString(inputDate));
+                    }
+
+                    String[] holidayArray = new String[ holidayDate.size() ];
+                    holidayDate.toArray( holidayArray );
                     
 
                     try {
                         FileInputStream inputStream = new FileInputStream(systemSettings);
                       
                         //Placeholder update function data
-                        String[] dummydata = {"Update", "t2", "3"}; 
+                        //String[] dummydata = {"Update", "t2", "3"}; 
 
 
                         Workbook workbook = WorkbookFactory.create(inputStream);
-                        //updateValue(workbook, 1,dummydata);
+                        updateColumnWithData(workbook, 1, holidayArray);
 
                         FileOutputStream fos = new FileOutputStream(systemSettings);
                         workbook.write(fos);
                         fos.close();
-                        System.out.println("Success: updated new column with data to an existing excel file.");
+                        System.out.println("Successly updated holiday date!");
                     } catch (EncryptedDocumentException | IOException e) {
 
-                        System.err.println("Failed: adding new column to an existing excel file.");
+                        System.err.println("Failed to update holiday date!");
                         e.printStackTrace();
                     }
 
