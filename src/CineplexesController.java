@@ -15,9 +15,9 @@ public class CineplexesController {
     public static ArrayList<Cineplex> read(){
         // Array list of cineplexes to return
         ArrayList<Cineplex> cineplexList = new ArrayList<Cineplex>();
+        Cineplex cineplex;
 
         // Cineplex variables
-        Cineplex cineplex;
         String cineplexName;
         //ArrayList<Cinema> cinemaList = new ArrayList<Cinema>();
         ArrayList<ArrayList<Cinema> > cinemaList = new ArrayList<ArrayList<Cinema>>(NUMOFCINEPLEXES);
@@ -26,9 +26,7 @@ public class CineplexesController {
         }
         // Cinema variables 
         Cinema cinema;
-        String cinemaID;
-        String cinemaName;
-        String cinemaTypeString;
+        String cinemaID, cinemaName, cinemaTypeString;
         Enums.CinemaType cinemaType;
 
         try{
@@ -44,10 +42,8 @@ public class CineplexesController {
             while (rowIterator.hasNext()) {
                 Row row = rowIterator.next();
                 Iterator<Cell> cellIterator = row.cellIterator();
-                Cell cell = cellIterator.next();
                 // Iterate through column
-                cineplexName = cell.getStringCellValue();
-                // Iterate through column
+                cineplexName = cellIterator.next().getStringCellValue();
                 cinemaID = cellIterator.next().getStringCellValue();
                 cinemaName = cellIterator.next().getStringCellValue();
                 cinemaTypeString = cellIterator.next().getStringCellValue();
@@ -84,4 +80,14 @@ public class CineplexesController {
         }
         return cineplexList;
     }
+
+    public static Cineplex readByName(String name){
+        ArrayList<Cineplex> cineplexList = read();
+        for (int i=0; i < cineplexList.size(); i++){
+            Cineplex cineplex = cineplexList.get(i);
+            if (cineplex.getCineplexeName().equals(name))
+                return cineplex;
+        }
+        return null;
+    };
 }
