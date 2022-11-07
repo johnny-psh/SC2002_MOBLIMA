@@ -122,6 +122,15 @@ public class AdminModule {
         }
     }
 
+    public static int getLastColumn(Workbook workbook)
+    {
+        Sheet sheet = workbook.getSheetAt(0);
+        int endColumn = sheet.getRow(0).getLastCellNum();
+        System.out.println(endColumn);
+        return endColumn;
+    }
+        
+
     private static void cloneCell( Cell cNew, Cell cOld ){
         cNew.setCellComment( cOld.getCellComment() );
         cNew.setCellStyle( cOld.getCellStyle() );
@@ -235,54 +244,54 @@ public class AdminModule {
                     //Add into excel function below
                     //File xlsxFile = new File("./src/database/TestMoviesReader.xlsx");
 
-                    String movieName,cinema;
                     
+                    //Simple Data insertion
+                    System.out.println("Enter Movie Title: ");
+                    String movieName  = sc.next();
 
-                    System.out.println("Enter Movie Name: ");
-                    movieName  = sc.next();
+                    System.out.println("Enter Sypnosis: ");
+                    String sypnosis  = sc.next();
 
-                    System.out.println("Choose a Cineplex:  1)Downtown 2)Causeway 3)Tampines ");
-                    String[] cine = {"Downtown","Causeway","Tampines"};
+                    System.out.println("Choose a Status:  1)Showing 2)Coming Soon 3)Closed ");
+                    String[] status = {"Showing","Coming Soon","Closed"};
                     int no=0;
 
-                    while (!(no>=1 && no<=(cine.length))) {
+                    while (!(no>=1 && no<=(status.length))) {
                         no = sc.nextInt();  
-                        System.out.println("Please select in its range of 1-"+cine.length);
+                        System.out.println("Please select in its range of 1-"+status.length);
                     }
                     no--;
 
-                    System.out.println("Choose a Cinema:  1)D01 2)D02 3)D03 4)C01 5)C02 6)C03 7)D01 8)D02 9)D03");
-                    String[] Cinema = {"D01","D02","D03","C01","C02","C03","D01","D02","D03"};
-                    int cinNo=0;
+                    System.out.println("Choose a Age Rating:  1)R18 2)M13 3)All");
+                    String[] AR = {"R18","M13","All"};
+                    int ARno=0;
 
-                    while (!(cinNo>=1 && cinNo<=(Cinema.length))) {
-                        cinNo = sc.nextInt();  
-                        System.out.println("Please select in its range of 1-"+Cinema.length);
+                    while (!(ARno>=1 && ARno<=(AR.length))) {
+                        ARno = sc.nextInt();  
+                        System.out.println("Please select in its range of 1-"+AR.length);
                     }
-                    cinNo--;
+                    ARno--;
                     
-                    
-                    
-                    System.out.println("Enter a date in this format dd/mm/yyyy: ");
-                    String date = sc.next();
+                    System.out.println("Enter Type of Movie:");
+                    String type = sc.next();
 
-                    System.out.println("Enter time: ");
-                    String time = sc.next();
-                    
-                    
+                    System.out.println("Enter Director Name:");
+                    String Dname = sc.next();
 
 
-
+                    
                     try {
                         // Creating input stream
                         FileInputStream inputStream = new FileInputStream(xlsxFile);
                         //Add your input scanner thing for whatever value supposed be here
 
-                        //Placeholder insert function data
-                        String[] inputData = {movieName, cine[no], Cinema[cinNo],date,time}; 
+                        
 
                         // Creating workbook from input stream
                         Workbook workbook = WorkbookFactory.create(inputStream);
+                        //int col = getLastColumn(workbook);
+                        //String sCol = Integer.toString(col);
+                        String[] inputData = {movieName,sypnosis, status[no], AR[ARno],type,Dname};
                         insertNewColumnBeforeWithData(workbook,inputData);
                         // Write the updated workbook to the file
                         FileOutputStream fos = new FileOutputStream(xlsxFile);
@@ -299,28 +308,64 @@ public class AdminModule {
                 else if(listing == 2)
                 {
                     System.out.println("Which Movie would you like to update?");
-                    System.out.println("Movie ID\t" + "Movie Title");
+                    System.out.println("Enter Movie ID: ");
+                    String movieID  = sc.next();
                     
+                    
+                    //Simple Data insertion
+                    System.out.println("Enter Movie Title: ");
+                    String movieName  = sc.next();
 
-                    try {
-                        FileInputStream inputStream = new FileInputStream(xlsxFile);
-                      
-                        //Placeholder update function data
-                        String[] dummydata = {"Update", "t2", "3","test","test"}; 
+                    System.out.println("Enter Sypnosis: ");
+                    String sypnosis  = sc.next();
 
+                    System.out.println("Choose a Status:  1)Showing 2)Coming Soon 3)Closed ");
+                    String[] status = {"Showing","Coming Soon","Closed"};
+                    int no=0;
 
-                        Workbook workbook = WorkbookFactory.create(inputStream);
-                        updateValue(workbook, 1,dummydata);
-
-                        FileOutputStream fos = new FileOutputStream(xlsxFile);
-                        workbook.write(fos);
-                        fos.close();
-                        System.out.println("Success: updated new column with data to an existing excel file.");
-                    } catch (EncryptedDocumentException | IOException e) {
-
-                        System.err.println("Failed: adding new column to an existing excel file.");
-                        e.printStackTrace();
+                    while (!(no>=1 && no<=(status.length))) {
+                        no = sc.nextInt();  
+                        System.out.println("Please select in its range of 1-"+status.length);
                     }
+                    no--;
+
+                    System.out.println("Choose a Age Rating:  1)R18 2)M13 3)All");
+                    String[] AR = {"R18","M13","All"};
+                    int ARno=0;
+
+                    while (!(ARno>=1 && ARno<=(AR.length))) {
+                        ARno = sc.nextInt();  
+                        System.out.println("Please select in its range of 1-"+AR.length);
+                    }
+                    ARno--;
+                    
+                    System.out.println("Enter Type of Movie:");
+                    String type = sc.next();
+
+                    System.out.println("Enter Director Name:");
+                    String Dname = sc.next();
+
+
+
+                    // try {
+                    //     FileInputStream inputStream = new FileInputStream(xlsxFile);
+                      
+                    //     //Placeholder update function data
+                    //     String[] inputData = {movieName,sypnosis, status[no], AR[ARno],type,Dname};  
+
+
+                    //     Workbook workbook = WorkbookFactory.create(inputStream);
+                    //     updateValue(workbook, 1,dummydata);
+
+                    //     FileOutputStream fos = new FileOutputStream(xlsxFile);
+                    //     workbook.write(fos);
+                    //     fos.close();
+                    //     System.out.println("Success: updated new column with data to an existing excel file.");
+                    // } catch (EncryptedDocumentException | IOException e) {
+
+                    //     System.err.println("Failed: adding new column to an existing excel file.");
+                    //     e.printStackTrace();
+                    // }
 
                 }
                 else if(listing == 3)
