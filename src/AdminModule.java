@@ -198,7 +198,7 @@ public class AdminModule {
         BufferedWriter bw = new BufferedWriter(fw);
         PrintWriter pw = new PrintWriter(bw);
 
-        File xlsxFile = new File("./src/database/TestMoviesReader.xlsx");
+        File xlsxFile = new File("./src/database/Movies.xlsx");
         File systemSettings = new File("./src/database/SystemSettings.xlsx");
         File showtime = new File("./src/database/Showtime.xlsx");
 
