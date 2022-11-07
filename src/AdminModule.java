@@ -404,10 +404,10 @@ public class AdminModule {
                         workbook.write(fos);
                         // close the output stream
                         fos.close();
-                        System.out.println("Success: added new column with data to an existing excel file.");
+                        System.out.println("Successfully created new row!");
                     } catch (EncryptedDocumentException | IOException e) {
 
-                        System.err.println("Failed: adding new column to an existing excel file.");
+                        System.err.println("Failed to create a new row!");
                         e.printStackTrace();
                     }
                 }
@@ -471,33 +471,45 @@ public class AdminModule {
                         FileOutputStream fos = new FileOutputStream(showtime);
                         workbook.write(fos);
                         fos.close();
-                        System.out.println("Success: updated new column with data to an existing excel file.");
+                        System.out.println("Successfully edited!");
                     } catch (EncryptedDocumentException | IOException e) {
 
-                        System.err.println("Failed: adding new column to an existing excel file.");
+                        System.err.println("Failed to edit!");
                         e.printStackTrace();
                     }
 
                 }
                 else if(showtimes == 3)
                 {
-                    
+                    System.out.println("========== Delete Cienema Showtime ==========");
+                    System.out.print("Enter the row of the cienema to delete > ");
+                    int rowCienema = 0;
 
-                    // try {
-                    //     FileInputStream inputStream = new FileInputStream(xlsxFile);
+                    rowCienema = sc.nextInt();
+            
+                    try {
+                        FileInputStream inputStream = new FileInputStream(showtime);
 
-                    //     Workbook workbook = WorkbookFactory.create(inputStream);
-                    //     deleteMovie(workbook, 1);
+                        Workbook workbook = WorkbookFactory.create(inputStream);
+                        
+                        Sheet sheet = workbook.getSheetAt(0);
+                        
+                        if(sheet.getLastRowNum() < rowCienema || rowCienema < 0){
+                            System.out.println("Row number entered is out of range!");
+                            break;
+                        }
 
-                    //     FileOutputStream fos = new FileOutputStream(xlsxFile);
-                    //     workbook.write(fos);
-                    //     fos.close();
-                    //     System.out.println("Success: updated new column with data to an existing excel file.");
-                    // } catch (EncryptedDocumentException | IOException e) {
+                        sheet.removeRow(sheet.getRow(rowCienema));
 
-                    //     System.err.println("Failed: adding new column to an existing excel file.");
-                    //     e.printStackTrace();
-                    // }
+                        FileOutputStream fos = new FileOutputStream(showtime);
+                        workbook.write(fos);
+                        fos.close();
+                        System.out.println("Successfully deleted!");
+                    } catch (EncryptedDocumentException | IOException e) {
+
+                        System.err.println("Unable to delete!");
+                        e.printStackTrace();
+                    }
 
                 }
                 else if(showtimes == 4)
