@@ -373,8 +373,6 @@ public class AdminModule {
                         FileInputStream inputStream = new FileInputStream(showtime);
                         //Add your input scanner thing for whatever value supposed be here
 
-                        //Placeholder insert function data
-                        String[] newRow = {"InsertFunction", "T1", "T3"}; 
 
                         // Creating workbook from input stream
                         Workbook workbook = WorkbookFactory.create(inputStream);
@@ -415,34 +413,75 @@ public class AdminModule {
                 }
                 else if(showtimes == 2)
                 {
-                    System.out.println("Which Movie would you like to update?");
-                    System.out.println("Movie ID\t" + "Movie Title");
-                    
+                    System.out.println("========== Update Cienema Showtime ==========");
+                    System.out.print("Enter the row of the cienema to edit > ");
+                    int rowCienema = 0;
 
-                    // try {
-                    //     FileInputStream inputStream = new FileInputStream(xlsxFile);
+                    rowCienema = sc.nextInt();
+
+
+                    String tempMovie, tempCineplex, tempCinema, tempDate, tempTime = "";
+                    System.out.print("Enter Movie ID >");
+                    tempMovie = sc.next();
+                    System.out.print("Enter Cineplex (Downtown, Causeway, Tampines) > ");
+                    tempCineplex = sc.next();
+                    System.out.print("Enter Cinema (D01, D02, etc)> ");
+                    tempCinema = sc.next();
+                    System.out.print("Enter Date > ");
+                    tempDate = sc.next();
+                    System.out.print("Enter Time > ");
+                    tempTime = sc.next();
+
+
+
+                    try {
+                        FileInputStream inputStream = new FileInputStream(showtime);
                       
-                    //     //Placeholder update function data
-                    //     String[] dummydata = {"Update", "t2", "3"}; 
+                        //Placeholder update function data
+                        
 
+                        Workbook workbook = WorkbookFactory.create(inputStream);
 
-                    //     Workbook workbook = WorkbookFactory.create(inputStream);
-                    //     updateValue(workbook, 1,dummydata);
+                        Sheet sheet = workbook.getSheetAt(0);
+                        
+                        if(sheet.getLastRowNum() < rowCienema || rowCienema < 0){
+                            System.out.println("Row number entered is out of range!");
+                            break;
+                        }
 
-                    //     FileOutputStream fos = new FileOutputStream(xlsxFile);
-                    //     workbook.write(fos);
-                    //     fos.close();
-                    //     System.out.println("Success: updated new column with data to an existing excel file.");
-                    // } catch (EncryptedDocumentException | IOException e) {
+                        
+                        Row row = sheet.getRow(rowCienema);
 
-                    //     System.err.println("Failed: adding new column to an existing excel file.");
-                    //     e.printStackTrace();
-                    // }
+                        Cell cell = row.getCell(0);
+                        cell.setCellValue(tempMovie);
+
+                        cell = row.getCell(1);
+                        cell.setCellValue(tempCineplex);
+
+                        cell = row.getCell(2);
+                        cell.setCellValue(tempCinema);
+
+                        cell = row.getCell(3);
+                        cell.setCellValue(tempDate);
+
+                        cell = row.getCell(4);
+                        cell.setCellValue(tempTime);
+                        
+
+                        FileOutputStream fos = new FileOutputStream(showtime);
+                        workbook.write(fos);
+                        fos.close();
+                        System.out.println("Success: updated new column with data to an existing excel file.");
+                    } catch (EncryptedDocumentException | IOException e) {
+
+                        System.err.println("Failed: adding new column to an existing excel file.");
+                        e.printStackTrace();
+                    }
 
                 }
                 else if(showtimes == 3)
                 {
-                    //3. Remove Movie 
+                    
 
                     // try {
                     //     FileInputStream inputStream = new FileInputStream(xlsxFile);
