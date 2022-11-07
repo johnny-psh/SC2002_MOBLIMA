@@ -4,24 +4,12 @@ import java.text.SimpleDateFormat;
 import java.util.Date;  
 
 public class BookingUI {
-
-    private ShowtimeList tempShowtimeList = new ShowtimeList();
-
 	static Scanner scanner = new Scanner(System.in);
-    private Cineplex selectedCinepex;
-    private Cinema selectedCinema;
-    private Date selectedDate;
-    private Showtime selectedShowtime;
-    private int numOfTickets;
-    private Transaction transaction;
-    private ArrayList<Showtime> showtimeList = new ArrayList<Showtime>();
     
     public static void displayMenu(){
 
-        ShowtimeList tempShowtimeList = new ShowtimeList();
         Cineplex selectedCinepex;
         Date selectedDate;
-        Movie selectedMovie;
         Showtime selectedShowtime;
         int numOfTickets = 0;
         ArrayList<Showtime> showtimeByCineplex = new ArrayList<Showtime>();
@@ -29,126 +17,103 @@ public class BookingUI {
         ArrayList<Showtime> showtimeByMovie = new ArrayList<Showtime>();
 
         // 1. Select Cineplex
+
         selectedCinepex = selectCineplex();
-        showtimeByCineplex = tempShowtimeList.getShowtimeListByCineplex(selectedCinepex);
         // 2. Select Date
-        selectedDate = selectDate(showtimeByCineplex);
-        showtimeByDate = ShowtimeList.getShowtimeListByDate(showtimeByCineplex, selectedDate);
-        // 3. Select Movie
-        selectedMovie = selectMovie(showtimeByDate);
-        showtimeByMovie = ShowtimeList.getShowtimeListByDate(showtimeByDate, selectedDate);
-        // 4. Select Showtime
-        selectedShowtime = selectShowtime(showtimeByMovie);
-        // 5. View seats
+        selectedDate = selectDate(selectedCinepex);
+        // 3. Select Showtime
+        selectedShowtime = selectShowtime(selectedCinepex, selectedDate);
+        // 4. View seats
         viewSeats(selectedShowtime.getCinema());
-        // 6. Select number of seats to purchase
+        // 5. Select number of seats to purchase
         System.out.print("\nNumbers of tickets to purchase: ");
         numOfTickets = scanner.nextInt();
-        // 7. Select seats
+        // 6. Select seats
         selectSeats(numOfTickets, selectedShowtime.getCinema());
-        // 8. Transaction
+        // 7. Transaction
         completeTransaction(numOfTickets, selectedShowtime.getCinema());
     }
 
     private static Cineplex selectCineplex(){
+        ArrayList<Cineplex> cineplexList = CineplexesController.read();
         int userOption = 0;
-		while(userOption != 4) {
-            System.out.println("Select Cineplex: ");
-            System.out.println("1. Downtown Cineplex");
-            System.out.println("2. Causeway Cineplex");
-            System.out.println("3. Tampines Cineplex");
-            System.out.println("4. Back");
+        int numOfCineplexes = cineplexList.size();
+
+        // Error
+        if(numOfCineplexes == 0)
+            return null;
+
+		while(userOption != (numOfCineplexes+1)) {
+            for(int i = 0; i < numOfCineplexes; i++) {
+                System.out.println((i+1) + ". " + cineplexList.get(i).getCineplexeName());
+            }
+            System.out.println((numOfCineplexes+1) + ". Back");
 			System.out.print("Option > ");
 			userOption = scanner.nextInt();
 
-			switch(userOption) {
-                case 1:
-                    return;
-				case 2:
-                    return;
-				case 3:
-                    return;
-				case 4:
-                    return;
-                default:
-					System.out.println("Invalid Option!");
-					System.out.println("Please re-enter!");
-					break;    
+			// Back
+			if(userOption >= numOfCineplexes){
+				System.out.println("Invalid Option! Please re-enter.");
+				System.out.println("Please re-enter.");
+                break;
             }
         }
+        return (cineplexList.get(userOption));
     }
 
-    private static Date selectDate(ArrayList<Showtime> showtimeList){
-        
+    private static Date selectDate(Cineplex cineplex){
+        ArrayList<Showtime> showtimeList = ShowtimeController.readByCineplex(cineplex.getCineplexeName());
         int userOption = 0;
-        int numOfOptions = showtimeList.size() + 1;
-		while(userOption >= numOfOptions) {
+        int numOfShowtimes = showtimeList.size();
+
+        // Error
+        if(numOfShowtimes == 0)
+            return null;
+
+		while(userOption >= (numOfShowtimes+1)) {
             System.out.println("Select Date: ");
             for(int i = 1; i <= showtimeList.size(); i++){
                 System.out.println(i + "." + showtimeList.get(i).getFormattedDate());
             }
-            System.out.println(numOfOptions + ". Back");
+            System.out.println((numOfShowtimes+1) + ". Back");
 		    System.out.print("Option > ");
 			userOption = scanner.nextInt();
 
             // Back
-			if(userOption >= numOfOptions){
+			if(userOption >= (numOfShowtimes+1)){
 				System.out.println("Invalid Option!");
 				System.out.println("Please re-enter!");
                 break;
             }
-
-            return (showtimeList.get(userOption).getDate());
         }
-        return null;
+        return (showtimeList.get(userOption).getDate());
     }
 
-    private static Movie selectMovie(ArrayList<Showtime> showtimeList){
+    private static Showtime selectShowtime(Cineplex cineplex, Date date){
+        ArrayList<Showtime> showtimeList = ShowtimeController.readByCineplexAndDate(cineplex.getCineplexeName(), date);
+        
+        int numOfShowtimes = showtimeList.size();
         int userOption = 0;
-        int numOfOptions = showtimeList.size() + 1;
-		while(userOption >= numOfOptions) {
+
+        if(numOfShowtimes == 0)
+            return null;
+        while(userOption >= (numOfShowtimes+1)) {
             System.out.println("Select Date: ");
-            for(int i = 1; i<=showtimeList.size(); i++){
+            for(int i = 1; i <= showtimeList.size(); i++){
                 showtimeList.get(i).printShowtime();
             }
-            System.out.println(numOfOptions + ". Back");
-		    System.out.print("Option > ");
-			userOption = scanner.nextInt();
-
+            System.out.println((numOfShowtimes+1) + ". Back");
+            System.out.print("Option > ");
+            userOption = scanner.nextInt();
+    
             // Back
-			if(userOption >= numOfOptions){
-				System.out.println("Invalid Option!");
-				System.out.println("Please re-enter!");
+            if(userOption >= (numOfShowtimes+1)){
+                System.out.println("Invalid Option!");
+                System.out.println("Please re-enter!");
                 break;
             }
-
-            return (showtimeList.get(userOption).getMovie());
-        }
-        return null;
-    }
-
-    private static Showtime selectShowtime(ArrayList<Showtime> showtimeList){
-        int userOption = 0;
-        int numOfOptions = showtimeList.size() + 1;
-		while(userOption >= numOfOptions) {
-            System.out.println("Select Date: ");
-            for(int i = 1; i<=showtimeList.size(); i++){
-                showtimeList.get(i).printShowtime();
-            }
-            System.out.println(numOfOptions + ". Back");
-		    System.out.print("Option > ");
-			userOption = scanner.nextInt();
-
-            // Back
-			if(userOption >= numOfOptions){
-				System.out.println("Invalid Option!");
-				System.out.println("Please re-enter!");
-                break;
-            }
-
-            return (showtimeList.get(userOption));
-        }
-        return null;
+        }                       
+        return (showtimeList.get(userOption));
     }
     
     private static void viewSeats(Cinema cinema){
