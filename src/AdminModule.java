@@ -98,9 +98,9 @@ public class AdminModule {
         //Future note : colIndex cannot be 0 if there is header in xlxs file
         // Like testMovie xlxs, apply to above few
         Sheet sheet = workbook.getSheetAt(0);
-        
+        colIndex--;
         //tempColDelete temp col = change to colIndex
-        int tempColDelete =2;
+        int tempColDelete = colIndex;
         int maxColumn = 0;
         for ( int r=0; r < sheet.getLastRowNum()+1; r++ ){
             Row row = sheet.getRow( r );
@@ -461,11 +461,21 @@ public class AdminModule {
                 {
                     //3. Remove Movie 
 
+                    System.out.println("Enter Movie ID to delete: ");
+                    
+                    int toDelete  = sc.nextInt();
+                    while(checkID(toDelete)==0)
+                    {
+                        System.out.println("Enter Existing ID: ");
+                        toDelete  = sc.nextInt();
+                    }
+                    int actualPosition = checkID(toDelete);
+
                     try {
                         FileInputStream inputStream = new FileInputStream(xlsxFile);
 
                         Workbook workbook = WorkbookFactory.create(inputStream);
-                        deleteMovie(workbook, 1);
+                        deleteMovie(workbook, actualPosition);
 
                         FileOutputStream fos = new FileOutputStream(xlsxFile);
                         workbook.write(fos);
