@@ -14,7 +14,7 @@ public class MainMenuUI {
 			System.out.println("2. View movie details");
 			System.out.println("3. Book and purchase ticket");
 			System.out.println("4. View booking history");
-			System.out.println("5. List the Top 5 ranking by ticket sales OR by overall reviewers’ ratings");
+			System.out.println("5. List the Top 5 ranking by ticket sales OR by overall reviewers ratings");
 			System.out.println("6. Admin Login");
 			System.out.println("7. Exit");
 			System.out.print("Option > ");

@@ -9,14 +9,19 @@ public class BookingHistoryUI {
 
         System.out.print("Enter your username: ");
         username = scanner.next();
-        System.out.println("\nBooking history of " + username + ":\n");
 
-        ArrayList<Transaction> transactionList = BookingHistoryController.readByMovieGoerUsername(username);
+        ArrayList<Transaction> transactionList = BookingHistoryController.readByUsername(username);
         if(transactionList.isEmpty()){
-            System.out.println("Your booking history is empty. Book a ticket now!");
+            System.out.println("\nYour booking history is empty. Book a ticket now!");
+            System.out.println("Returning to main menu...\n");
+            return;
         }
         else{
-            transactionList.forEach(transaction -> System.out.println(transaction.toString()));
+            System.out.println("\nBooking history of " + username + ":\n");
+            for (Transaction transaction: transactionList){
+                TransactionPrinter transactionPrinter = new TransactionPrinter(transaction);
+                 transactionPrinter.printTransaction();
+            }
             System.out.print("Enter any character to exit: ");
             scanner.next().charAt(0);
             return;

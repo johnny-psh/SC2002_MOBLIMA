@@ -761,8 +761,6 @@ public class AdminModule {
                     try {
                         FileInputStream inputStream = new FileInputStream(systemSettings);
                       
-                        //Placeholder update function data
-                        //String[] dummydata = {"Update", "t2", "3"}; 
 
 
                         Workbook workbook = WorkbookFactory.create(inputStream);

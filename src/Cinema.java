@@ -25,6 +25,7 @@ public class Cinema{
         int mid = this.numOfCols / 2;
 
         System.out.println("\nCinema " + this.cinemaID + "'s Seating Layout: \n");
+        System.out.println("\t\t\t\t" + "Screen \n");
         System.out.print(" \t");
 
         // Column numbering headers

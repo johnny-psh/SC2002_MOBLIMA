@@ -17,17 +17,23 @@ public class BookingUI {
         selectedCinepex = selectCineplex();
         // 2. Select Date
         selectedDate = selectDate(selectedCinepex);
+        if(selectedDate == null){
+            System.out.println("There are currently no showtimes available at " + selectedCinepex.getCineplexeName());
+            return;
+        }
         // 3. Select Showtime
         selectedShowtime = selectShowtime(selectedCinepex, selectedDate);
+        if(selectedShowtime == null){
+            System.out.println("There are currently no showtimes available at your selected date");
+            return;
+        }
         // 4. View seats
         viewSeats(selectedShowtime.getCinema());
         // 5. Select number of seats to purchase
         System.out.print("\nNumbers of tickets to purchase: ");
         numOfTickets = scanner.nextInt();
-        // 6. Select seats
+        // 6. Select seats & transaction
         selectSeats(numOfTickets, selectedShowtime);
-        // 7. Transaction
-        completeTransaction(numOfTickets, selectedShowtime);
     }
 
     private static Cineplex selectCineplex(){
@@ -154,11 +160,35 @@ public class BookingUI {
     	if(userOption == 1){
     		saveSeatToDB(cinema);
             saveBookingToDB();
+            System.out.println("\nYou have successfully purchased " + numOfTickets + " ticket(s)");
+            completeTransaction(numOfTickets, showtime, totalPrice);
 		}
     	else{
     		System.out.println("\nReturning to main menu...\n");
     		return;
 		}
+    }
+
+    private static void completeTransaction(int numOfTickets, Showtime showtime, Double totalPrice){
+        // Capture movie-goer's name, mobile number, email address
+        String username, mobileNum, email;
+
+        System.out.print("Enter username: ");
+        username = scanner.next();
+        System.out.print("Enter mobile number: ");
+        mobileNum = scanner.next();
+        System.out.print("Enter email: ");
+        email = scanner.next();
+
+        // Transaction
+        String cinemaID = showtime.getCinema().getCinemaID();
+        String movieName = showtime.getMovie().getTitle();
+        Transaction transaction = new Transaction(username, mobileNum, email, cinemaID, movieName, numOfTickets, totalPrice);
+        TransactionPrinter transactionPrinter = new TransactionPrinter(transaction);
+        System.out.println("Thank you for your purchase!");
+        transactionPrinter.printTransaction();
+        
+        System.out.println("Returning to main menu...\n");
     }
 
     // Function to save reserved seats to database from CinemaController.java
@@ -199,13 +229,4 @@ public class BookingUI {
         return null;
     }
 
-    private static void completeTransaction(int numOfTickets, Showtime showtime){
-        // TODO: Capture movie-goer's name, mobile number, email address
-        
-        // Transaction
-        Transaction transaction = new Transaction(showtime, "Testusername");
-        System.out.println("\nYou have successfully purchased " + numOfTickets + " ticket(s)");
-        System.out.println(transaction.toString());
-        System.out.println("Returning to main menu...\n");
-    }
 }
