@@ -28,7 +28,7 @@ public class BookingUI {
             return;
         }
         // 4. View seats
-        viewSeats(selectedShowtime.getCinema());
+        viewSeats(CinemasController.readByID(selectedShowtime.getCinema().getCinemaID()));
         // 5. Select number of seats to purchase
         System.out.print("\nNumbers of tickets to purchase: ");
         numOfTickets = scanner.nextInt();
@@ -67,6 +67,12 @@ public class BookingUI {
 
     private static Date selectDate(Cineplex cineplex){
         ArrayList<Showtime> showtimeList = ShowtimeController.readByCineplex(cineplex.getCineplexeName());
+        // Remove all end of showing showtimes
+        for(Showtime showtime : showtimeList){
+            if(showtime.getMovie().getShowingStatus() == Enums.ShowingStatus.END_OF_SHOWING)
+                showtimeList.remove(showtime);
+        }
+
         int userOption = 0;
         int numOfShowtimes = showtimeList.size();
 
@@ -95,7 +101,12 @@ public class BookingUI {
 
     private static Showtime selectShowtime(Cineplex cineplex, Date date){
         ArrayList<Showtime> showtimeList = ShowtimeController.readByCineplexAndDate(cineplex.getCineplexeName(), date);
-        
+        // Remove all end of showing showtimes
+        for(Showtime showtime : showtimeList){
+            if(showtime.getMovie().getShowingStatus() == Enums.ShowingStatus.END_OF_SHOWING)
+                showtimeList.remove(showtime);
+        }
+
         int numOfShowtimes = showtimeList.size();
         int userOption = 0;
 
@@ -197,7 +208,7 @@ public class BookingUI {
 
     // Function to save reserved seats to database from CinemaController.java
     private static void saveSeatToDB(Cinema cinema){
-        CinemasController.update(cinema);
+        CinemasController.updateSeats(cinema);
         return;
     }
 
