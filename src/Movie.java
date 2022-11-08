@@ -24,6 +24,7 @@ public class Movie {
         this.castList = new ArrayList<String>();
         this.movieReviewList = new ArrayList<Review>();
         this.ticketSales = 0;
+        this.overallReviewerRating = -1;
     }
 
     public String getMovieID()
@@ -46,6 +47,8 @@ public class Movie {
     }
 
     public String getDirector(){
+        if(this.director == null)
+            return "NA";
         return this.director;
     }
     
@@ -54,6 +57,8 @@ public class Movie {
     }
 
     public String getSypnosis(){
+        if(this.sypnosis == null)
+            return "NA";
         return this.sypnosis;
     }
 
@@ -77,11 +82,6 @@ public class Movie {
         this.type = type;
     }
 
-    // This is also called by ticket class
-    public void printType(){
-        System.out.println(this.type);
-    }
-
     public Enums.MovieRating getMovieRating(){
         return this.movieRating;
     }
@@ -91,6 +91,11 @@ public class Movie {
     } 
 
     public ArrayList<String> getCastList(){
+        if(this.castList.size() == 0){
+            ArrayList<String> nullString = new ArrayList<String>(1);
+            nullString.add("NA");
+            return nullString;
+        }
         return this.castList;
     }
 
@@ -98,13 +103,8 @@ public class Movie {
         this.castList.add(castName);
     }
 
-    public void printCastList(){
-        for(String cast : castList)
-            System.out.println(cast);
-    }
-
     // OVERALL Reviewer Rating
-    public int getOverallReviewerRating(){ 
+    public int getOverallReviewerRating(){
         return this.overallReviewerRating;
     }
 
@@ -123,12 +123,8 @@ public class Movie {
         updateOverallReviewerRating(rating);
     }
 
-    // Print Past Reviews
-    public void printPastReviews(){
-        for(int i=0; i < this.movieReviewList.size(); i++){
-            System.out.println("Rating: " + this.movieReviewList.get(i).getRating());
-            System.out.println("Review: " + this.movieReviewList.get(i).getDescription());
-        }
+    public ArrayList<Review> getMovieReviewList(){
+        return this.movieReviewList;
     }
     
     // Ticket Sales
