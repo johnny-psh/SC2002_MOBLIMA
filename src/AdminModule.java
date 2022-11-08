@@ -452,7 +452,7 @@ public class AdminModule {
                         System.out.println("Success: updated new column with data to an existing excel file.");
                     } catch (EncryptedDocumentException | IOException e) {
 
-                        System.err.println("Failed: adding new column to an existing excel file.");
+                        System.err.println("Failed: updated new column to an existing excel file.");
                         e.printStackTrace();
                     }
 
@@ -480,10 +480,10 @@ public class AdminModule {
                         FileOutputStream fos = new FileOutputStream(xlsxFile);
                         workbook.write(fos);
                         fos.close();
-                        System.out.println("Success: updated new column with data to an existing excel file.");
+                        System.out.println("Success: deleted column in existing excel file.");
                     } catch (EncryptedDocumentException | IOException e) {
 
-                        System.err.println("Failed: adding new column to an existing excel file.");
+                        System.err.println("Failed: deleting column in  an existing excel file.");
                         e.printStackTrace();
                     }
 
