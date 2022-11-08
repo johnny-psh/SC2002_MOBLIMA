@@ -1,10 +1,8 @@
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.io.File;
 import java.io.FileInputStream;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
-import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
@@ -22,7 +20,6 @@ public class MoviesController {
             FileInputStream file = new FileInputStream(new File(FILENAME));
             XSSFWorkbook workbook = new XSSFWorkbook(file);
             XSSFSheet sheet = workbook.getSheetAt(0);
-            Iterator<Row> rowIterator = sheet.iterator();
 
             // Iterate through column
             int curCellNum = 0;
@@ -39,7 +36,7 @@ public class MoviesController {
                 movie = new Movie(movieID, movieTitle);
                 movieList.add(movie);
 
-                
+
             }
            
             workbook.close(); 
@@ -54,7 +51,6 @@ public class MoviesController {
         return movieList;
     }
 
-
     public static Movie readByID(String movieID){
         ArrayList<Movie> movieList = read();
         for (int i=0; i < movieList.size(); i++){
@@ -63,13 +59,6 @@ public class MoviesController {
                 return movie;
         }
         return null;
-    }
-
-    public static void main(String[] args){
-        ArrayList<Movie> test = read();
-        for(int i = 0; i < test.size(); i++){
-            System.out.println(test.get(i).getMovieID() + test.get(i).getTitle());
-        }
     }
 
 }

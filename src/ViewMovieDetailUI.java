@@ -18,7 +18,6 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.apache.poi.ss.usermodel.CellValue;
 
-
 public class ViewMovieDetailUI {
     static Scanner sc = new Scanner(System.in);
     static String path = "./src/database/Movies.csv";

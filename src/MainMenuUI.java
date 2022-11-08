@@ -10,8 +10,9 @@ public class MainMenuUI {
 		
 		int userOption = 0;
 		while(userOption != 7) {
-			System.out.println("1. Search/List movie");
-			System.out.println("2. View movie details");
+			System.out.println("Main Menu:");
+			System.out.println("1. List movies");
+			System.out.println("2. Search and view movie details");
 			System.out.println("3. Book and purchase ticket");
 			System.out.println("4. View booking history");
 			System.out.println("5. List the Top 5 ranking by ticket sales OR by overall reviewers ratings");
@@ -22,24 +23,26 @@ public class MainMenuUI {
 			
 			switch(userOption) {
 				case 1:
+					// TODO
                     MovieListUI.displayMenu();
 					break;
 				case 2:
                     ViewMovieDetailUI.displayMenu();
 					break;
 				case 3:
+					// TODO - WIP
 					BookingUI.displayMenu();
 					break;
 				case 4:
                     BookingHistoryUI.displayMenu();
 					break;
 				case 5:
+					// TODO
                     ListTopMoviesUI.displayMenu();
 					break;
 				case 6:
                     try {
                         LoginModule.Login();
-                        
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
