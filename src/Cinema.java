@@ -75,6 +75,12 @@ public class Cinema{
         return null;
     }
 
+    public Seat getSeat(int row, int col){
+        if(row < this.numOfRows && col < this.numOfCols)
+            return this.seats[row][col];
+        return null;
+    }
+
     public Seat[][] getSeats(){
         return this.seats;
     }

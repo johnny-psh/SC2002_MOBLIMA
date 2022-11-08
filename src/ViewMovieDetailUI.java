@@ -6,7 +6,7 @@ public class ViewMovieDetailUI {
    
     public static void displayMenu() throws IOException{
 
-        System.out.print("Enter movie ID to view movie detail: ");
+        System.out.print("\nEnter movie ID to view movie detail: ");
         String movieID = scanner.next();
        
         Movie movie = MoviesController.readByID(movieID);

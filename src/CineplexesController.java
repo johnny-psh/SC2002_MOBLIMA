@@ -9,8 +9,8 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 
 public class CineplexesController {
-    public final static String FILENAME = "./src/database/Cineplexes.xlsx";
-    public final static int NUMOFCINEPLEXES = 3;
+    private final static String FILENAME = "./src/database/Cineplexes.xlsx";
+    private final static int NUMOFCINEPLEXES = 3;
 
     public static ArrayList<Cineplex> read(){
         // Array list of cineplexes to return
@@ -26,15 +26,14 @@ public class CineplexesController {
         }
         // Cinema variables 
         Cinema cinema;
-        String cinemaID, cinemaName, cinemaTypeString;
-        Enums.CinemaType cinemaType;
+        String cinemaID;
 
         try{
             FileInputStream file = new FileInputStream(new File(FILENAME));
             XSSFWorkbook workbook = new XSSFWorkbook(file);
             XSSFSheet sheet = workbook.getSheetAt(0);
             Iterator<Row> rowIterator = sheet.iterator();
-
+            rowIterator.next();
             // Iterate through row
             int rowNum = 1;
             int cineplexNum = 0;
@@ -45,21 +44,7 @@ public class CineplexesController {
                 // Iterate through column
                 cineplexName = cellIterator.next().getStringCellValue();
                 cinemaID = cellIterator.next().getStringCellValue();
-                cinemaName = cellIterator.next().getStringCellValue();
-                cinemaTypeString = cellIterator.next().getStringCellValue();
-                switch(cinemaTypeString){
-                    case "Dolby Atmos":
-                        cinemaType = Enums.CinemaType.DOLBY_ATMOS;
-                        break;
-                    case "Platinum Movie Suites":
-                        cinemaType = Enums.CinemaType.PLATINUM_MOVIE_SUITES;
-                        break;
-                    case "Regular":
-                    default:
-                        cinemaType = Enums.CinemaType.REGULAR;
-                        break;
-                }
-                cinema = new Cinema(cinemaID, cinemaName, cinemaType);
+                cinema = CinemasController.readByID(cinemaID);
                 cinemaList.get(cineplexNum).add(cinema);
                 
                 if(rowNum % NUMOFCINEPLEXES == 0 && rowNum != 0){
@@ -90,4 +75,5 @@ public class CineplexesController {
         }
         return null;
     };
+
 }

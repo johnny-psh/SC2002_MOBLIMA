@@ -79,7 +79,7 @@ public class ShowtimeController {
                 date = dateFormatter.parse(dateString);  
                 time = timeFormatter.parse(timeString); 
                 cineplex = CineplexesController.readByName(cineplexName);
-                cinema = cineplex.getCinemaByID(cinemaID);
+                cinema = CinemasController.readByID(cinemaID);
                 movie = MoviesController.readByID(movieID);
                 
                 showtime = new Showtime(movie, cineplex, cinema, date, time);
