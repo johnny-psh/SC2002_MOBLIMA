@@ -27,6 +27,7 @@ public class MainMenuUI {
                     MovieListUI.displayMenu();
 					break;
 				case 2:
+				//Done
                     ViewMovieDetailUI.displayMenu();
 					break;
 				case 3:
