@@ -10,7 +10,7 @@ public class BookingHistoryUI {
         System.out.print("Enter your username: ");
         username = scanner.next();
 
-        ArrayList<Transaction> transactionList = BookingHistoryController.readByUsername(username);
+        ArrayList<Transaction> transactionList = ViewBookingHistoryController.readByUsername(username);
         if(transactionList.isEmpty())
             System.out.println("\nYour booking history is empty. Book a ticket now!");
 

@@ -8,7 +8,7 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-public class BookingHistoryController {
+public class ViewBookingHistoryController {
     public final static String FILENAME = "./src/database/BookingHistory.xlsx";
 
     public static ArrayList<Transaction> read(){
@@ -124,9 +124,5 @@ public class BookingHistoryController {
         }
         
         return userBookingList;
-    }
-
-    public static void addBookingHistory(String username, Transaction transaction){
-        
     }
 }

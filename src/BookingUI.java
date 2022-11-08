@@ -159,9 +159,7 @@ public class BookingUI {
     	System.out.print("Do you want to confirm payment? Yes (1) / No (2): ");
     	int userOption = scanner.nextInt();
     	if(userOption == 1){
-    		saveSeatToDB(cinema);
-            saveBookingToDB();
-            System.out.println("\nYou have successfully purchased " + numOfTickets + " ticket(s)");
+            System.out.println("\nYou have successfully purchased " + numOfTickets + " ticket(s)\n");
             completeTransaction(numOfTickets, showtime, totalPrice);
 		}
     	else{
@@ -186,8 +184,12 @@ public class BookingUI {
         String movieName = showtime.getMovie().getTitle();
         Transaction transaction = new Transaction(username, mobileNum, email, cinemaID, movieName, numOfTickets, totalPrice);
         TransactionPrinter transactionPrinter = new TransactionPrinter(transaction);
-        System.out.println("Thank you for your purchase!");
+        System.out.println("");
         transactionPrinter.printTransaction();
+
+        // Save booking & booked seats to database
+        saveSeatToDB(showtime.getCinema());
+        saveBookingToDB(username, transaction);
         
         ExitUI.displayMenu();
         return;
@@ -195,11 +197,13 @@ public class BookingUI {
 
     // Function to save reserved seats to database from CinemaController.java
     private static void saveSeatToDB(Cinema cinema){
+        CinemasController.update(cinema);
         return;
     }
 
     // Function to save booking to user database from userBookings.java
-    private static void saveBookingToDB(){
+    private static void saveBookingToDB(String username, Transaction transaction){
+        AddBookingHistoryController.addBookingHistory(username, transaction);
         return;
     }
 

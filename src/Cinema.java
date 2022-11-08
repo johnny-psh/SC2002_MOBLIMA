@@ -74,6 +74,14 @@ public class Cinema{
             return this.seats[rowNum][colNum];
         return null;
     }
+
+    public Seat[][] getSeats(){
+        return this.seats;
+    }
+
+    public void setSeats(Seat[][] seats){
+        this.seats = seats;
+    }
     
     // Method to set a certain seat as occupied in Cinema
     public void setSeatOccupied(char row, int col){
