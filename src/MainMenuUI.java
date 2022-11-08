@@ -23,7 +23,6 @@ public class MainMenuUI {
 			
 			switch(userOption) {
 				case 1:
-					// TODO
                     MovieListUI.displayMenu();
 					break;
 				case 2:
@@ -31,7 +30,7 @@ public class MainMenuUI {
                     ViewMovieDetailUI.displayMenu();
 					break;
 				case 3:
-					// TODO - WIP
+					// WIP
 					BookingUI.displayMenu();
 					break;
 				case 4:
@@ -49,7 +48,7 @@ public class MainMenuUI {
                     }
                     break;
 				case 7:
-					System.out.println("Goodbye!");	
+					System.out.println("\nGoodbye!");	
 					System.out.println("   ______      __  __                   _______                  __                       ");
 					System.out.println("  / ____/___ _/ /_/ /_  ____ ___  __   / ____(_)___  ___  ____  / /__  _  _____  _____    ");
 					System.out.println(" / /   / __ `/ __/ __ \\/ __ `/ / / /  / /   / / __ \\/ _ \\/ __ \\/ / _ \\| |/_/ _ \\/ ___/   ");

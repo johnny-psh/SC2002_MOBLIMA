@@ -35,10 +35,10 @@ public class MoviesController {
             while(curCellNum+1 < sheet.getRow(0).getLastCellNum()){
                 curCellNum++;
                 Cell cell = sheet.getRow(0).getCell(curCellNum);
-                if(cell.getCellType() != CellType.BLANK && cell.getCellType() == CellType.NUMERIC) movieID = ((int)cell.getNumericCellValue() + "");
+                if(cell != null && cell.getCellType() == CellType.NUMERIC) movieID = ((int)cell.getNumericCellValue() + "");
                 else movieID = (cell.getStringCellValue());
                 cell = sheet.getRow(1).getCell(curCellNum);
-                if(cell.getCellType() != CellType.BLANK && cell.getCellType() == CellType.NUMERIC) movieTitle = ((int)cell.getNumericCellValue() + "");
+                if(cell != null && cell.getCellType() == CellType.NUMERIC) movieTitle = ((int)cell.getNumericCellValue() + "");
                 else movieTitle = (cell.getStringCellValue());
                 
                 // Create movie object
@@ -46,14 +46,14 @@ public class MoviesController {
                 
                 // Sypnosis
                 cell = sheet.getRow(2).getCell(curCellNum);
-                if(cell.getCellType() != CellType.BLANK && cell.getCellType() == CellType.STRING){
+                if(cell != null && cell.getCellType() == CellType.STRING){
                     sypnosis = (cell.getStringCellValue());
                     movie.setSypnosis(sypnosis);
                 }
 
                 // Status (ENUM)
                 cell = sheet.getRow(3).getCell(curCellNum);
-                if(cell.getCellType() != CellType.BLANK && cell.getCellType() == CellType.STRING) {
+                if(cell != null && cell.getCellType() == CellType.STRING) {
                     statusString = (cell.getStringCellValue());
                     switch(statusString){
                         case "Coming Soon":
@@ -77,7 +77,7 @@ public class MoviesController {
 
                 // Age Rating (ENUM)
                 cell = sheet.getRow(4).getCell(curCellNum);
-                if(cell.getCellType() != CellType.BLANK && cell.getCellType() == CellType.STRING) {
+                if(cell != null && cell.getCellType() == CellType.STRING) {
                     movieRatingString = (cell.getStringCellValue());
                     switch(movieRatingString){
                         case "G":
@@ -107,7 +107,7 @@ public class MoviesController {
 
                 // Type (ENUM)
                 cell = sheet.getRow(5).getCell(curCellNum);
-                if(cell.getCellType() != CellType.BLANK && cell.getCellType() == CellType.STRING) {
+                if(cell != null && cell.getCellType() == CellType.STRING) {
                     typeString = (cell.getStringCellValue());
                     switch(typeString){
                         case "2D":
@@ -131,25 +131,25 @@ public class MoviesController {
 
                 // Director
                 cell = sheet.getRow(6).getCell(curCellNum);
-                if(cell.getCellType() != CellType.BLANK && cell.getCellType() == CellType.NUMERIC){
+                if(cell != null && cell.getCellType() == CellType.NUMERIC){
                     director = ((int)cell.getNumericCellValue() + "");
                     movie.setDirector(director);
                 } 
-                else if(cell.getCellType() != CellType.BLANK && cell.getCellType() == CellType.STRING) {
+                else if(cell != null && cell.getCellType() == CellType.STRING) {
                     director = (cell.getStringCellValue());
                     movie.setDirector(director);
                 }
 
                 // Ticket Sales (int)
                 cell = sheet.getRow(7).getCell(curCellNum);
-                if(cell.getCellType() != CellType.BLANK && cell.getCellType() == CellType.NUMERIC) {
+                if(cell != null && cell.getCellType() == CellType.NUMERIC) {
                     ticketSales = (int) cell.getNumericCellValue();
                     movie.addTicketSales(ticketSales);
                 }
 
                 // Cast List
                 cell = sheet.getRow(8).getCell(curCellNum);
-                if(cell.getCellType() != CellType.BLANK && cell.getCellType() == CellType.STRING) {
+                if(cell != null && cell.getCellType() == CellType.STRING) {
                     castListString = (cell.getStringCellValue());
                     castList = new ArrayList<String>(Arrays.asList(castListString.split(",")));
                     for(String cast : castList){
