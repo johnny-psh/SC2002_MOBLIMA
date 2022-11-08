@@ -175,19 +175,17 @@ public class BookingUI {
 
         System.out.print("Enter username: ");
         username = scanner.next();
-        System.out.println("");
         System.out.print("Enter mobile number: ");
         mobileNum = scanner.next();
-        System.out.println("");
         System.out.print("Enter email: ");
         email = scanner.next();
-        System.out.println("");
 
         // Transaction
         String cinemaID = showtime.getCinema().getCinemaID();
         String movieName = showtime.getMovie().getTitle();
         Transaction transaction = new Transaction(username, mobileNum, email, cinemaID, movieName, numOfTickets, totalPrice);
         TransactionPrinter transactionPrinter = new TransactionPrinter(transaction);
+        System.out.println("Thank you for your purchase!");
         transactionPrinter.printTransaction();
         
         System.out.println("Returning to main menu...\n");

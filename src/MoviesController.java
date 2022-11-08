@@ -23,8 +23,6 @@ public class MoviesController {
             XSSFWorkbook workbook = new XSSFWorkbook(file);
             XSSFSheet sheet = workbook.getSheetAt(0);
             Iterator<Row> rowIterator = sheet.iterator();
-            Row row = rowIterator.next();
-            Iterator<Cell> cellIterator = row.cellIterator();
 
             // Iterate through column
             int curCellNum = 0;
@@ -40,6 +38,8 @@ public class MoviesController {
                 // Create movie object and add to movieList
                 movie = new Movie(movieID, movieTitle);
                 movieList.add(movie);
+
+                
             }
            
             workbook.close(); 
