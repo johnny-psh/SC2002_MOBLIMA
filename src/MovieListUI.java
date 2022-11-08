@@ -14,7 +14,9 @@ public class MovieListUI {
             System.out.println("ID:\tTitle:");
 
             for(Movie movie : movieList){
-                System.out.println(movie.getMovieID() + "\t" + movie.getTitle());
+                if(movie.getShowingStatus() != Enums.ShowingStatus.END_OF_SHOWING){
+                    System.out.println(movie.getMovieID() + "\t" + movie.getTitle() + " (" + movie.getShowingStatus().toString() + ")");
+                }
             }
         }
         ExitUI.displayMenu();
