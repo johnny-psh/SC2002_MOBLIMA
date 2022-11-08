@@ -1,4 +1,3 @@
-// Login plus display  menu in our main function
 import java.util.Scanner;
 import java.io.*;
 
@@ -30,14 +29,12 @@ public class MainMenuUI {
                     ViewMovieDetailUI.displayMenu();
 					break;
 				case 3:
-					// WIP
 					BookingUI.displayMenu();
 					break;
 				case 4:
                     BookingHistoryUI.displayMenu();
 					break;
 				case 5:
-					// TODO
                     ListTopMoviesUI.displayMenu();
 					break;
 				case 6:
