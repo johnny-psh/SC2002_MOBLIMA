@@ -11,20 +11,18 @@ public class BookingHistoryUI {
         username = scanner.next();
 
         ArrayList<Transaction> transactionList = BookingHistoryController.readByUsername(username);
-        if(transactionList.isEmpty()){
+        if(transactionList.isEmpty())
             System.out.println("\nYour booking history is empty. Book a ticket now!");
-            System.out.println("Returning to main menu...\n");
-            return;
-        }
+
         else{
             System.out.println("\nBooking history of " + username + ":\n");
             for (Transaction transaction: transactionList){
                 TransactionPrinter transactionPrinter = new TransactionPrinter(transaction);
-                 transactionPrinter.printTransaction();
+                transactionPrinter.printTransaction();
             }
-            System.out.print("Enter any character to exit: ");
-            scanner.next().charAt(0);
-            return;
         }
+
+        ExitUI.displayMenu();
+        return;
     }
 }
