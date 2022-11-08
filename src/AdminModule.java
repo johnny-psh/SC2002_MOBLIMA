@@ -59,7 +59,16 @@ public class AdminModule {
     // Add the data to new column , just to know what data needed here to progress
         for (int i = 0; i <= sheet.getLastRowNum(); i++) {
         Row row = sheet.getRow(i);
-            row.createCell(endColumn).setCellValue(arr[i]);
+            if(i==0)
+            {
+                int tempID = Integer.parseInt(arr[i]);
+                row.createCell(endColumn).setCellValue(tempID);
+            }
+            else
+            {
+                row.createCell(endColumn).setCellValue(arr[i]);
+            }
+            
         
         }
     }
@@ -67,13 +76,20 @@ public class AdminModule {
     public static void updateValue(Workbook workbook, int colIndex,String [] arr)
     {
         Sheet sheet = workbook.getSheetAt(0);
+        colIndex--;
 
-        //column to update
-        int endColumn = 2;
+
         for (int i = 0; i <= sheet.getLastRowNum(); i++) {
             Row row = sheet.getRow(i);
-                row.createCell(endColumn).setCellValue(arr[i]);
-            
+            if(i==0)
+            {
+                int tempID = Integer.parseInt(arr[i]);
+                row.createCell(colIndex).setCellValue(tempID);
+            }
+            else
+            {
+                row.createCell(colIndex).setCellValue(arr[i]);
+            }
             }
     }
 
@@ -129,6 +145,14 @@ public class AdminModule {
         System.out.println(endColumn);
         return endColumn;
     }
+
+    public static int getIDPosition(Workbook workbook)
+    {
+        Sheet sheet = workbook.getSheetAt(0);
+        int endColumn = sheet.getRow(0).getLastCellNum();
+        System.out.println(endColumn);
+        return endColumn;
+    }
     public static String getID(Workbook workbook)
     {
         Sheet sheet = workbook.getSheetAt(0);
@@ -137,11 +161,43 @@ public class AdminModule {
         endColumn--;
 
         Cell i = workbook.getSheetAt(0).getRow(0).getCell(endColumn); 
-        int cellString = Integer.parseInt(i.getStringCellValue());
+        int cellString = (int)(i.getNumericCellValue());
         cellString++;
         String conv = String.valueOf(cellString);
         //System.out.println("ID = " +cellString);
         return conv;
+    }
+
+    public static int checkID(int givenID)
+    {
+        File xlsxFile = new File("./src/database/Movies.xlsx");
+        try
+        {
+                FileInputStream inputStream = new FileInputStream(xlsxFile);
+                Workbook workbook = WorkbookFactory.create(inputStream);
+                Sheet sheet = workbook.getSheetAt(0);
+                int endColumn = sheet.getRow(0).getLastCellNum();
+                int count = 2;
+                for(int i=1;i<endColumn;i++,count++)
+                {
+                Cell CellID = workbook.getSheetAt(0).getRow(0).getCell(i); 
+                
+                int cellString = (int)(CellID.getNumericCellValue());
+                
+                if(cellString==givenID)
+                {  
+                    System.out.println("Found : " + count);
+                    return count;
+                }
+                }
+        }
+        catch (EncryptedDocumentException | IOException e) {
+
+            System.err.println("File not found");
+            e.printStackTrace();
+        }
+        System.out.println("Not Found");
+        return 0;
     }
         
 
@@ -260,12 +316,12 @@ public class AdminModule {
 
                     
                     //Simple Data insertion
-                    
+                    String scapegoatString_i1 = sc.nextLine();
                     System.out.println("Enter Movie Title: ");
-                    String movieName  = sc.next();
+                    String movieName  = sc.nextLine();
 
                     System.out.println("Enter Sypnosis: ");
-                    String sypnosis  = sc.next();
+                    String sypnosis  = sc.nextLine();
 
                     System.out.println("Choose a Status:  1)Showing 2)Coming Soon 3)Closed ");
                     String[] status = {"Showing","Coming Soon","Closed"};
@@ -286,12 +342,12 @@ public class AdminModule {
                         System.out.println("Please select in its range of 1-"+AR.length);
                     }
                     ARno--;
-                    
+                    String scapegoatString_i2 = sc.nextLine();
                     System.out.println("Enter Type of Movie:");
-                    String type = sc.next();
+                    String type = sc.nextLine();
 
                     System.out.println("Enter Director Name:");
-                    String Dname = sc.next();
+                    String Dname = sc.nextLine();
 
 
                     
@@ -327,21 +383,34 @@ public class AdminModule {
                 else if(listing == 2)
                 {
                     System.out.println("Which Movie would you like to update?");
+          
+              
+                  
                     System.out.println("Enter Movie ID: ");
-                    String movieID  = sc.next();
                     
-                    
-                    //Simple Data insertion
+                    int kID  = sc.nextInt();
+                    while(checkID(kID)==0)
+                    {
+                        System.out.println("Enter Existing ID: ");
+                        kID  = sc.nextInt();
+                    }
+                    String mID = String.valueOf(kID);
+                    int actualPosition = checkID(kID);
+
+                    //Don delete this
+                    String scapegoatString = sc.nextLine();
+
+                    //Simple Update value
                     System.out.println("Enter Movie Title: ");
-                    String movieName  = sc.next();
+                    String movieName  = sc.nextLine();
 
                     System.out.println("Enter Sypnosis: ");
-                    String sypnosis  = sc.next();
+                    String sypnosis  = sc.nextLine();
 
                     System.out.println("Choose a Status:  1)Showing 2)Coming Soon 3)Closed ");
                     String[] status = {"Showing","Coming Soon","Closed"};
                     int no=0;
-
+                    no = sc.nextInt();  
                     while (!(no>=1 && no<=(status.length))) {
                         no = sc.nextInt();  
                         System.out.println("Please select in its range of 1-"+status.length);
@@ -350,41 +419,42 @@ public class AdminModule {
 
                     System.out.println("Choose a Age Rating:  1)R18 2)M13 3)All");
                     String[] AR = {"R18","M13","All"};
-                    int ARno=0;
-
+                    int ARno;
+                    ARno = sc.nextInt();  
                     while (!(ARno>=1 && ARno<=(AR.length))) {
                         ARno = sc.nextInt();  
                         System.out.println("Please select in its range of 1-"+AR.length);
                     }
                     ARno--;
-                    
+
+                    //don delete
+                    String scapegoatString2 = sc.nextLine();
+
                     System.out.println("Enter Type of Movie:");
-                    String type = sc.next();
+                    String type = sc.nextLine();
 
                     System.out.println("Enter Director Name:");
-                    String Dname = sc.next();
+                    String Dname = sc.nextLine();
 
 
 
-                    // try {
-                    //     FileInputStream inputStream = new FileInputStream(xlsxFile);
+                    try {
+                        FileInputStream inputStream = new FileInputStream(xlsxFile);
                       
-                    //     //Placeholder update function data
-                    //     String[] inputData = {movieName,sypnosis, status[no], AR[ARno],type,Dname};  
+                        String[] inputData = {mID,movieName,sypnosis, status[no], AR[ARno],type,Dname};
 
+                        Workbook workbook = WorkbookFactory.create(inputStream);
+                        updateValue(workbook, actualPosition,inputData);
 
-                    //     Workbook workbook = WorkbookFactory.create(inputStream);
-                    //     updateValue(workbook, 1,dummydata);
+                        FileOutputStream fos = new FileOutputStream(xlsxFile);
+                        workbook.write(fos);
+                        fos.close();
+                        System.out.println("Success: updated new column with data to an existing excel file.");
+                    } catch (EncryptedDocumentException | IOException e) {
 
-                    //     FileOutputStream fos = new FileOutputStream(xlsxFile);
-                    //     workbook.write(fos);
-                    //     fos.close();
-                    //     System.out.println("Success: updated new column with data to an existing excel file.");
-                    // } catch (EncryptedDocumentException | IOException e) {
-
-                    //     System.err.println("Failed: adding new column to an existing excel file.");
-                    //     e.printStackTrace();
-                    // }
+                        System.err.println("Failed: adding new column to an existing excel file.");
+                        e.printStackTrace();
+                    }
 
                 }
                 else if(listing == 3)
