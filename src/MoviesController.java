@@ -3,12 +3,13 @@ import java.util.Iterator;
 import java.io.File;
 import java.io.FileInputStream;
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class MoviesController {
-    public final static String FILENAME = "./src/database/Movie.xlsx";
+    private final static String FILENAME = "./src/database/Movies.xlsx";
 
     public static ArrayList<Movie> read(){
         // Array list of movies to return
@@ -22,30 +23,25 @@ public class MoviesController {
             XSSFWorkbook workbook = new XSSFWorkbook(file);
             XSSFSheet sheet = workbook.getSheetAt(0);
             Iterator<Row> rowIterator = sheet.iterator();
+            Row row = rowIterator.next();
+            Iterator<Cell> cellIterator = row.cellIterator();
 
-            // Iterate through row
-
-            while (rowIterator.hasNext()) {
-                Row row = rowIterator.next();
-                Iterator<Cell> cellIterator = row.cellIterator();
-                // Iterate through column
-                Cell cell = cellIterator.next();
-                switch (cell.getCellType()) 
-                {
-                    case NUMERIC:
-                        movieID = ((int)cell.getNumericCellValue() + "");            
-                        break;
-                    case STRING:
-                    default:
-                        movieID = (cell.getStringCellValue());
-                        break;
-                }
-                movieTitle = cellIterator.next().getStringCellValue();
+            // Iterate through column
+            int curCellNum = 0;
+            while(curCellNum+1 < sheet.getRow(0).getLastCellNum()){
+                curCellNum++;
+                Cell cell = sheet.getRow(0).getCell(curCellNum);
+                if(cell.getCellType() != CellType.BLANK && cell.getCellType() == CellType.NUMERIC) movieID = ((int)cell.getNumericCellValue() + "");
+                else movieID = (cell.getStringCellValue());
+                cell = sheet.getRow(1).getCell(curCellNum);
+                if(cell.getCellType() != CellType.BLANK && cell.getCellType() == CellType.NUMERIC) movieTitle = ((int)cell.getNumericCellValue() + "");
+                else movieTitle = (cell.getStringCellValue());
                 
                 // Create movie object and add to movieList
                 movie = new Movie(movieID, movieTitle);
                 movieList.add(movie);
             }
+           
             workbook.close(); 
             file.close();
         }
@@ -58,6 +54,7 @@ public class MoviesController {
         return movieList;
     }
 
+
     public static Movie readByID(String movieID){
         ArrayList<Movie> movieList = read();
         for (int i=0; i < movieList.size(); i++){
@@ -66,6 +63,13 @@ public class MoviesController {
                 return movie;
         }
         return null;
+    }
+
+    public static void main(String[] args){
+        ArrayList<Movie> test = read();
+        for(int i = 0; i < test.size(); i++){
+            System.out.println(test.get(i).getMovieID() + test.get(i).getTitle());
+        }
     }
 
 }
