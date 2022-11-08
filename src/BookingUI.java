@@ -34,6 +34,7 @@ public class BookingUI {
         numOfTickets = scanner.nextInt();
         // 6. Select seats & transaction
         selectSeats(numOfTickets, selectedShowtime);
+        return;
     }
 
     private static Cineplex selectCineplex(){
@@ -188,7 +189,8 @@ public class BookingUI {
         System.out.println("Thank you for your purchase!");
         transactionPrinter.printTransaction();
         
-        System.out.println("Returning to main menu...\n");
+        ExitUI.displayMenu();
+        return;
     }
 
     // Function to save reserved seats to database from CinemaController.java

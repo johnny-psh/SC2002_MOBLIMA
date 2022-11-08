@@ -1,7 +1,5 @@
-import java.util.ArrayList;
 import java.io.*;
 import java.util.*;
-
 
 public class ViewMovieDetailUI {
     static Scanner scanner = new Scanner(System.in);
