@@ -21,18 +21,4 @@ public class Cineplex{
     public ArrayList<Cinema> getCinemaList(){
         return this.cinemaList;
     }
-
-    public void printCinemaList(){
-        for(Cinema cin : this.cinemaList)
-            System.out.println(cin.getCinemaID());
-    }
-
-    public Cinema getCinemaByID(String cinemaID){
-        for (int i=0; i < this.cinemaList.size(); i++){
-            Cinema cinema = this.cinemaList.get(i);
-            if (cinema.getCinemaID().equals(cinemaID))
-                return cinema;
-        }
-        return null;
-    }
 }

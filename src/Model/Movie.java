@@ -33,12 +33,6 @@ public class Movie {
         return this.movieID;
     }
 
-    public void setMovieID(String movieID)
-    {
-        this.movieID = movieID;
-    }
-
-    // Note: get classes are called by movieGoer class , 
     public String getTitle(){
         return this.title;
     }

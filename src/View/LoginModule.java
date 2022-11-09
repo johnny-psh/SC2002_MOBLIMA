@@ -22,8 +22,7 @@ public class LoginModule {
         if(v.valid)
         {
             a.isValid(true, v.name);
-            AdminModule.MenuPage(a);
-            
+            AdminModule.MenuPage(a);        
         }
         else
         {
