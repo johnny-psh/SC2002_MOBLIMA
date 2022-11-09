@@ -1,4 +1,7 @@
 import java.util.*;
+
+import Model.Moviegoer;
+import Model.Review;
 public class TestUser {
     public static void main(String[] args) {
         Moviegoer test1 = new Moviegoer("Test", 97777777, "3332a", 33);

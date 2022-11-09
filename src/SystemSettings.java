@@ -1,8 +1,0 @@
-class SystemSettings {
-
-    
-
-    public SystemSettings(){
-
-    }
-}
