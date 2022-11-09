@@ -1,5 +1,3 @@
-import java.util.*;
-
 import Model.Moviegoer;
 import Model.Review;
 public class TestUser {

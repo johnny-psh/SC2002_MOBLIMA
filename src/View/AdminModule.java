@@ -1,25 +1,14 @@
 package View;
 import java.util.*;
 import java.io.*;
-import java.text.SimpleDateFormat;  
-import java.util.Date;  
-import java.text.ParseException;
-
+import Model.*;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.xssf.usermodel.XSSFRow;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-
-import Model.Administrator;
-
 import org.apache.poi.EncryptedDocumentException;
-import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
-import org.apache.poi.ss.usermodel.CellValue;
 
 
 public class AdminModule {
@@ -227,6 +216,8 @@ public class AdminModule {
                 cNew.setCellFormula( cOld.getCellFormula() );
                 break;
             }
+            default:
+                break;
         }
 
     }
@@ -256,23 +247,17 @@ public class AdminModule {
                     {
                         case NUMERIC:
                             System.out.print((int)cell.getNumericCellValue() + " ");
-                            
                             break;
                         case STRING:
-
                             System.out.print(cell.getStringCellValue() + " ");
-                            
                             break;
-                    }
-                    
-                    
+                        default:
+                            break;
+                    }                  
                 }
                 System.out.println("");
                 r++;
             }
-           
-        
-        
     }
 
     public static void MenuPage(Administrator a) throws IOException
@@ -317,7 +302,7 @@ public class AdminModule {
 
                     
                     //Simple Data insertion
-                    String scapegoatString_i1 = sc.nextLine();
+                    sc.nextLine();
                     System.out.println("Enter Movie Title: ");
                     String movieName  = sc.nextLine();
 
@@ -343,7 +328,7 @@ public class AdminModule {
                         System.out.println("Please select in its range of 1-"+AR.length);
                     }
                     ARno--;
-                    String scapegoatString_i2 = sc.nextLine();
+                    sc.nextLine();
                     System.out.println("Enter Type of Movie:");
                     String type = sc.nextLine();
 
@@ -399,7 +384,7 @@ public class AdminModule {
                     int actualPosition = checkID(kID);
 
                     //Don delete this
-                    String scapegoatString = sc.nextLine();
+                    sc.nextLine();
 
                     //Simple Update value
                     System.out.println("Enter Movie Title: ");
@@ -429,7 +414,7 @@ public class AdminModule {
                     ARno--;
 
                     //don delete
-                    String scapegoatString2 = sc.nextLine();
+                    sc.nextLine();
 
                     System.out.println("Enter Type of Movie:");
                     String type = sc.nextLine();
