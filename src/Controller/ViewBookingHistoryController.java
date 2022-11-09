@@ -12,7 +12,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import Model.Transaction;
 
 public class ViewBookingHistoryController {
-    public final static String FILENAME = "./src/database/BookingHistory.xlsx";
+    public final static String FILENAME = "./database/BookingHistory.xlsx";
 
     public static ArrayList<Transaction> read(){
         ArrayList<Transaction> bookingList = new ArrayList<Transaction>();

@@ -12,7 +12,7 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class HolidaysController {
-    private final static String FILENAME = "./src/database/SystemSettings.xlsx";
+    private final static String FILENAME = "./database/SystemSettings.xlsx";
     private final static int COLNUM = 1;
 
     public static ArrayList<Date> read(){

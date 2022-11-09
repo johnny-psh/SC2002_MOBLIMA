@@ -13,7 +13,7 @@ import Model.Movie;
 import Model.Review;
 
 public class MoviesController {
-    private final static String FILENAME = "./src/database/Movies.xlsx";
+    private final static String FILENAME = "./database/Movies.xlsx";
 
     public static ArrayList<Movie> read(){
         // Array list of movies to return

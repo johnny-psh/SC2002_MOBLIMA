@@ -10,7 +10,7 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class TicketPriceController {
-    private final static String FILENAME = "./src/database/SystemSettings.xlsx";
+    private final static String FILENAME = "./database/SystemSettings.xlsx";
     private final static int COLNUM = 0;
 
     public static ArrayList<Double> readTicketPrices(){

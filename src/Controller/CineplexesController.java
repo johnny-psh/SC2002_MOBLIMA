@@ -13,7 +13,7 @@ import Model.Cineplex;
 
 
 public class CineplexesController {
-    private final static String FILENAME = "./src/database/Cineplexes.xlsx";
+    private final static String FILENAME = "./database/Cineplexes.xlsx";
     private final static int NUMOFCINEPLEXES = 3;
 
     public static ArrayList<Cineplex> read(){

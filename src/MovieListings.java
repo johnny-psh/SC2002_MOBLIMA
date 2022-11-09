@@ -162,7 +162,7 @@ public class MovieListings {
     public static void main(String[] args) throws IOException
     {
         Movie m = MovieListings.createMovie();
-        File xlsxFile = new File("./src/database/TestMoviesReader.xlsx");
+        File xlsxFile = new File("./database/TestMoviesReader.xlsx");
         XSSFWorkbook workbook = new XSSFWorkbook();
         XSSFSheet sheet = workbook.createSheet("Movies");
         String type = m.getType().toString();

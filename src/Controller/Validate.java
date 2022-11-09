@@ -8,8 +8,7 @@ public class Validate {
     public boolean valid = false;
     public String name;
 
-    //static String path = "/Users/periadhityan/Documents/GitHub/SC2002_Assignment/src/database/LoginDetails.csv";
-    static String path = "./src/database/LoginDetails.csv";
+    static String path = "./database/LoginDetails.csv";
 
     public boolean validateLogin(Administrator a)
     {
@@ -31,7 +30,6 @@ public class Validate {
                 
             } br.close();
         } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();

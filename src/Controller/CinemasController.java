@@ -18,7 +18,7 @@ import Model.Enums;
 import Model.Seat;
 
 public class CinemasController {
-    public final static String FILENAME = "./src/database/Cinemas.xlsx";
+    public final static String FILENAME = "./database/Cinemas.xlsx";
     public final static int SEATCOL = 4;
 
     public static void updateSeats(Cinema cinema){

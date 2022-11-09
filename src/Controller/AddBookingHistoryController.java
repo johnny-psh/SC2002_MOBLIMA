@@ -13,7 +13,7 @@ import Model.Transaction;
 
 
 public class AddBookingHistoryController {
-    public final static String FILENAME = "./src/database/BookingHistory.xlsx";
+    public final static String FILENAME = "./database/BookingHistory.xlsx";
     public final static int NUMOFCOLS = 7;
 
     public static void addBookingHistory(String username, Transaction transaction){

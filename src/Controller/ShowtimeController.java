@@ -17,7 +17,7 @@ import Model.Showtime;
 
 
 public class ShowtimeController {
-    public final static String FILENAME = "./src/database/Showtime.xlsx";
+    public final static String FILENAME = "./database/Showtime.xlsx";
 
     public static ArrayList<Showtime> read(){
         // Array list of showtimes to return

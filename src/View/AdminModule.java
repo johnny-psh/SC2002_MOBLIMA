@@ -25,10 +25,8 @@ import org.apache.poi.ss.usermodel.CellValue;
 public class AdminModule {
 
     static Scanner sc = new Scanner(System.in);
-    static String path = "./src/database/Movies.csv";
+    static String path = "./database/Movies.csv";
     
-   // ./src/database/TestMoviesReader.xlsx
-
    public static void updateColumnWithData(Workbook workbook, int colIndex,String [] arr) {
     Sheet sheet = workbook.getSheetAt(0);
 
@@ -173,7 +171,7 @@ public class AdminModule {
 
     public static int checkID(int givenID)
     {
-        File xlsxFile = new File("./src/database/Movies.xlsx");
+        File xlsxFile = new File("./database/Movies.xlsx");
         try
         {
                 FileInputStream inputStream = new FileInputStream(xlsxFile);
@@ -284,9 +282,9 @@ public class AdminModule {
         BufferedWriter bw = new BufferedWriter(fw);
         PrintWriter pw = new PrintWriter(bw);
 
-        File xlsxFile = new File("./src/database/Movies.xlsx");
-        File systemSettings = new File("./src/database/SystemSettings.xlsx");
-        File showtime = new File("./src/database/Showtime.xlsx");
+        File xlsxFile = new File("./database/Movies.xlsx");
+        File systemSettings = new File("./database/SystemSettings.xlsx");
+        File showtime = new File("./database/Showtime.xlsx");
 
         while(a.getValid())
         {
@@ -315,7 +313,7 @@ public class AdminModule {
                 if(listing == 1)
                 {      
                     //Add into excel function below
-                    //File xlsxFile = new File("./src/database/TestMoviesReader.xlsx");
+                    //File xlsxFile = new File("./database/TestMoviesReader.xlsx");
 
                     
                     //Simple Data insertion
