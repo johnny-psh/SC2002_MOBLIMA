@@ -113,11 +113,9 @@ public class Enums {
     public enum TicketType {
         SENIOR("Senior Citizen"),
         STUDENT("Student"),
-        MON_TO_WED("Mon - Wed"),
-        THU("Thu"),
-        FRI_BEFORE_SIX("Fri before 6pm"),
-        FRI_FROM_SIX("Fri from 6pm"),
-        WEEKEND_AND_PUBLICHOL("Sat & Sun & Public Holiday");
+        WEEKDAY("Weekday"),
+        WEEKEND("Weekend"),
+        HOL("Public Holiday");
 
         private String ticType;
 
