@@ -1,5 +1,11 @@
 # MOvie Booking and LIsting Management Application (MOBLIMA)
 
+   ______      __  __                   _______                  __
+  / ____/___ _/ /_/ /_  ____ ___  __   / ____(_)___  ___  ____  / /__  _  _____  _____
+ / /   / __ `/ __/ __ \/ __ `/ / / /  / /   / / __ \/ _ \/ __ \/ / _ \| |/_/ _ \/ ___/
+/ /___/ /_/ / /_/ / / / /_/ / /_/ /  / /___/ / / / /  __/ /_/ / /  __/>  </  __(__  )
+\____/\__,_/\__/_/ /_/\__,_/\__, /   \____/_/_/ /_/\___/ .___/_/\___/_/|_|\___/____/
+
 ## Problem Statement
 
 Application to computerize the process of making online booking of Cinemas.
