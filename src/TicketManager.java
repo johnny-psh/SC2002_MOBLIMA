@@ -56,7 +56,7 @@ public class TicketManager {
     }
 
     private boolean isHoliday(){        
-        ArrayList<Date> holidayList = HolidaysController.readHolidays();
+        ArrayList<Date> holidayList = HolidaysController.read();
         SimpleDateFormat dateFormatter = new SimpleDateFormat("ddMMyyyy");
         for(Date holiday : holidayList){
             if ((dateFormatter.format(this.ticket.getDate())).equals(dateFormatter.format(holiday)))

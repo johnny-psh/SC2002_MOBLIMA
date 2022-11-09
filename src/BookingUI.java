@@ -156,8 +156,10 @@ public class BookingUI {
                     Enums.TypeOfMovieGoer movieGoerType = selectTypeOfMovieGoer();
                     Seat seat = cinema.getSeat(row,col);
                     Ticket ticket = new Ticket(seat,  showtime, movieGoerType);
-                    System.out.println("Price: " + ticket.getTicketPrice());
-                    totalPrice += ticket.getTicketPrice();
+                    TicketManager ticketManager = new TicketManager(ticket);
+                    TicketPriceManager ticketPriceManager = new TicketPriceManager(ticketManager);
+                    System.out.println("Price: " + ticketPriceManager.getTicketPrice());
+                    totalPrice += ticketPriceManager.getTicketPrice();
                     isOccupiedSeat = false;
                     ticketList.add(ticket);
                     break;
