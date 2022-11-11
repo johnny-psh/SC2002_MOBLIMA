@@ -174,7 +174,7 @@ public class BookingUI {
         ArrayList<Ticket> ticketList = new ArrayList<Ticket>(numOfTickets);
         char row;
         int col;
-        boolean isOccupiedSeat = false;
+        boolean invalidSeat = false;
         double totalPrice = 0;
         for(int i = 0; i < numOfTickets; i++){
             do{
@@ -184,8 +184,20 @@ public class BookingUI {
                 row = Character.toUpperCase(row);
                 System.out.print("Column: ");
                 col = scanner.nextInt();
-                if(!cinema.getSeatOccupied(row, col)){
+
+                if(cinema.getSeat(row, col) == null){
+                    System.out.println("\nInvalid Seat! Please re-enter!");  
+                    invalidSeat = true;              
+                }
+
+                else if(cinema.getSeatOccupied(row, col)){
+                    System.out.println("\nSeat selected is occupied. Please select another seat");
+                    invalidSeat = true;
+                }
+                
+                else {
                     cinema.setSeatOccupied(row, col);
+                    // Sekect movie-goer type
                     Enums.TypeOfMovieGoer movieGoerType = selectTypeOfMovieGoer();
                     Seat seat = cinema.getSeat(row,col);
                     // Create ticket
@@ -197,13 +209,11 @@ public class BookingUI {
                     double ticketPrice = ticketPriceManager.getTicketPrice();
                     System.out.println("Price: " + ticketPrice);
                     totalPrice += ticketPriceManager.getTicketPrice();
-                    isOccupiedSeat = false;
+                    invalidSeat = false;
                     ticketList.add(ticket);
                     break;
                 }
-                System.out.println("Seat selected is occupied. Please select another seat");
-                isOccupiedSeat = true;
-            } while(isOccupiedSeat);
+            } while(invalidSeat);
         }
         System.out.println("\nTotal price is: " + totalPrice + " SGD");
     	System.out.print("Do you want to confirm payment? Yes (1) / No (2): ");
