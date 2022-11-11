@@ -736,9 +736,19 @@ public class AdminModule {
                         // Creating workbook from input stream
                         Workbook workbook = WorkbookFactory.create(inputStream);
 
+                        Sheet sheet = workbook.getSheetAt(0);
 
                         
-                        updateColumnWithData(workbook, 0,updatedTicketPrice);
+                        for(int i = 0; i < 5; i++){
+                            Row row = sheet.getRow(i);
+                            Cell cell = row.createCell(0);
+                            cell.setCellValue(updatedTicketPrice[i]);
+                        }
+                        
+
+
+                        
+                        //updateColumnWithData(workbook, 0,updatedTicketPrice);
                         // Write the updated workbook to the file
                         FileOutputStream fos = new FileOutputStream(systemSettings);
                         workbook.write(fos);
@@ -780,7 +790,22 @@ public class AdminModule {
 
 
                         Workbook workbook = WorkbookFactory.create(inputStream);
-                        updateColumnWithData(workbook, 1, holidayArray);
+
+                        Sheet sheet = workbook.getSheetAt(0);
+
+                        
+                        for(int i = 0; i < holidayArray.length; i++){
+                            
+                            Row row = sheet.getRow(i);
+                            
+                            if(row == null)
+                            {
+                                row = sheet.createRow(i);
+                            }
+                            Cell cell = row.createCell(1);
+                            cell.setCellValue(holidayArray[i]);
+                        }
+                        //updateColumnWithData(workbook, 1, holidayArray);
 
                         FileOutputStream fos = new FileOutputStream(systemSettings);
                         workbook.write(fos);
