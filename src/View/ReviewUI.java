@@ -1,7 +1,29 @@
 package View;
+import java.util.*;
+
+import Controller.AddReviewController;
+import Controller.MoviesController;
+import Model.Movie;
 
 public class ReviewUI {
-    public static void displayMenu(){
+    static Scanner scanner = new Scanner(System.in);
 
+    public static void displayMenu(){
+        System.out.print("\nEnter movie ID to view movie detail: ");
+        String movieID = scanner.next();
+        Movie movie = MoviesController.readByID(movieID);
+        if(movie == null){
+            System.out.println("Movie with this id doesn't exist!\n");
+        }
+        else{
+            System.out.print("Enter your rating: ");
+            int rating = scanner.nextInt();
+            System.out.print("Enter your review: ");
+            String review = scanner.next();
+            AddReviewController.addReviewToMovie(movieID, rating, review);
+        }
+
+        ExitUI.displayMenu();
+        return; 
     }
 }

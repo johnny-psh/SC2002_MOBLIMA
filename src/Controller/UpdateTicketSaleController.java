@@ -38,7 +38,6 @@ public class UpdateTicketSaleController {
                 if(cellMovieID.equals(movieID)){
                     cell = sheet.getRow(TICSALEROW).getCell(col);
                     cell.setCellValue(numOfTickets);
-                    System.out.println("updated tickets");
                     break;
                 }
                 cell = cellIterator.next();
