@@ -25,7 +25,7 @@ public class Cinema{
     public void printCinemaLayout(){
         int mid = this.numOfCols / 2;
 
-        System.out.println("\nCinema " + this.cinemaID + "'s Seating Layout: \n");
+        System.out.println("\n" + this.cinemaType.toString() + " Cinema " + this.cinemaID + " seating Layout: \n");
         System.out.println("\t\t\t\t" + "Screen \n");
         System.out.print(" \t");
 
