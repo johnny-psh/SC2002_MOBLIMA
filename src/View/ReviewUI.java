@@ -19,7 +19,8 @@ public class ReviewUI {
             System.out.print("Enter your rating: ");
             int rating = scanner.nextInt();
             System.out.print("Enter your review: ");
-            String review = scanner.next();
+            scanner.nextLine();
+            String review = scanner.nextLine();
             AddReviewController.addReviewToMovie(movieID, rating, review);
         }
 
