@@ -26,8 +26,7 @@ public class MoviesController {
         Enums.TypeOfMovie type; 
         Enums.MovieRating movieRating; 
         ArrayList<String> castList;
-        ArrayList<Review> movieReviewList;
-        int overallReviewerRating, ticketSales;
+        int ticketSales;
         String statusString, typeString, movieRatingString, castListString;
 
         try{
@@ -163,6 +162,17 @@ public class MoviesController {
                 }
                 // Movie Review List
                 cell = sheet.getRow(9).getCell(curCellNum);
+                if(cell != null){
+                    String reviews = cell.getStringCellValue();
+                    ArrayList<String> reviewStringList = new ArrayList<String>(Arrays.asList(reviews.split("rating:")));
+                    for(String reviewString : reviewStringList){
+                        if(reviewString.equals("")) continue;
+                        else {
+                            String ratingDescString[] = reviewString.split("review:");
+                            movie.addReview(Integer.parseInt(ratingDescString[0]), ratingDescString[1]);
+                        }
+                    }
+                }
 
                 // Add movie to movieList
                 movieList.add(movie);

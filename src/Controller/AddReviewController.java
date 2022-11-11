@@ -40,7 +40,7 @@ public class AddReviewController {
                     cell = sheet.getRow(REVIEWROW).getCell(col);
                     String reviews = "";
                     if(cell != null) reviews = cell.getStringCellValue();
-                    reviews += "|rating:" + rating + "review:" + description;
+                    reviews += "rating:" + rating + "review:" + description;
                     if(cell == null)
                         cell = sheet.getRow(REVIEWROW).createCell(col);
                     cell.setCellValue(reviews);

@@ -55,11 +55,9 @@ public class MovieDetailsPrinter {
         else{
             System.out.println("");
             for(int i=0; i < this.movie.getMovieReviewList().size(); i++){
-                System.out.println("Rating: " + this.movie.getMovieReviewList().get(i).getRating());
-                System.out.println("Review: " + this.movie.getMovieReviewList().get(i).getDescription() + "\n");
-            }
+                System.out.println("\t" + this.movie.getMovieReviewList().get(i).getRating() + " - " + this.movie.getMovieReviewList().get(i).getDescription());
+        }
         }
     }
-
     
 }
