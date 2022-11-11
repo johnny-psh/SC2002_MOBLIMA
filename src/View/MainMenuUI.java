@@ -9,15 +9,16 @@ public class MainMenuUI {
 	public static void displayMenu() throws IOException {
 		
 		int userOption = 0;
-		while(userOption != 7) {
+		while(userOption != 8) {
 			System.out.println("Main Menu:");
 			System.out.println("1. List movies");
 			System.out.println("2. Search and view movie details");
 			System.out.println("3. Book and purchase ticket");
 			System.out.println("4. View booking history");
 			System.out.println("5. List the Top 5 ranking by ticket sales OR by overall reviewers ratings");
-			System.out.println("6. Admin Login");
-			System.out.println("7. Exit");
+			System.out.println("6. Review a movie");
+			System.out.println("7. Admin Login");
+			System.out.println("8. Exit");
 			System.out.print("Option > ");
 			userOption = scanner.nextInt();
 			
@@ -39,13 +40,16 @@ public class MainMenuUI {
                     ListTopMoviesUI.displayMenu();
 					break;
 				case 6:
+					ReviewUI.displayMenu();
+					break;
+				case 7:
                     try {
                         LoginModule.Login();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
                     break;
-				case 7:
+				case 8:
 					System.out.println("\nGoodbye!");	
 					System.out.println("   ______      __  __                   _______                  __                       ");
 					System.out.println("  / ____/___ _/ /_/ /_  ____ ___  __   / ____(_)___  ___  ____  / /__  _  _____  _____    ");
