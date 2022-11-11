@@ -7,6 +7,7 @@ import Controller.CineplexesController;
 import Controller.ShowtimeController;
 import Controller.TicketManager;
 import Controller.TicketPriceManager;
+import Controller.UpdateTicketSaleController;
 import Model.Cinema;
 import Model.Cineplex;
 import Model.Enums;
@@ -171,10 +172,14 @@ public class BookingUI {
                     cinema.setSeatOccupied(row, col);
                     Enums.TypeOfMovieGoer movieGoerType = selectTypeOfMovieGoer();
                     Seat seat = cinema.getSeat(row,col);
+                    // Create ticket
                     Ticket ticket = new Ticket(seat,  showtime, movieGoerType);
+                    // Use ticketmanager to determine ticket type
                     TicketManager ticketManager = new TicketManager(ticket);
+                    // Use ticketpricemanager to calculate ticket price
                     TicketPriceManager ticketPriceManager = new TicketPriceManager(ticketManager);
-                    System.out.println("Price: " + ticketPriceManager.getTicketPrice());
+                    double ticketPrice = ticketPriceManager.getTicketPrice();
+                    System.out.println("Price: " + ticketPrice);
                     totalPrice += ticketPriceManager.getTicketPrice();
                     isOccupiedSeat = false;
                     ticketList.add(ticket);
@@ -216,26 +221,20 @@ public class BookingUI {
         System.out.println("");
         transactionPrinter.printTransaction();
 
-        // Save booking & booked seats to database
-        saveSeatToDB(showtime.getCinema());
-        saveBookingToDB(username, transaction);
-        
+        // Save booking, booked seats, tickets purchased to respective databases
+        saveToDB(showtime, username, transaction, numOfTickets);
         ExitUI.displayMenu();
         return;
     }
 
-    // Function to save reserved seats to database from CinemaController.java
-    private static void saveSeatToDB(Cinema cinema){
-        CinemasController.updateSeats(cinema);
-        return;
-    }
-
-    // Function to save booking to user database from userBookings.java
-    private static void saveBookingToDB(String username, Transaction transaction){
+    private static void saveToDB(Showtime showtime, String username, Transaction transaction, int numOfTickets){
+        CinemasController.updateSeats(showtime.getCinema());
         AddBookingHistoryController.addBookingHistory(username, transaction);
-        return;
+        UpdateTicketSaleController.updateTicketSale(numOfTickets, showtime.getMovie().getMovieID());
     }
 
+
+    // Allow user to select the type of movie goer - student/adult/senior citizen
     private static Enums.TypeOfMovieGoer selectTypeOfMovieGoer(){
         int userOption = 0;
 
