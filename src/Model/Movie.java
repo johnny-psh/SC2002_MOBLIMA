@@ -16,7 +16,8 @@ public class Movie {
     private Enums.MovieRating movieRating; // Rating of movie - (PG, M18 etc.)
     private ArrayList<String> castList;
     private ArrayList<Review> movieReviewList;
-    private int overallReviewerRating, ticketSales;
+    private int ticketSales;
+    private double overallReviewerRating;
 
     // Constructor - Used by <cinema staff> to create a new movie object
     public Movie(String movieID, String title){
@@ -99,15 +100,18 @@ public class Movie {
     }
 
     // OVERALL Reviewer Rating
-    public int getOverallReviewerRating(){
+    public double getOverallReviewerRating(){
         return this.overallReviewerRating;
     }
 
     // Private Helper method to calculate overall reviewer rating
     private void updateOverallReviewerRating(int newReviewerRating){
         int numOfRatings = movieReviewList.size();
-        int totalRatings = (overallReviewerRating * (numOfRatings - 1))  + newReviewerRating;
+        double totalRatings = (overallReviewerRating * (numOfRatings - 1))  + newReviewerRating;
         this.overallReviewerRating = totalRatings / numOfRatings;
+        // 1DP
+        int scale = (int) Math.pow(10, 1);
+        this.overallReviewerRating =  (double) Math.round(this.overallReviewerRating * scale) / scale;
     }
 
     // REVIEWS - CALLED BY MOVIE GOER USER CLASS
