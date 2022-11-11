@@ -14,7 +14,6 @@ import org.apache.poi.ss.usermodel.WorkbookFactory;
 public class AdminModule {
 
     static Scanner sc = new Scanner(System.in);
-    static String path = "./database/Movies.csv";
     
    public static void updateColumnWithData(Workbook workbook, int colIndex,String [] arr) {
     Sheet sheet = workbook.getSheetAt(0);
@@ -47,9 +46,12 @@ public class AdminModule {
     int endColumn = sheet.getRow(0).getLastCellNum();
 
     // Add the data to new column , just to know what data needed here to progress
-        for (int i = 0; i <= sheet.getLastRowNum(); i++) {
+    int rowTotal = sheet.getLastRowNum();
+    rowTotal--;
+
+        for (int i = 0; i <= rowTotal; i++) {
         Row row = sheet.getRow(i);
-            if(i==0)
+            if(i==0 || i==7)
             {
                 int tempID = Integer.parseInt(arr[i]);
                 row.createCell(endColumn).setCellValue(tempID);
@@ -68,10 +70,11 @@ public class AdminModule {
         Sheet sheet = workbook.getSheetAt(0);
         colIndex--;
 
-
-        for (int i = 0; i <= sheet.getLastRowNum(); i++) {
+        int rowTotal = sheet.getLastRowNum();
+        rowTotal--;
+        for (int i = 0; i <= rowTotal; i++) {
             Row row = sheet.getRow(i);
-            if(i==0)
+            if(i==0 || i==7)
             {
                 int tempID = Integer.parseInt(arr[i]);
                 row.createCell(colIndex).setCellValue(tempID);
@@ -262,10 +265,7 @@ public class AdminModule {
 
     public static void MenuPage(Administrator a) throws IOException
     {
-        BufferedReader br = new BufferedReader(new FileReader(path));
-        FileWriter fw = new FileWriter(path, true);
-        BufferedWriter bw = new BufferedWriter(fw);
-        PrintWriter pw = new PrintWriter(bw);
+       
 
         File xlsxFile = new File("./database/Movies.xlsx");
         File systemSettings = new File("./database/SystemSettings.xlsx");
@@ -297,8 +297,7 @@ public class AdminModule {
                 int listing = sc.nextInt();
                 if(listing == 1)
                 {      
-                    //Add into excel function below
-                    //File xlsxFile = new File("./database/TestMoviesReader.xlsx");
+                    
 
                     
                     //Simple Data insertion
@@ -309,31 +308,44 @@ public class AdminModule {
                     System.out.println("Enter Sypnosis: ");
                     String sypnosis  = sc.nextLine();
 
-                    System.out.println("Choose a Status:  1)Showing 2)Coming Soon 3)Closed ");
-                    String[] status = {"Showing","Coming Soon","Closed"};
+                    System.out.println("Choose a Status:  1)Coming Soon 2)Preview 3)Now Showing 4)End of Showing ");
+                    String[] status = {"Coming Soon","Preview","Now Showing","End of Showing"};
                     int no=0;
-
+                    no = sc.nextInt();
                     while (!(no>=1 && no<=(status.length))) {
-                        no = sc.nextInt();  
                         System.out.println("Please select in its range of 1-"+status.length);
+                        no = sc.nextInt();  
                     }
                     no--;
 
-                    System.out.println("Choose a Age Rating:  1)R18 2)M13 3)All");
-                    String[] AR = {"R18","M13","All"};
+                    System.out.println("Choose a Age Rating:  1)G 2)PG 3)PG13 4)NC16 5)M18 6)R21");
+                    String[] AR = {"G","PG","PG13","NC16","M18","R21"};
                     int ARno=0;
-
+                    ARno = sc.nextInt();
                     while (!(ARno>=1 && ARno<=(AR.length))) {
-                        ARno = sc.nextInt();  
                         System.out.println("Please select in its range of 1-"+AR.length);
+                        ARno = sc.nextInt();  
                     }
                     ARno--;
                     sc.nextLine();
-                    System.out.println("Enter Type of Movie:");
-                    String type = sc.nextLine();
 
+
+                    System.out.println("Choose Type of Movie: 1)2D 2)3D 3)2D Blockbuster 4)3D Blockbuster");
+                    String[] MT = {"2D","3D","2D Blockbuster","3D Blockbuster"};
+                    int MTno = 0;
+                    MTno = sc.nextInt();
+                    while (!(MTno>=1 && MTno<=(MT.length))) {
+                        System.out.println("Please select in its range of 1-"+MT.length);
+                        MTno = sc.nextInt();  
+                    }
+                    MTno--;
+
+                    sc.nextLine();
                     System.out.println("Enter Director Name:");
                     String Dname = sc.nextLine();
+
+                    System.out.println("Enter Cast List:");
+                    String castList = sc.nextLine();
 
 
                     
@@ -352,7 +364,7 @@ public class AdminModule {
                         String LastID = getID(workbook);
 
 
-                        String[] inputData = {LastID,movieName,sypnosis, status[no], AR[ARno],type,Dname};
+                        String[] inputData = {LastID,movieName,sypnosis, status[no], AR[ARno],MT[MTno],Dname,"0",castList};
                         insertNewColumnBeforeWithData(workbook,inputData);
                         // Write the updated workbook to the file
                         FileOutputStream fos = new FileOutputStream(xlsxFile);
@@ -368,10 +380,8 @@ public class AdminModule {
                 }
                 else if(listing == 2)
                 {
+                    //Update section
                     System.out.println("Which Movie would you like to update?");
-          
-              
-                  
                     System.out.println("Enter Movie ID: ");
                     
                     int kID  = sc.nextInt();
@@ -393,41 +403,51 @@ public class AdminModule {
                     System.out.println("Enter Sypnosis: ");
                     String sypnosis  = sc.nextLine();
 
-                    System.out.println("Choose a Status:  1)Showing 2)Coming Soon 3)Closed ");
-                    String[] status = {"Showing","Coming Soon","Closed"};
+                    System.out.println("Choose a Status:  1)Coming Soon 2)Preview 3)Now Showing 4)End of Showing ");
+                    String[] status = {"Coming Soon","Preview","Now Showing","End of Showing"};
                     int no=0;
-                    no = sc.nextInt();  
+                    no = sc.nextInt();
                     while (!(no>=1 && no<=(status.length))) {
-                        no = sc.nextInt();  
                         System.out.println("Please select in its range of 1-"+status.length);
+                        no = sc.nextInt();  
                     }
                     no--;
 
-                    System.out.println("Choose a Age Rating:  1)R18 2)M13 3)All");
-                    String[] AR = {"R18","M13","All"};
-                    int ARno;
-                    ARno = sc.nextInt();  
+                    System.out.println("Choose a Age Rating:  1)G 2)PG 3)PG13 4)NC16 5)M18 6)R21");
+                    String[] AR = {"G","PG","PG13","NC16","M18","R21"};
+                    int ARno=0;
+                    ARno = sc.nextInt();
                     while (!(ARno>=1 && ARno<=(AR.length))) {
-                        ARno = sc.nextInt();  
                         System.out.println("Please select in its range of 1-"+AR.length);
+                        ARno = sc.nextInt();  
                     }
                     ARno--;
-
-                    //don delete
                     sc.nextLine();
 
-                    System.out.println("Enter Type of Movie:");
-                    String type = sc.nextLine();
 
+                    System.out.println("Choose Type of Movie: 1)2D 2)3D 3)2D Blockbuster 4)3D Blockbuster");
+                    String[] MT = {"2D","3D","2D Blockbuster","3D Blockbuster"};
+                    int MTno = 0;
+                    MTno = sc.nextInt();
+                    while (!(MTno>=1 && MTno<=(MT.length))) {
+                        System.out.println("Please select in its range of 1-"+MT.length);
+                        MTno = sc.nextInt();  
+                    }
+                    MTno--;
+
+                     sc.nextLine();
                     System.out.println("Enter Director Name:");
                     String Dname = sc.nextLine();
+
+                    System.out.println("Enter Cast List:");
+                    String castList = sc.nextLine();
 
 
 
                     try {
                         FileInputStream inputStream = new FileInputStream(xlsxFile);
                       
-                        String[] inputData = {mID,movieName,sypnosis, status[no], AR[ARno],type,Dname};
+                        String[] inputData = {mID,movieName,sypnosis, status[no], AR[ARno],MT[MTno],Dname,"0",castList};
 
                         Workbook workbook = WorkbookFactory.create(inputStream);
                         updateValue(workbook, actualPosition,inputData);
@@ -782,8 +802,6 @@ public class AdminModule {
                 a.isValid(false, a.name);
             }
         }
-        pw.close();
-        br.close();
     }
 
     
