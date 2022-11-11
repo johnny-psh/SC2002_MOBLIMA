@@ -30,25 +30,33 @@ public class BookingUI {
         int numOfTickets = 0;
 
         // 1. Select Cineplex
-
         selectedCinepex = selectCineplex();
+        if(selectedCinepex == null) {
+            System.out.println("\nReturning to main menu...\n");
+            return;
+        }
+
         // 2. Select Date
         selectedDate = selectDate(selectedCinepex);
-        if(selectedDate == null){
-            System.out.println("There are currently no showtimes available at " + selectedCinepex.getCineplexeName());
+        if(selectedDate == null) {
+            System.out.println("\nReturning to main menu...\n");
             return;
         }
+
         // 3. Select Showtime
         selectedShowtime = selectShowtime(selectedCinepex, selectedDate);
-        if(selectedShowtime == null){
-            System.out.println("There are currently no showtimes available at your selected date");
+        if(selectedShowtime == null) {
+            System.out.println("\nReturning to main menu...\n");
             return;
         }
+
         // 4. View seats
         viewSeats(CinemasController.readByID(selectedShowtime.getCinema().getCinemaID()));
+
         // 5. Select number of seats to purchase
         System.out.print("\nNumbers of tickets to purchase: ");
         numOfTickets = scanner.nextInt();
+
         // 6. Select seats & transaction
         selectSeats(numOfTickets, selectedShowtime);
         return;
@@ -68,17 +76,19 @@ public class BookingUI {
             for(int i = 0; i < numOfCineplexes; i++) {
                 System.out.println((i+1) + ". " + cineplexList.get(i).getCineplexeName());
             }
-            System.out.println((numOfCineplexes+1) + ". Back");
+            System.out.println((numOfCineplexes+1) + ". Exit");
 			System.out.print("Option > ");
 			userOption = scanner.nextInt();
 
 			// Back
-			if(userOption < 1 || userOption >= (numOfCineplexes+1)){
-				System.out.println("Invalid Option! Please re-enter.");
+            if(userOption == (numOfCineplexes + 1))
+                return null;
+			if(userOption < 1 || userOption > (numOfCineplexes+1)){
+				System.out.println("\nInvalid Option! Please re-enter.");
 				System.out.println("Please re-enter.");
-                break;
             }
-        } while(userOption < 1 || userOption >= (numOfCineplexes+1));
+        } while(userOption < 1 || userOption > (numOfCineplexes+1));
+        
         return (cineplexList.get(userOption-1));
     }
 
@@ -94,23 +104,26 @@ public class BookingUI {
         int numOfShowtimes = showtimeList.size();
 
         // Error
-        if(numOfShowtimes == 0)
+        if(numOfShowtimes == 0){
+            System.out.println("There are currently no showtimes available at " + cineplex.getCineplexeName());
             return null;
+        }
 
 		do {
             System.out.println("\nSelect Date: ");
             for(int i = 0; i < showtimeList.size(); i++){
                 System.out.println((i+1) + ". " + showtimeList.get(i).getFormattedDate());
             }
-            System.out.println((numOfShowtimes+1) + ". Back");
+            System.out.println((numOfShowtimes+1) + ". Exit");
 		    System.out.print("Option > ");
 			userOption = scanner.nextInt();
 
             // Back
-			if(userOption < 1 || userOption >= (numOfShowtimes+1)){
-				System.out.println("Invalid Option!");
+            if(userOption == (numOfShowtimes + 1))
+                return null;
+			if(userOption < 1 || userOption > (numOfShowtimes+1)){
+				System.out.println("\nInvalid Option!");
 				System.out.println("Please re-enter!");
-                break;
             }
         } while(userOption < 1 || userOption >= (numOfShowtimes+1));
         return (showtimeList.get(userOption-1).getDate());
@@ -127,25 +140,28 @@ public class BookingUI {
         int numOfShowtimes = showtimeList.size();
         int userOption = 0;
 
-        if(numOfShowtimes == 0)
+        if(numOfShowtimes == 0){
+            System.out.println("There are currently no showtimes available at your selected date");
             return null;
+        }
         do {
             System.out.println("\nSelect Movie and Showtime: ");
             for(int i = 0; i < showtimeList.size(); i++){
                 System.out.print((i+1) + ". ");
                 showtimeList.get(i).printShowtime();
             }
-            System.out.println((numOfShowtimes+1) + ". Back");
+            System.out.println((numOfShowtimes+1) + ". Exit");
             System.out.print("Option > ");
             userOption = scanner.nextInt();
     
             // Back
-            if(userOption < 1 || userOption >= (numOfShowtimes+1)){
+            if(userOption == (numOfShowtimes + 1))
+                return null;
+            if(userOption < 1 || userOption > (numOfShowtimes+1)){
                 System.out.println("Invalid Option!");
                 System.out.println("Please re-enter!");
-                break;
             }
-        } while(userOption >= (numOfShowtimes+1));            
+        } while(userOption > (numOfShowtimes+1));            
         return (showtimeList.get(userOption-1));
     }
     
@@ -232,7 +248,6 @@ public class BookingUI {
         AddBookingHistoryController.addBookingHistory(username, transaction);
         UpdateTicketSaleController.updateTicketSale(numOfTickets, showtime.getMovie().getMovieID());
     }
-
 
     // Allow user to select the type of movie goer - student/adult/senior citizen
     private static Enums.TypeOfMovieGoer selectTypeOfMovieGoer(){
