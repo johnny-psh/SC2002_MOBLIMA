@@ -16,7 +16,12 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import Model.Cinema;
 import Model.Enums;
 import Model.Seat;
-
+/**
+ * Class to edit cinema data base
+ * @author Group 6
+ * @version 1.0
+ * @since 12/11/2022
+ */
 public class CinemasController {
     public final static String FILENAME = "./database/Cinemas.xlsx";
     public final static int SEATCOL = 4;

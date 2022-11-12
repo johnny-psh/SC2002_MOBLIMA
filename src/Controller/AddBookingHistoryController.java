@@ -11,7 +11,12 @@ import org.apache.poi.ss.usermodel.WorkbookFactory;
 
 import Model.Transaction;
 
-
+/**
+ * Class to edit booking history data base 
+ * @author Group 6
+ * @version 1.0
+ * @since 12/11/2022
+ */
 public class AddBookingHistoryController {
     public final static String FILENAME = "./database/BookingHistory.xlsx";
     public final static int NUMOFCOLS = 7;

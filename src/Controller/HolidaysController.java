@@ -11,10 +11,25 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+/**
+ * Class to edit holidays date data base
+ * @author Group 6 s
+ * @version 1.0
+ * @since 12/11/2022
+ */
 public class HolidaysController {
+    /**
+     * File path
+     */
     private final static String FILENAME = "./database/SystemSettings.xlsx";
+    /**
+     * Number of columns in data base
+     */
     private final static int COLNUM = 1;
-
+    /**
+     * Method to read from list of dates
+     * @return List of dates
+     */
     public static ArrayList<Date> read(){
         ArrayList<Date> holidayList = new ArrayList<Date>();
         String dateString = "";

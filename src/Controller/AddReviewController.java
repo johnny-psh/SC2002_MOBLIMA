@@ -10,9 +10,23 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 
+/**
+ * Class to edit review data base
+ * @author Group 6
+ * @version 1.0
+ * @since 12/11/2022
+ */
 public class AddReviewController {
+    /**
+     * File path
+     */
     private final static String FILENAME = "./database/Movies.xlsx";
-
+    /**
+     * Method to add a new review 
+     * @param movieID Movie ID for review 
+     * @param rating Rating of movie by moviegoer
+     * @param description Description of movie by moviegoer
+     */
     public static void addReviewToMovie(String movieID, int rating, String description){
         int REVIEWROW = 9;
         try{

@@ -2,14 +2,30 @@ package Controller;
 import java.io.*;
 
 import Model.Administrator;
-
+/**
+ * Class to validare administrator account 
+ * @author Group 6 
+ * @version 1.0
+ * @since 12/11/2022
+ */
 public class Validate {
-
+    /**
+     * Validating boolean 
+     */
     public boolean valid = false;
+    /**
+     * Name of account 
+     */
     public String name;
-
+    /**
+     * File path
+     */
     static String path = "./database/LoginDetails.csv";
-
+    /**
+     * Method to validate account login 
+     * @param a Administrator account 
+     * @return Validation True or False
+     */
     public boolean validateLogin(Administrator a)
     {
 

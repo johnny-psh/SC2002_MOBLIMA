@@ -10,10 +10,21 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import Model.Transaction;
-
+/**
+ * Class to edit booking history data base
+ * @author Group 6
+ * @version 1.0
+ * @since 12/11/2022
+ */
 public class ViewBookingHistoryController {
+    /**
+     * File path
+     */
     public final static String FILENAME = "./database/BookingHistory.xlsx";
-
+    /**
+     * Method to read transaction history 
+     * @return List of transaction 
+     */
     public static ArrayList<Transaction> read(){
         ArrayList<Transaction> bookingList = new ArrayList<Transaction>();
         Transaction transaction;
@@ -116,7 +127,11 @@ public class ViewBookingHistoryController {
 
         return bookingList;
     }
-
+    /**
+     * Method to read transaction history by username 
+     * @param username Username of user
+     * @return Transaction history of user 
+     */
     public static ArrayList<Transaction> readByUsername(String username){
         ArrayList<Transaction> bookingList = read();
         ArrayList<Transaction> userBookingList = new ArrayList<Transaction>();

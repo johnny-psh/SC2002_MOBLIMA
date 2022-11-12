@@ -9,10 +9,22 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
-
+/**
+ * Class to edit ticket sale data base
+ * @author Group 6
+ * @version 1.0
+ * @since 12/11/2022
+ */
 public class UpdateTicketSaleController {
+    /**
+     * File path
+     */
     private final static String FILENAME = "./database/Movies.xlsx";
-
+    /**
+     * Update ticket sale data base 
+     * @param numOfTickets Number of ticket bought 
+     * @param movieID Movie ID of ticket bought 
+     */
     public static void updateTicketSale(int numOfTickets, String movieID){
         int TICSALEROW = 7;
         try{

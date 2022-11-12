@@ -11,6 +11,12 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import Model.Enums;
 import Model.Movie;
 
+/**
+ * Class to edit movie data base
+ * @author Group 6 
+ * @version 1.0
+ * @since 12/11/2022
+ */
 public class MoviesController {
     private final static String FILENAME = "./database/Movies.xlsx";
 

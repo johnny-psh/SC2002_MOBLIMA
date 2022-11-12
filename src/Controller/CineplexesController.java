@@ -11,7 +11,12 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import Model.Cinema;
 import Model.Cineplex;
 
-
+/**
+ * Class to edit cineplex data base
+ * @author Group 6 
+ * @version 1.0
+ * @since 12/11/2022
+ */
 public class CineplexesController {
     private final static String FILENAME = "./database/Cineplexes.xlsx";
     private final static int NUMOFCINEPLEXES = 3;

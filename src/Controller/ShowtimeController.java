@@ -15,7 +15,12 @@ import Model.Cineplex;
 import Model.Movie;
 import Model.Showtime;
 
-
+/**
+ * Class to edit showtime data base
+ * @author Group 6 
+ * @version 1.0
+ * @since 12/11/2022
+ */
 public class ShowtimeController {
     public final static String FILENAME = "./database/Showtime.xlsx";
 
