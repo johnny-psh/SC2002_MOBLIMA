@@ -94,14 +94,21 @@ public class BookingUI {
 
     private static Date selectDate(Cineplex cineplex){
         ArrayList<Showtime> showtimeList = ShowtimeController.readByCineplex(cineplex.getCineplexeName());
-        // Remove all end of showing showtimes
+        ArrayList<String> dateList = new ArrayList<String>();
+
         for(Showtime showtime : showtimeList){
+            // Remove all end of showing showtimes
             if(showtime.getMovie().getShowingStatus() == Enums.ShowingStatus.END_OF_SHOWING)
                 showtimeList.remove(showtime);
+
+            // Remove duplicated dates
+                if (!dateList.contains(showtime.getFormattedDate())) {
+                    dateList.add(showtime.getFormattedDate());
+                }
         }
 
         int userOption = 0;
-        int numOfShowtimes = showtimeList.size();
+        int numOfShowtimes = dateList.size();
 
         // Error
         if(numOfShowtimes == 0){
@@ -111,8 +118,8 @@ public class BookingUI {
 
 		do {
             System.out.println("\nSelect Date: ");
-            for(int i = 0; i < showtimeList.size(); i++){
-                System.out.println((i+1) + ". " + showtimeList.get(i).getFormattedDate());
+            for(int i = 0; i < dateList.size(); i++){
+                System.out.println((i+1) + ". " + dateList.get(i));
             }
             System.out.println((numOfShowtimes+1) + ". Exit");
 		    System.out.print("Option > ");
@@ -126,7 +133,13 @@ public class BookingUI {
 				System.out.println("Please re-enter!");
             }
         } while(userOption < 1 || userOption >= (numOfShowtimes+1));
-        return (showtimeList.get(userOption-1).getDate());
+
+        for(Showtime showtime : showtimeList){
+            if(showtime.getFormattedDate().equals(dateList.get(userOption-1)))
+                return showtime.getDate();
+        }
+        System.out.println("Sorry, there was an error with your selection date. Please try again later.");
+        return null;
     }
 
     private static Showtime selectShowtime(Cineplex cineplex, Date date){
