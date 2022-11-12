@@ -1,8 +1,15 @@
 package Model;
 /* Class for all ENUMS used in this project */
-
+/**
+ * Class for all ENUMS used in this project 
+ * @author Group 6
+ * @version 1.0
+ * @since 12/11/2022
+ */
 public class Enums {
-
+    /**
+     * ENUM of movie showing status
+     */
     public enum ShowingStatus {
         COMING_SOON("Coming Soon"),
         PREVIEW("Preview"),
@@ -19,7 +26,9 @@ public class Enums {
             return this.status;
         }
     };
-
+    /**
+     * ENUM of type of movie 
+     */
     public enum TypeOfMovie {
         
         TWO_D("2D"), 
@@ -37,7 +46,9 @@ public class Enums {
             return this.type;
         }
     }
-
+    /**
+     * ENUM of movie rating 
+     */
     public enum MovieRating { 
         G("G"),
         PG("PG"),
@@ -56,7 +67,9 @@ public class Enums {
              return this.rating;
         }
     }
-
+    /**
+     * ENUM of cinema type 
+     */
     public enum CinemaType {
         
         REGULAR("Regular"), 
@@ -73,7 +86,9 @@ public class Enums {
             return this.CinemaType;
         }
     }
-
+    /**
+     * ENUM of day of the week 
+     */
     public enum DayOfWeek {
         MON("Monday"),
         TUES("Tuesday"),
@@ -94,7 +109,9 @@ public class Enums {
             return this.day;
         }
     }
-
+    /**
+     * ENUM of type of movie goer
+     */
     public enum TypeOfMovieGoer {
         STUDENT("Student"),
         ADULT("Adult"),
@@ -110,7 +127,9 @@ public class Enums {
             return this.movieGoer;
         }
     }
-
+    /**
+     * ENUM of ticket type 
+     */
     public enum TicketType {
         SENIOR("Senior Citizen"),
         STUDENT("Student"),
