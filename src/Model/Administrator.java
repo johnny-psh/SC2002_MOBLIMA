@@ -20,7 +20,7 @@ public class Administrator {
      */
     private Boolean isValid;
     /**
-     * 
+     * Name of admin
      */
     private String name;
     /**
