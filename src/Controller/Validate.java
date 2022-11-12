@@ -35,9 +35,9 @@ public class Validate {
             while((line = br.readLine()) != null)
             {
                 String values[] = line.split(",");
-                if(a.userName.compareTo(values[1].replaceAll("\\s", ""))==0)
+                if(a.getUserName().compareTo(values[1].replaceAll("\\s", ""))==0)
                 {
-                    if(a.passWord.compareTo(values[2].replaceAll("\\s", ""))==0)
+                    if(a.getPassword().compareTo(values[2].replaceAll("\\s", ""))==0)
                     {
                         valid = true;
                         name = values[0];

@@ -326,7 +326,7 @@ public class AdminModule {
         {
             int choice;
 
-            System.out.println("Welcome " + a.name);
+            System.out.println("Welcome " + a.getUserName());
             System.out.println("Select an option: ");
             System.out.println("1. Movie Listings");
             System.out.println("2. Showtimes");
@@ -875,7 +875,7 @@ public class AdminModule {
                 }
                 break;
                 case 4:
-                a.isValid(false, a.name);
+                a.isValid(false, a.getUserName());
             }
         }
     }
