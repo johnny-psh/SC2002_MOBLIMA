@@ -9,7 +9,7 @@ public class ReviewUI {
     static Scanner scanner = new Scanner(System.in);
 
     public static void displayMenu(){
-        System.out.print("\nEnter movie ID to view movie detail: ");
+        System.out.print("\nEnter movie ID: ");
         String movieID = scanner.next();
         Movie movie = MoviesController.readByID(movieID);
         if(movie == null){
