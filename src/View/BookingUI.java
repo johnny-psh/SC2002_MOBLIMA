@@ -97,12 +97,8 @@ public class BookingUI {
         ArrayList<String> dateList = new ArrayList<String>();
 
         for(Showtime showtime : showtimeList){
-            // Remove all end of showing showtimes
-            if(showtime.getMovie().getShowingStatus() == Enums.ShowingStatus.END_OF_SHOWING)
-                showtimeList.remove(showtime);
-
             // Remove duplicated dates
-                if (!dateList.contains(showtime.getFormattedDate())) {
+                if (!dateList.contains(showtime.getFormattedDate()) && showtime.getMovie().getShowingStatus() != Enums.ShowingStatus.END_OF_SHOWING) {
                     dateList.add(showtime.getFormattedDate());
                 }
         }
@@ -145,12 +141,13 @@ public class BookingUI {
     private static Showtime selectShowtime(Cineplex cineplex, Date date){
         ArrayList<Showtime> showtimeList = ShowtimeController.readByCineplexAndDate(cineplex.getCineplexeName(), date);
         // Remove all end of showing showtimes
+        ArrayList<Showtime> showtimeListAvail = new ArrayList<Showtime>();
         for(Showtime showtime : showtimeList){
-            if(showtime.getMovie().getShowingStatus() == Enums.ShowingStatus.END_OF_SHOWING)
-                showtimeList.remove(showtime);
+            if(showtime.getMovie().getShowingStatus() != Enums.ShowingStatus.END_OF_SHOWING)
+            showtimeListAvail.add(showtime);
         }
 
-        int numOfShowtimes = showtimeList.size();
+        int numOfShowtimes = showtimeListAvail.size();
         int userOption = 0;
 
         if(numOfShowtimes == 0){
@@ -159,9 +156,9 @@ public class BookingUI {
         }
         do {
             System.out.println("\nSelect Movie and Showtime: ");
-            for(int i = 0; i < showtimeList.size(); i++){
+            for(int i = 0; i < showtimeListAvail.size(); i++){
                 System.out.print((i+1) + ". ");
-                showtimeList.get(i).printShowtime();
+                showtimeListAvail.get(i).printShowtime();
             }
             System.out.println((numOfShowtimes+1) + ". Exit");
             System.out.print("Option > ");
@@ -175,7 +172,7 @@ public class BookingUI {
                 System.out.println("Please re-enter!");
             }
         } while(userOption > (numOfShowtimes+1));            
-        return (showtimeList.get(userOption-1));
+        return (showtimeListAvail.get(userOption-1));
     }
     
     private static void viewSeats(Cinema cinema){
