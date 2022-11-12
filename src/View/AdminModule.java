@@ -10,11 +10,21 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 
-
+/**
+ * Admin module class 
+ * @author Group 6
+ * @version 1.0
+ * @since 12/11/2022
+ */
 public class AdminModule {
 
     static Scanner sc = new Scanner(System.in);
-    
+    /**
+     * Method to update column with daata
+     * @param workbook Workbook 
+     * @param colIndex Index of column 
+     * @param arr string array 
+     */
    public static void updateColumnWithData(Workbook workbook, int colIndex,String [] arr) {
     Sheet sheet = workbook.getSheetAt(0);
 
@@ -32,7 +42,11 @@ public class AdminModule {
 
    }
 
-
+   /**
+    * Method to insert a new column before data input 
+    * @param workbook Workbook
+    * @param arr string array
+    */
    public static void insertNewColumnBeforeWithData(Workbook workbook,String [] arr) {
     // Getting the first sheet from workbook
     Sheet sheet = workbook.getSheetAt(0);
@@ -64,7 +78,12 @@ public class AdminModule {
         
         }
     }
-
+    /**
+     * Update workbook with new values
+     * @param workbook Workbook 
+     * @param colIndex Index of column
+     * @param arr String array
+     */
     public static void updateValue(Workbook workbook, int colIndex,String [] arr)
     {
         Sheet sheet = workbook.getSheetAt(0);
@@ -85,7 +104,11 @@ public class AdminModule {
             }
             }
     }
-
+    /**
+     * Delete movie from workbook
+     * @param workbook Workbook
+     * @param colIndex Index of column  
+     */
     public static void deleteMovie(Workbook workbook, int colIndex)
     {
         //Future note : colIndex cannot be 0 if there is header in xlxs file
@@ -130,7 +153,11 @@ public class AdminModule {
             sheet.setColumnWidth( c, sheet.getColumnWidth(c+1) );
         }
     }
-
+    /**
+     * Method to get last column in workbook
+     * @param workbook Workbook 
+     * @return End of column 
+     */
     public static int getLastColumn(Workbook workbook)
     {
         Sheet sheet = workbook.getSheetAt(0);
@@ -138,7 +165,11 @@ public class AdminModule {
         System.out.println(endColumn);
         return endColumn;
     }
-
+    /**
+     * Get position of ID in workbook
+     * @param workbook Workbook
+     * @return Position in workbook 
+     */
     public static int getIDPosition(Workbook workbook)
     {
         Sheet sheet = workbook.getSheetAt(0);
@@ -146,6 +177,11 @@ public class AdminModule {
         System.out.println(endColumn);
         return endColumn;
     }
+    /**
+     * Get ID from workbook 
+     * @param workbook Workbook 
+     * @return ID
+     */
     public static String getID(Workbook workbook)
     {
         Sheet sheet = workbook.getSheetAt(0);
@@ -160,7 +196,11 @@ public class AdminModule {
         //System.out.println("ID = " +cellString);
         return conv;
     }
-
+    /**
+     * Check movie ID from data base
+     * @param givenID Movie ID
+     * @return File found or not
+     */
     public static int checkID(int givenID)
     {
         File xlsxFile = new File("./database/Movies.xlsx");
@@ -193,7 +233,11 @@ public class AdminModule {
         return 0;
     }
         
-
+    /**
+     * Method to clone cell
+     * @param cNew New cell created
+     * @param cOld Old cell to clone
+     */
     private static void cloneCell( Cell cNew, Cell cOld ){
         cNew.setCellComment( cOld.getCellComment() );
         cNew.setCellStyle( cOld.getCellStyle() );
@@ -224,7 +268,10 @@ public class AdminModule {
         }
 
     }
-
+    /**
+     * Method to read showtime from data base
+     * @param workbook Workbook 
+     */
     public static void readshowTimeCSV(Workbook workbook){
  
             //Get first/desired sheet from the workbook
@@ -262,7 +309,11 @@ public class AdminModule {
                 r++;
             }
     }
-
+    /**
+     * User interface for admin module
+     * @param a Admin account
+     * @throws IOException
+     */
     public static void MenuPage(Administrator a) throws IOException
     {
        

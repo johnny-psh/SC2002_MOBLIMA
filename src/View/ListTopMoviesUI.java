@@ -6,11 +6,21 @@ import java.util.Scanner;
 
 import Controller.MoviesController;
 import Model.Movie;
-
+/**
+ * Class of user interface for listing top movies
+ * @author Group 6
+ * @version 1.0
+ * @since 12/11/2022
+ */
 public class ListTopMoviesUI {
 	static Scanner scanner = new Scanner(System.in);
+    /**
+     * Number of movies to print 
+     */
     private static final int NUMBTOPRINT = 5;
-
+    /**
+     * Method to display top movies menu
+     */
     public static void displayMenu(){
 		int userOption = 0;
         while(userOption != 3){
@@ -36,7 +46,9 @@ public class ListTopMoviesUI {
         ExitUI.displayMenu();
         return;
     }
-
+    /**
+     * Method to display top movies by overall reviewer rating 
+     */
     private static void listByOverallReview(){
         ArrayList<Movie> movieList = MoviesController.read();
         Collections.sort(movieList, Comparator.comparing(Movie::getOverallReviewerRating));
@@ -55,6 +67,9 @@ public class ListTopMoviesUI {
         }
     }
 
+    /**
+     * Method to display top movies by ticket sales
+     */
     private static void listByTicketSales(){
         ArrayList<Movie> movieList = MoviesController.read();
         Collections.sort(movieList, Comparator.comparing(Movie::getTicketSales));

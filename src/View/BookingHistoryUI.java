@@ -4,10 +4,17 @@ import java.util.Scanner;
 
 import Controller.ViewBookingHistoryController;
 import Model.Transaction;
-
+/**
+ * Class of user interface for booking history 
+ * @author Group 6
+ * @version 1.0
+ * @since 12/11/2022
+ */
 public class BookingHistoryUI {
     static Scanner scanner = new Scanner(System.in);
-
+    /**
+     * Method to display booking history menu 
+     */
     public static void displayMenu(){
         String username;
 

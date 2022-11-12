@@ -4,10 +4,17 @@ import java.util.*;
 import Controller.AddReviewController;
 import Controller.MoviesController;
 import Model.Movie;
-
+/**
+ * Class of user interface for reviews
+ * @author Group 6
+ * @version 1.0
+ * @since 12/11/2022
+ */
 public class ReviewUI {
     static Scanner scanner = new Scanner(System.in);
-
+    /**
+     * Method to diplay review menu 
+     */
     public static void displayMenu(){
         System.out.print("\nEnter movie ID: ");
         String movieID = scanner.next();

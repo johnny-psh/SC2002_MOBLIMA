@@ -4,11 +4,19 @@ import java.util.*;
 
 import Controller.Validate;
 import Model.Administrator;
-
+/**
+ * Class of login module 
+ * @author Group 6
+ * @version 1.0
+ * @since 12/11/2022
+ */
 public class LoginModule {
     
     static Scanner sc = new Scanner(System.in);
-    
+    /**
+     * Login method for admin account 
+     * @throws IOException
+     */
     public static void Login () throws IOException
     {
         System.out.print("Username: ");

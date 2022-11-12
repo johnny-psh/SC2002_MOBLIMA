@@ -18,10 +18,17 @@ import Model.Transaction;
 
 import java.util.ArrayList;
 import java.util.Date;  
-
+/**
+ * Class of user interface for booking 
+ * @author Group 6
+ * @version 1.0
+ * @since 12/11/2022
+ */
 public class BookingUI {
 	static Scanner scanner = new Scanner(System.in);
-    
+    /**
+     * Method to display booking menu 
+     */
     public static void displayMenu(){
 
         Cineplex selectedCinepex;
@@ -61,7 +68,10 @@ public class BookingUI {
         selectSeats(numOfTickets, selectedShowtime);
         return;
     }
-
+    /**
+     * Method to select cineplex
+     * @return Cineplex chosen 
+     */
     private static Cineplex selectCineplex(){
         ArrayList<Cineplex> cineplexList = CineplexesController.read();
         int userOption = 0;
@@ -91,7 +101,11 @@ public class BookingUI {
         
         return (cineplexList.get(userOption-1));
     }
-
+    /**
+     * Method to select date
+     * @param cineplex Cineplex chosen 
+     * @return Showtime of date selected
+     */
     private static Date selectDate(Cineplex cineplex){
         ArrayList<Showtime> showtimeList = ShowtimeController.readByCineplex(cineplex.getCineplexeName());
         ArrayList<String> dateList = new ArrayList<String>();
@@ -137,7 +151,12 @@ public class BookingUI {
         System.out.println("Sorry, there was an error with your selection date. Please try again later.");
         return null;
     }
-
+    /**
+     * Method to select showtime 
+     * @param cineplex Cineplex chosen
+     * @param date Date chosen
+     * @return Showtime availability 
+     */
     private static Showtime selectShowtime(Cineplex cineplex, Date date){
         ArrayList<Showtime> showtimeList = ShowtimeController.readByCineplexAndDate(cineplex.getCineplexeName(), date);
         // Remove all end of showing showtimes
@@ -174,11 +193,18 @@ public class BookingUI {
         } while(userOption > (numOfShowtimes+1));            
         return (showtimeListAvail.get(userOption-1));
     }
-    
+    /**
+     * Display cinema layout 
+     * @param cinema Cinema chosen
+     */
     private static void viewSeats(Cinema cinema){
         cinema.printCinemaLayout();
     }
-
+    /**
+     * Select seat in cinema 
+     * @param numOfTickets Number of tickets bought
+     * @param showtime Showtime of movie 
+     */
     private static void selectSeats(int numOfTickets, Showtime showtime){
         Cinema cinema = showtime.getCinema();
         ArrayList<Ticket> ticketList = new ArrayList<Ticket>(numOfTickets);
@@ -262,13 +288,22 @@ public class BookingUI {
         ExitUI.displayMenu();
         return;
     }
-
+    /**
+     * Method to save booking to data base
+     * @param showtime Showtime of movie
+     * @param username Username of moviegoer
+     * @param transaction Transaction ID of booking
+     * @param numOfTickets Number of tickets 
+     */
     private static void saveToDB(Showtime showtime, String username, Transaction transaction, int numOfTickets){
         CinemasController.updateSeats(showtime.getCinema());
         AddBookingHistoryController.addBookingHistory(username, transaction);
         UpdateTicketSaleController.updateTicketSale(numOfTickets, showtime.getMovie().getMovieID());
     }
-
+    /**
+     * Method for user to select the type of moviegoer
+     * @return Null
+     */
     // Allow user to select the type of movie goer - student/adult/senior citizen
     private static Enums.TypeOfMovieGoer selectTypeOfMovieGoer(){
         int userOption = 0;

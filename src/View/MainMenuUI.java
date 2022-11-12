@@ -1,11 +1,19 @@
 package View;
 import java.util.Scanner;
 import java.io.*;
-
+/**
+ * Class of user interface for main menu
+ * @author Group 6 
+ * @version 1.0
+ * @since 12/11/2022
+ */
 public class MainMenuUI {
 	
 	static Scanner scanner = new Scanner(System.in);
-   
+	/**
+	 * Method to display main menu
+	 * @throws IOException
+	 */
 	public static void displayMenu() throws IOException {
 		
 		int userOption = 0;
